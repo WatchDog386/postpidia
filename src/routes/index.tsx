@@ -29,7 +29,7 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Benqu — WordPress Blog & Magazine" },
+      { title: "Postpidia — Premium Magazine & Content Platform" },
       { name: "description", content: "Premium Magazine Platform" },
     ],
     links: [
@@ -47,13 +47,13 @@ export const Route = createFileRoute("/")({
 // Exact Tag Color Mapper from the design
 const getCategoryStyles = (category: string) => {
   const cat = category.toLowerCase();
-  if (cat.includes("fashion")) return "bg-[#ff007b] text-white"; 
-  if (cat.includes("food")) return "bg-[#ff6a00] text-white"; 
-  if (cat.includes("travel")) return "bg-[#00c3ff] text-white"; 
-  if (cat.includes("tech")) return "bg-[#006aff] text-white"; 
-  if (cat.includes("creative")) return "bg-[#ffb300] text-black"; 
+  if (cat.includes("fashion") || cat.includes("design")) return "bg-[#ff007b] text-white"; 
+  if (cat.includes("food") || cat.includes("grading")) return "bg-[#ff6a00] text-white"; 
+  if (cat.includes("travel") || cat.includes("graphics")) return "bg-[#00c3ff] text-white"; 
+  if (cat.includes("tech") || cat.includes("editing")) return "bg-[#006aff] text-white"; 
+  if (cat.includes("creative") || cat.includes("analytics")) return "bg-[#ffb300] text-black"; 
   if (cat.includes("sports")) return "bg-[#4caf50] text-white"; 
-  if (cat.includes("racing")) return "bg-[#ff5722] text-white"; 
+  if (cat.includes("racing") || cat.includes("production")) return "bg-[#ff5722] text-white"; 
   if (cat.includes("music")) return "bg-[#f44336] text-white"; 
   return "bg-indigo-600 text-white";
 };
@@ -65,7 +65,7 @@ export default function Landing() {
       <main className="relative">
         <FloatingThemeToggle />
         <HeroSection />
-        <TrendingGrid />
+        <ServicesSection />
         <BottomSection />
         <HowItWorksSection />
         <PricingSection />
@@ -79,8 +79,7 @@ export default function Landing() {
 
 function Nav() {
   const [open, setOpen] = useState(false);
-
-  const navLinks = ["Home", "Features", "Categories", "Shop", "Pages", "Tags"];
+  const navLinks = ["Services", "Pricing", "How It Work", "Contact"];
 
   return (
     <header className="bg-[#111111]">
@@ -125,10 +124,10 @@ function Nav() {
             </button>
             <a href="#" className="flex items-center gap-2">
               <div className="bg-gradient-to-tr from-[#ff007b] to-[#ff5722] text-white w-10 h-10 flex items-center justify-center font-bold text-xl">
-                B
+                P
               </div>
               <div className="text-2xl font-bold tracking-tight text-white leading-none">
-                Benqu
+                Postpidia
               </div>
             </a>
           </div>
@@ -140,11 +139,11 @@ function Nav() {
             <div className="absolute left-8 top-0 w-16 h-16 bg-yellow-400 [clip-path:polygon(50%_0,100%_50%,50%_100%,0_50%)]"></div>
             
             <h2 className="text-black font-black text-xl z-10 ml-16">
-              WordPress Blog & Magazine Themes
+              Postidia Premium Content & Trends
             </h2>
             
             <button className="bg-[#00d084] text-white font-bold text-[11px] uppercase tracking-wider px-6 py-2.5 z-10 hover:bg-[#00b371] transition-colors">
-              SHOP NOW
+              GET STARTED
             </button>
             
             <div className="absolute right-0 top-0 bottom-0 w-32 bg-[#ff007b] [clip-path:polygon(20%_0,100%_0,100%_100%,0%_100%)]"></div>
@@ -167,9 +166,6 @@ function Nav() {
                 <ChevronRight className="h-3 w-3 text-gray-500 group-hover:text-[#ff007b] transition-colors" />
               </a>
             ))}
-            <a href="#" className="text-[13px] font-bold text-gray-200 hover:text-[#ff007b] transition-colors">
-              Contact Us
-            </a>
           </nav>
 
           <div className="flex items-center gap-4 w-full lg:w-auto justify-end">
@@ -208,9 +204,6 @@ function Nav() {
                   <ChevronRight className="h-4 w-4" />
                 </a>
               ))}
-              <a href="#" className="block py-3 text-sm font-bold text-gray-300 hover:text-[#ff007b]">
-                Contact Us
-              </a>
             </div>
           </motion.div>
         )}
@@ -255,7 +248,7 @@ function HeroSection() {
               FASHION
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-4 leading-tight tracking-tight group-hover:text-[#ff007b] transition-colors">
-              Fasion Trends and Li Edelkoort the Culture Shock Special Report
+              Fashion Trends and Li Edelkoort the Culture Shock Special Report
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-gray-300 text-[11px] font-bold tracking-wider mt-5 uppercase">
               <span>BY DAVID</span>
@@ -331,7 +324,7 @@ function HeroSection() {
   );
 }
 
-function TrendingStoriesHeader({ title, endSlot }: { title: string, endSlot?: React.ReactNode }) {
+function SectionHeader({ title, endSlot }: { title: string, endSlot?: React.ReactNode }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
       <div className="flex items-center w-full">
@@ -343,20 +336,28 @@ function TrendingStoriesHeader({ title, endSlot }: { title: string, endSlot?: Re
   );
 }
 
-function TrendingGrid() {
-  const items = [
-    { category: "CREATIVE", title: "African Nations Are Struggling To Save Ready Their Wildlife", img: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=500&h=350&fit=crop" },
-    { category: "RACING", title: "Emirates Palace Spends that a Hefty Sum For...", img: "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=500&h=350&fit=crop" },
-    { category: "TECH", title: "Nintendo Labo VR hands This virtual Reality Gets Weird", img: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=500&h=350&fit=crop" },
-    { category: "FOOD", title: "Boxed Water Partners With To Consumer Creativity.", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&h=350&fit=crop" },
+function ServicesSection() {
+  const [sliderPage, setSliderPage] = useState(0);
+
+  const services = [
+    { category: "VIDEO EDITING", title: "Video Editing", desc: "Professional editing tailored for TikTok Shop, Instagram Reels, YouTube Shorts and Amazon product videos.", img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=500&h=350&fit=crop" },
+    { category: "MOTION GRAPHICS", title: "Motion Graphics", desc: "Dynamic 2D/3D animations, text overlays, and visual effects that grab attention and drive engagement.", img: "https://images.unsplash.com/photo-1551269901-5c5e14c30ded?w=500&h=350&fit=crop" },
+    { category: "THUMBNAIL DESIGN", title: "Thumbnail Design", desc: "A/B tested thumbnail variations designed to maximize click-through rates and views on every platform.", img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=500&h=350&fit=crop" },
+    { category: "COLOR GRADING", title: "Color Grading", desc: "Advanced color correction and grading to give your content a cinematic, brand-consistent look.", img: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500&h=350&fit=crop" },
+    { category: "ANALYTICS", title: "Performance Analytics", desc: "Data-driven insights on content performance. SEO and keyword strategy for every video we deliver.", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=500&h=350&fit=crop" },
+    { category: "AUDIO PRODUCTION", title: "Audio Production", desc: "Professional noise reduction, audio leveling, and royalty-free background music selection.", img: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=500&h=350&fit=crop" },
   ];
+
+  // Sliding window mechanic: shows 4 cards on screen at any time.
+  // Page 0 displays items 0, 1, 2, 3. Page 1 slides to display items 2, 3, 4, 5.
+  const visibleServices = sliderPage === 0 ? services.slice(0, 4) : services.slice(2, 6);
 
   return (
     <section className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-20">
-      <TrendingStoriesHeader title="Trending Stories" />
+      <SectionHeader title="Our Services" />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {items.map((item, idx) => (
+        {visibleServices.map((item, idx) => (
           <div key={idx} className="bg-[#1a1a1a] group cursor-pointer flex flex-col h-full border border-[#222] hover:border-[#333] transition-colors">
             <div className="relative overflow-hidden bg-black shrink-0">
               <img
@@ -369,23 +370,31 @@ function TrendingGrid() {
               </span>
             </div>
             <div className="p-5 flex flex-col flex-grow">
-              <h3 className="font-extrabold text-[15px] text-gray-200 line-clamp-2 leading-snug group-hover:text-[#ff007b] transition-colors">
+              <h3 className="font-extrabold text-[15px] text-gray-200 line-clamp-1 leading-snug group-hover:text-[#ff007b] transition-colors">
                 {item.title}
               </h3>
+              <p className="text-xs text-gray-400 mt-2 line-clamp-3 leading-relaxed font-medium">
+                {item.desc}
+              </p>
               <div className="flex items-center gap-3 mt-auto pt-4 text-[10px] text-gray-500 uppercase tracking-widest font-bold">
-                <span>BY DAVID</span>
-                <span className="flex items-center gap-1.5"><MessageCircle className="h-3 w-3" /> 0 COMMENTS</span>
+                <span>SERVICES</span>
+                <span className="flex items-center gap-1.5"><Check className="h-3 w-3 text-[#5c45fd]" /> READY</span>
               </div>
             </div>
           </div>
         ))}
       </div>
       
-      {/* Pagination Dots beneath Trending Grid */}
+      {/* Pagination Slider Dots */}
       <div className="flex items-center justify-center gap-2 mt-8">
-         <div className="w-6 h-1.5 bg-[#5c45fd]"></div>
-         <div className="w-1.5 h-1.5 bg-gray-500"></div>
-         <div className="w-1.5 h-1.5 bg-gray-500"></div>
+         <button 
+           onClick={() => setSliderPage(0)}
+           className={`h-1.5 transition-all duration-300 ${sliderPage === 0 ? "w-6 bg-[#5c45fd]" : "w-1.5 bg-gray-500"}`}
+         />
+         <button 
+           onClick={() => setSliderPage(1)}
+           className={`h-1.5 transition-all duration-300 ${sliderPage === 1 ? "w-6 bg-[#5c45fd]" : "w-1.5 bg-gray-500"}`}
+         />
       </div>
     </section>
   );
@@ -411,10 +420,9 @@ function BottomSection() {
 
   return (
     <section className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-20 grid lg:grid-cols-12 gap-10">
-      
       {/* Left Feed Section (Second Trending Stories) */}
       <div className="lg:col-span-8">
-        <TrendingStoriesHeader 
+        <SectionHeader 
            title="Trending Stories" 
            endSlot={
              <button className="bg-[#5c45fd] text-white text-[10px] font-bold uppercase tracking-widest px-4 py-2 flex items-center gap-2 hover:bg-[#4a36d9] transition-colors">
@@ -439,7 +447,7 @@ function BottomSection() {
 
       {/* Right Social Widget Section */}
       <div className="lg:col-span-4">
-         <TrendingStoriesHeader title="Trending Stories" />
+         <SectionHeader title="Trending Stories" />
 
         <div className="grid grid-cols-4 gap-[2px] bg-[#222]">
           {socialStats.map((stat, idx) => (
@@ -453,7 +461,6 @@ function BottomSection() {
           ))}
         </div>
       </div>
-      
     </section>
   );
 }
@@ -462,122 +469,203 @@ function HowItWorksSection() {
   const steps = [
     {
       step: "01",
-      icon: <UserPlus className="w-6 h-6 text-[#ff007b]" />,
-      title: "Create Account",
-      desc: "Sign up instantly and establish your tailored premium reader profile dashboard."
+      title: "Choose Your Plan",
+      desc: "Select the package that fits your content volume and business goals. Upgrade anytime as you grow."
     },
     {
       step: "02",
-      icon: <Sliders className="w-6 h-6 text-[#5c45fd]" />,
-      title: "Tailor Preferences",
-      desc: "Select specific global categories, trend trackers, and expert columnists."
+      title: "Send Your Raw Footage",
+      desc: "Upload your raw videos, brand guidelines, and any special requests. We handle the rest."
     },
     {
       step: "03",
-      icon: <BookOpen className="w-6 h-6 text-[#00d084]" />,
-      title: "Immersive Reading",
-      desc: "Gain deep access to highly visual, non-cluttered exclusive custom content."
+      title: "We Edit & Optimize",
+      desc: "Our team transforms your footage into scroll-stopping content optimized for each platform."
+    },
+    {
+      step: "04",
+      title: "Publish & Profit",
+      desc: "Receive your polished videos ready to upload. Watch your engagement and sales grow."
     }
   ];
 
   return (
-    <section className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-24">
-      <TrendingStoriesHeader title="How It Works" />
-      <div className="grid md:grid-cols-3 gap-8">
-        {steps.map((item, index) => (
-          <div key={index} className="bg-[#1a1a1a] border border-[#222] p-8 relative group transition-colors hover:border-[#333]">
-            <div className="absolute top-4 right-6 text-4xl font-black text-[#262626] group-hover:text-[#ff007b]/10 transition-colors select-none">
-              {item.step}
+    <section className="bg-[#0b0b0b] py-24 text-center mt-20">
+      <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
+        <div className="inline-block border border-[#df9a28]/40 text-[#df9a28] bg-[#df9a28]/5 rounded-full px-4 py-1 text-[11px] font-bold uppercase tracking-widest mb-4">
+          Process
+        </div>
+        <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight">
+          How It Works
+        </h2>
+        <p className="text-gray-400 text-sm max-w-2xl mx-auto mb-20 leading-relaxed font-medium">
+          From raw footage to viral content in four simple steps. Our streamlined process ensures
+          quick turnaround without sacrificing quality.
+        </p>
+        
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+          {steps.map((item, index) => (
+            <div key={index} className="flex flex-col">
+              <div className="flex items-center gap-1 mb-4 select-none">
+                {index > 0 && <span className="text-[#3b2d18] font-bold text-xl mr-1">—</span>}
+                <span className="text-4xl font-black text-[#2e2415] tracking-tight">
+                  {item.step}
+                </span>
+              </div>
+              <h3 className="text-[17px] font-bold text-white mb-2 tracking-tight">
+                {item.title}
+              </h3>
+              <p className="text-xs text-gray-400 leading-relaxed font-medium">
+                {item.desc}
+              </p>
             </div>
-            <div className="bg-[#111111] w-12 h-12 flex items-center justify-center border border-[#333] mb-6">
-              {item.icon}
-            </div>
-            <h3 className="text-lg font-extrabold text-white mb-2 tracking-tight">
-              {item.title}
-            </h3>
-            <p className="text-xs text-gray-400 leading-relaxed font-medium">
-              {item.desc}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
 }
 
 function PricingSection() {
+  const [isYearly, setIsYearly] = useState(false);
+
   const tiers = [
     {
-      name: "Basic Access",
-      price: "0",
-      desc: "Perfect for testing our premium framework tools.",
-      features: ["Standard global articles feed", "Basic category filtering matrices", "Community comments reading", "Weekly curated brief newsletter"],
-      cta: "Get Started Now",
+      name: "Startup",
+      desc: "Perfect for small brands getting started with video content.",
+      price: isYearly ? 39 : 49,
+      features: [
+        "Up to 4 Edited Videos",
+        "Royalty-Free Background Music",
+        "Advanced Color Grading",
+        "Noise Reduction & Audio Leveling",
+        "2 Revisions per Video",
+        "Custom Thumbnail (1 per video)",
+        "3% Sales Commission Agreement"
+      ],
       popular: false
     },
     {
-      name: "Premium Pro",
-      price: "19",
-      desc: "Tailored directly for consistent trends investigators.",
-      features: ["Unlimited complete premium posts", "Advanced layout dark filters", "Real-time global breaking tickers", "Zero external ad network tracking", "Priority system customer support"],
-      cta: "Unlock Premium Access",
+      name: "Essential",
+      desc: "For growing brands ready to scale their content output.",
+      price: isYearly ? 79 : 99,
+      features: [
+        "Up to 5 Edited Videos",
+        "Dynamic Motion Graphics",
+        "Advanced Color Correction",
+        "A/B Testing Thumbnail Variations",
+        "3 Revisions per Video",
+        "Dedicated Project Manager",
+        "Multi-Platform Exports (TikTok/YT/IG)",
+        "3% Sales Commission Agreement"
+      ],
       popular: true
     },
     {
-      name: "Elite Enterprise",
-      price: "49",
-      desc: "Designed comprehensively for corporate media teams.",
-      features: ["Multi-user enterprise credentials", "Dedicated industry raw metrics exports", "Custom tag tracking triggers", "Direct custom content api hookups", "24/7 dedicated account engineers"],
-      cta: "Deploy Elite Infrastructure",
+      name: "Growth Pro",
+      desc: "Full-service for brands serious about dominating social commerce.",
+      price: isYearly ? 159 : 199,
+      features: [
+        "Up to 8 Edited Videos",
+        "High-End 2D/3D Animations",
+        "Custom Brand Identity Kit",
+        "Premium Stock Footage Access",
+        "Performance Analytics Consulting",
+        "Unlimited Revisions",
+        "Dedicated Project Manager",
+        "Postpidia Asset Library Access",
+        "24-Hour Priority Support",
+        "Professional Voiceover Integration",
+        "SEO & Keyword Strategy for Video",
+        "3% Sales Commission Agreement"
+      ],
       popular: false
     }
   ];
 
   return (
-    <section className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-24">
-      <TrendingStoriesHeader title="Premium Membership Plans" />
-      <div className="grid lg:grid-cols-3 gap-8 items-stretch">
-        {tiers.map((tier, index) => (
-          <div 
-            key={index} 
-            className={`flex flex-col border p-8 bg-[#1a1a1a] relative ${
-              tier.popular ? "border-[#ff007b]" : "border-[#222]"
-            }`}
-          >
-            {tier.popular && (
-              <span className="absolute top-0 right-8 -translate-y-1/2 bg-[#ff007b] text-white text-[9px] font-black uppercase tracking-widest px-3 py-1">
-                MOST POPULAR
-              </span>
-            )}
-            
-            <h3 className="text-lg font-extrabold text-white uppercase tracking-tight">{tier.name}</h3>
-            <p className="text-xs text-gray-400 mt-2 mb-6 font-medium">{tier.desc}</p>
-            
-            <div className="flex items-baseline gap-1 mb-6 border-b border-[#222] pb-6">
-              <span className="text-4xl font-black text-white tracking-tight">${tier.price}</span>
-              <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">/ Month</span>
-            </div>
+    <section className="bg-[#0b0b0b] py-20 text-center">
+      <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
+        <div className="inline-block border border-[#df9a28]/40 text-[#df9a28] bg-[#df9a28]/5 rounded-full px-4 py-1 text-[11px] font-bold uppercase tracking-widest mb-4">
+          Pricing
+        </div>
+        <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight">
+          Simple, Transparent Pricing
+        </h2>
+        <p className="text-gray-400 text-sm max-w-2xl mx-auto mb-8 leading-relaxed font-medium">
+          Choose the plan that matches your content needs. All plans include a low 3% performance-based commission on generated sales.
+        </p>
 
-            <ul className="space-y-4 mb-8 flex-grow">
-              {tier.features.map((feature, fIdx) => (
-                <li key={fIdx} className="flex items-start gap-3 text-xs font-semibold text-gray-300">
-                  <Check className={`w-4 h-4 shrink-0 mt-0.5 ${tier.popular ? "text-[#ff007b]" : "text-[#5c45fd]"}`} />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-
-            <button 
-              className={`w-full font-bold text-xs uppercase tracking-widest py-3.5 transition-colors ${
-                tier.popular 
-                  ? "bg-[#ff007b] text-white hover:bg-[#d80068]" 
-                  : "bg-[#111111] text-white border border-[#333] hover:bg-[#222]"
+        {/* Dynamic State Switcher */}
+        <div className="flex justify-center items-center mb-16">
+          <div className="bg-[#151515] p-1 rounded-full flex items-center border border-[#222]">
+            <button
+              onClick={() => setIsYearly(false)}
+              className={`px-5 py-2 rounded-full text-xs font-bold transition-all ${
+                !isYearly ? "bg-[#df9a28] text-black" : "text-gray-400 hover:text-white"
               }`}
             >
-              {tier.cta}
+              Monthly
+            </button>
+            <button
+              onClick={() => setIsYearly(true)}
+              className={`px-5 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all ${
+                isYearly ? "bg-[#df9a28] text-black" : "text-gray-400 hover:text-white"
+              }`}
+            >
+              <span>Yearly</span>
+              <span className={`text-[9px] px-1.5 py-0.5 rounded font-black ${isYearly ? "bg-black/10 text-black" : "bg-[#df9a28]/10 text-[#df9a28]"}`}>
+                Save 20%
+              </span>
             </button>
           </div>
-        ))}
+        </div>
+
+        {/* Tiers Container */}
+        <div className="grid lg:grid-cols-3 gap-8 items-start text-left">
+          {tiers.map((tier, index) => (
+            <div 
+              key={index} 
+              className={`flex flex-col border rounded-xl p-8 bg-[#111111] relative min-h-[640px] transition-all ${
+                tier.popular ? "border-[#df9a28] shadow-lg shadow-[#df9a28]/5" : "border-[#222]"
+              }`}
+            >
+              {tier.popular && (
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#111111] border border-[#df9a28] text-[#df9a28] text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full flex items-center gap-1">
+                  <span>☆</span> Most Popular
+                </div>
+              )}
+              
+              <h3 className="text-xl font-bold text-white tracking-tight mb-2">{tier.name}</h3>
+              <p className="text-xs text-gray-400 leading-relaxed font-medium mb-6 min-h-[32px]">{tier.desc}</p>
+              
+              <div className="flex items-baseline gap-1 mb-6">
+                <span className="text-4xl font-black text-white tracking-tight">${tier.price}</span>
+                <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">/month</span>
+              </div>
+
+              <ul className="space-y-4 mb-10 flex-grow">
+                {tier.features.map((feature, fIdx) => (
+                  <li key={fIdx} className="flex items-start gap-3 text-xs font-semibold text-gray-300">
+                    <Check className="w-4 h-4 shrink-0 mt-0.5 text-[#df9a28]" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button 
+                className={`w-full font-bold text-xs uppercase tracking-widest py-3.5 rounded-lg transition-all border flex items-center justify-center gap-1.5 ${
+                  tier.popular 
+                    ? "bg-[#df9a28] text-black border-[#df9a28] hover:bg-[#cb8b1f]" 
+                    : "bg-transparent text-white border-[#2c2c2c] hover:bg-[#1a1a1a]"
+                }`}
+              >
+                <span>Subscribe Now</span>
+                <span className="text-sm">→</span>
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -585,116 +673,62 @@ function PricingSection() {
 
 function ContactSection() {
   return (
-    <section className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-24">
-      <TrendingStoriesHeader title="Get In Touch" />
-      <div className="grid lg:grid-cols-12 gap-10">
-        
+    <section className="bg-[#0b0b0b] py-24 text-left border-t border-[#1a1a1a]">
+      <div className="max-w-[1400px] mx-auto px-4 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
         {/* Info Column */}
-        <div className="lg:col-span-4 flex flex-col justify-between bg-[#1a1a1a] border border-[#222] p-8">
-          <div>
-            <h3 className="text-xl font-black text-white tracking-tight mb-4">Contact Information</h3>
-            <p className="text-xs text-gray-400 leading-relaxed mb-8 font-medium">
-              Have inquiries regarding news submissions, commercial display partnerships, technical glitches, or custom membership arrangements? Reach out to our operators instantly.
-            </p>
-            
-            <div className="space-y-6">
-              <div className="flex gap-4 items-center">
-                <div className="w-10 h-10 bg-[#111111] border border-[#333] flex items-center justify-center shrink-0">
-                  <Mail className="w-4 h-4 text-[#ff007b]" />
-                </div>
-                <div>
-                  <span className="text-[10px] text-gray-500 font-black uppercase tracking-wider block">EMAIL ADDRESS</span>
-                  <a href="mailto:support@benqu.news" className="text-sm font-bold text-white hover:text-[#ff007b] transition-colors">support@benqu.news</a>
-                </div>
-              </div>
-
-              <div className="flex gap-4 items-center">
-                <div className="w-10 h-10 bg-[#111111] border border-[#333] flex items-center justify-center shrink-0">
-                  <Phone className="w-4 h-4 text-[#5c45fd]" />
-                </div>
-                <div>
-                  <span className="text-[10px] text-gray-500 font-black uppercase tracking-wider block">PHONE SYSTEM</span>
-                  <a href="tel:+15558920192" className="text-sm font-bold text-white hover:text-[#5c45fd] transition-colors">+1 (555) 892-0192</a>
-                </div>
-              </div>
-
-              <div className="flex gap-4 items-center">
-                <div className="w-10 h-10 bg-[#111111] border border-[#333] flex items-center justify-center shrink-0">
-                  <MapPin className="w-4 h-4 text-[#00d084]" />
-                </div>
-                <div>
-                  <span className="text-[10px] text-gray-500 font-black uppercase tracking-wider block">HQ LOCATION</span>
-                  <span className="text-sm font-bold text-white">789 Media Grid Row, NY 10011</span>
-                </div>
-              </div>
-            </div>
+        <div className="lg:col-span-5 flex flex-col justify-center">
+          <div className="inline-block border border-[#df9a28]/40 text-[#df9a28] bg-[#df9a28]/5 rounded-full px-4 py-1 text-[11px] font-bold uppercase tracking-widest mb-4 w-max">
+            Contact
           </div>
-
-          <div className="mt-8 pt-6 border-t border-[#222]">
-             <span className="text-[10px] text-gray-500 font-black uppercase tracking-wider block mb-3">FOLLOW CONSTANT STREAMS</span>
-             <div className="flex items-center gap-4 text-gray-400">
-               <Facebook className="h-4 w-4 hover:text-white cursor-pointer transition-colors" />
-               <Twitter className="h-4 w-4 hover:text-white cursor-pointer transition-colors" />
-               <Instagram className="h-4 w-4 hover:text-white cursor-pointer transition-colors" />
-               <Youtube className="h-4 w-4 hover:text-white cursor-pointer transition-colors" />
+          <h2 className="text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
+            Ready to Scale Your Content?
+          </h2>
+          <p className="text-gray-400 text-sm leading-relaxed mb-8 font-medium">
+            Get in touch with our team to discuss your video editing needs. We'll get back to you within 24 hours with a customized plan tailored exactly for your platform.
+          </p>
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 text-sm font-semibold text-gray-300">
+              <Phone className="w-4 h-4 text-[#df9a28]" />
+              <span>+1 (555) 234-5678</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm font-semibold text-gray-300">
+              <Mail className="w-4 h-4 text-[#df9a28]" />
+              <span>support@postpidia.com</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm font-semibold text-gray-300">
+              <MapPin className="w-4 h-4 text-[#df9a28]" />
+              <span>San Francisco, CA 94107</span>
             </div>
           </div>
         </div>
 
-        {/* Form Column */}
-        <div className="lg:col-span-8 bg-[#1a1a1a] border border-[#222] p-8">
-           <form onSubmit={(e) => e.preventDefault()} className="grid sm:grid-cols-2 gap-6">
-              <div className="flex flex-col">
-                <label className="text-[10px] font-black uppercase text-gray-400 tracking-widest mb-2">Your Full Name *</label>
-                <input 
-                  type="text" 
-                  required
-                  placeholder="e.g. David Miller" 
-                  className="bg-[#111111] border border-[#333] focus:border-[#ff007b] text-gray-200 text-xs p-3 outline-none transition-colors"
-                />
+        {/* Contact Form Column */}
+        <div className="lg:col-span-7 bg-[#111111] border border-[#222] p-8 rounded-xl">
+          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-xs font-bold uppercase text-gray-400 mb-2">First Name</label>
+                <input type="text" className="w-full bg-[#161616] border border-[#262626] rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-[#df9a28] transition-colors" />
               </div>
-
-              <div className="flex flex-col">
-                <label className="text-[10px] font-black uppercase text-gray-400 tracking-widest mb-2">Email Address *</label>
-                <input 
-                  type="email" 
-                  required
-                  placeholder="e.g. david@domain.com" 
-                  className="bg-[#111111] border border-[#333] focus:border-[#ff007b] text-gray-200 text-xs p-3 outline-none transition-colors"
-                />
+              <div>
+                <label className="block text-xs font-bold uppercase text-gray-400 mb-2">Last Name</label>
+                <input type="text" className="w-full bg-[#161616] border border-[#262626] rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-[#df9a28] transition-colors" />
               </div>
-
-              <div className="sm:col-span-2 flex flex-col">
-                <label className="text-[10px] font-black uppercase text-gray-400 tracking-widest mb-2">Subject Matter *</label>
-                <input 
-                  type="text" 
-                  required
-                  placeholder="e.g. Commercial Advertisement Space Inquiry" 
-                  className="bg-[#111111] border border-[#333] focus:border-[#ff007b] text-gray-200 text-xs p-3 outline-none transition-colors"
-                />
-              </div>
-
-              <div className="sm:col-span-2 flex flex-col">
-                <label className="text-[10px] font-black uppercase text-gray-400 tracking-widest mb-2">Detailed Narrative Message *</label>
-                <textarea 
-                  rows={5}
-                  required
-                  placeholder="Draft your operational request parameters here..." 
-                  className="bg-[#111111] border border-[#333] focus:border-[#ff007b] text-gray-200 text-xs p-3 outline-none transition-colors resize-none"
-                ></textarea>
-              </div>
-
-              <div className="sm:col-span-2 flex justify-end">
-                <button 
-                  type="submit" 
-                  className="bg-[#5c45fd] hover:bg-[#4a36d9] text-white text-xs font-black uppercase tracking-widest px-8 py-4 flex items-center gap-2.5 transition-colors"
-                >
-                  <Send className="w-3.5 h-3.5" /> Dispatch Transmission
-                </button>
-              </div>
-           </form>
+            </div>
+            <div>
+              <label className="block text-xs font-bold uppercase text-gray-400 mb-2">Email Address</label>
+              <input type="email" className="w-full bg-[#161616] border border-[#262626] rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-[#df9a28] transition-colors" />
+            </div>
+            <div>
+              <label className="block text-xs font-bold uppercase text-gray-400 mb-2">Your Message</label>
+              <textarea rows={4} className="w-full bg-[#161616] border border-[#262626] rounded px-4 py-3 text-sm text-white focus:outline-none focus:border-[#df9a28] transition-colors resize-none"></textarea>
+            </div>
+            <button className="bg-[#df9a28] text-black font-bold text-xs uppercase tracking-widest py-3.5 px-8 rounded flex items-center gap-2 hover:bg-[#cb8b1f] transition-all">
+              <span>Send Message</span>
+              <Send className="w-3.5 h-3.5" />
+            </button>
+          </form>
         </div>
-
       </div>
     </section>
   );
@@ -702,32 +736,15 @@ function ContactSection() {
 
 function CTASection() {
   return (
-    <section className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-24 mb-16">
-      <div className="bg-[#5c45fd] relative overflow-hidden py-16 px-6 sm:px-12 flex flex-col md:flex-row items-center justify-between shadow-2xl">
-        {/* Abstract background elements */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-        <div className="absolute bottom-0 left-0 w-48 h-48 bg-black opacity-10 rounded-full blur-2xl translate-y-1/3 -translate-x-1/4"></div>
-        
-        <div className="z-10 text-center md:text-left mb-8 md:mb-0 md:max-w-xl">
-          <h2 className="text-3xl font-extrabold text-white mb-3">Get The Best News Directly in Your Inbox</h2>
-          <p className="text-indigo-100 text-sm">Subscribe to our newsletter and stay updated on the latest trends, news, and special offers.</p>
-        </div>
-
-        <div className="z-10 w-full md:w-auto flex flex-col sm:flex-row gap-2">
-          <div className="relative w-full sm:w-72">
-             <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-                <Mail className="w-4 h-4 text-gray-400" />
-             </div>
-             <input 
-               type="email" 
-               placeholder="Your email address" 
-               className="w-full bg-[#111111] text-white placeholder:text-gray-500 text-sm px-4 py-3.5 pl-10 border-none focus:ring-2 focus:ring-[#ff007b] outline-none transition-all shadow-inner"
-             />
-          </div>
-          <button className="bg-[#ff007b] hover:bg-[#d80068] text-white font-bold text-xs uppercase tracking-widest px-8 py-3.5 transition-colors whitespace-nowrap">
-            Subscribe
-          </button>
-        </div>
+    <section className="bg-gradient-to-r from-[#ff007b] to-[#5c45fd] py-20 text-center text-white">
+      <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
+        <h2 className="text-4xl lg:text-5xl font-black mb-4 tracking-tight">Unlock Ultimate Performance Today</h2>
+        <p className="text-white/80 max-w-xl mx-auto text-sm mb-8 font-medium leading-relaxed">
+          Join thousands of global brands utilizing our high-retention video pipelines to scale cross-platform views.
+        </p>
+        <button className="bg-white text-black font-extrabold text-xs uppercase tracking-widest px-8 py-4 rounded-lg shadow-xl hover:bg-gray-100 transition-colors">
+          Get Started For Free
+        </button>
       </div>
     </section>
   );
@@ -735,94 +752,13 @@ function CTASection() {
 
 function Footer() {
   return (
-    <footer className="bg-[#0a0a0a] pt-20 border-t border-[#222]">
-      <div className="max-w-[1400px] mx-auto px-4 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-        
-        {/* Column 1: Brand */}
-        <div>
-          <a href="#" className="flex items-center gap-2 mb-6">
-            <div className="bg-gradient-to-tr from-[#ff007b] to-[#ff5722] text-white w-10 h-10 flex items-center justify-center font-bold text-xl">
-              B
-            </div>
-            <div className="text-2xl font-bold tracking-tight text-white leading-none">
-              Benqu
-            </div>
-          </a>
-          <p className="text-sm text-gray-400 leading-relaxed mb-6">
-            Benqu is a premium WordPress blog and magazine theme designed for creators who want sharp aesthetics and high-performance layouts.
-          </p>
-          <div className="flex items-center gap-4 text-gray-400">
-             <Facebook className="h-4 w-4 hover:text-[#ff007b] cursor-pointer transition-colors" />
-             <Twitter className="h-4 w-4 hover:text-[#ff007b] cursor-pointer transition-colors" />
-             <Instagram className="h-4 w-4 hover:text-[#ff007b] cursor-pointer transition-colors" />
-             <Youtube className="h-4 w-4 hover:text-[#ff007b] cursor-pointer transition-colors" />
-          </div>
-        </div>
-
-        {/* Column 2: Categories */}
-        <div>
-          <h4 className="text-white font-extrabold text-lg mb-6 tracking-tight">Top Categories</h4>
-          <ul className="space-y-3">
-            {["Technology", "Fashion & Beauty", "Travel & Leisure", "Food & Drink", "Sports News"].map((item) => (
-              <li key={item}>
-                <a href="#" className="text-sm text-gray-400 hover:text-[#ff007b] transition-colors flex items-center gap-2 group">
-                  <ChevronRight className="w-3 h-3 text-gray-600 group-hover:text-[#ff007b] transition-colors" />
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Column 3: Useful Links */}
-        <div>
-          <h4 className="text-white font-extrabold text-lg mb-6 tracking-tight">Useful Links</h4>
-          <ul className="space-y-3">
-            {["About Us", "Contact Us", "Terms & Conditions", "Privacy Policy", "Advertise With Us"].map((item) => (
-              <li key={item}>
-                <a href="#" className="text-sm text-gray-400 hover:text-[#ff007b] transition-colors flex items-center gap-2 group">
-                  <ChevronRight className="w-3 h-3 text-gray-600 group-hover:text-[#ff007b] transition-colors" />
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Column 4: Recent Posts */}
-        <div>
-           <h4 className="text-white font-extrabold text-lg mb-6 tracking-tight">Recent Posts</h4>
-           <div className="space-y-4">
-              <div className="flex gap-4 group cursor-pointer">
-                 <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=100&h=100&fit=crop" alt="thumb" className="w-16 h-16 object-cover border border-[#222]" />
-                 <div>
-                    <h5 className="text-sm text-gray-200 font-bold leading-tight group-hover:text-[#ff007b] transition-colors line-clamp-2">Sony Laptops Are Still Part Of The Sony Family</h5>
-                    <span className="text-[10px] text-gray-500 font-bold uppercase mt-1 block">Jul 07, 2022</span>
-                 </div>
-              </div>
-              <div className="flex gap-4 group cursor-pointer">
-                 <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100&h=100&fit=crop" alt="thumb" className="w-16 h-16 object-cover border border-[#222]" />
-                 <div>
-                    <h5 className="text-sm text-gray-200 font-bold leading-tight group-hover:text-[#ff007b] transition-colors line-clamp-2">We believe Apple Will announce iPhone.</h5>
-                    <span className="text-[10px] text-gray-500 font-bold uppercase mt-1 block">Jul 07, 2022</span>
-                 </div>
-              </div>
-           </div>
-        </div>
-        
-      </div>
-
-      {/* Copyright Bar */}
-      <div className="bg-[#111111] border-t border-[#222] py-6">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs font-bold text-gray-500">
-            &copy; 2023 <span className="text-gray-300">Benqu</span>. All rights reserved.
-          </p>
-          <div className="flex items-center gap-6 text-xs font-bold text-gray-500">
-             <a href="#" className="hover:text-white transition-colors">Privacy</a>
-             <a href="#" className="hover:text-white transition-colors">Terms</a>
-             <a href="#" className="hover:text-white transition-colors">Contact</a>
-          </div>
+    <footer className="bg-[#0b0b0b] border-t border-[#222] py-12 text-center text-xs text-gray-500 font-bold uppercase tracking-wider">
+      <div className="max-w-[1400px] mx-auto px-4 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div>© {new Date().getFullYear()} Postpidia. All Rights Reserved.</div>
+        <div className="flex gap-6 normal-case text-gray-400 font-semibold">
+          <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+          <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+          <a href="#" className="hover:text-white transition-colors">Sitemap</a>
         </div>
       </div>
     </footer>
