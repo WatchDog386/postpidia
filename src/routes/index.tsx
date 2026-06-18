@@ -710,9 +710,9 @@ function ContactSection() {
   };
 
   return (
-    <section className="bg-[#111111] pt-0 pb-16">
+    <section className="bg-[#111111] pt-0 pb-0">
       <div className="max-w-[1100px] mx-auto px-4 lg:px-8 relative flex flex-col lg:flex-row items-end gap-16 lg:gap-12">
-        <div className="w-full lg:w-[45%] relative flex items-end justify-center lg:justify-end pt-32 lg:pt-0 -mb-3 lg:-mb-4">
+        <div className="w-full lg:w-[45%] relative flex items-end justify-center lg:justify-end pt-32 lg:pt-0">
           <div className="absolute top-10 lg:-top-10 left-0 lg:left-0 xl:left-[-20px] z-10 bg-[#ff007b] rounded-[24px] text-white p-8 w-[240px] sm:w-[280px] shadow-2xl">
             <div className="bg-white text-[#ff007b] w-14 h-14 rounded-full flex items-center justify-center mb-6 mx-auto">
               <MessageCircle className="w-6 h-6 fill-current" />
