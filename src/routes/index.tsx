@@ -264,7 +264,7 @@ function HeroSection() {
               SALES TRACKING
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-4 leading-tight tracking-tight group-hover:text-[#ff007b] transition-colors">
-              Turn Your Data Into Revenue
+              Turn Your Content Into Sales Machines
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-gray-300 text-[11px] font-bold tracking-wider mt-5 uppercase">
               <span>BY POSTPIDIA</span>
