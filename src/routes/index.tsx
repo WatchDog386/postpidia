@@ -96,13 +96,13 @@ function Nav() {
         <div className="max-w-[1400px] mx-auto px-4 lg:px-8 py-2 flex items-center justify-between text-[11px] font-semibold">
           <div className="flex items-center gap-3">
             <span className="bg-[#5c45fd] text-white px-2.5 py-1 tracking-wider">
-              JANUARY 17, 2023
+              POSTPIDIA
             </span>
             <div className="flex items-center gap-2 text-gray-400">
               <TrendingUp className="h-3 w-3 text-[#ff5722]" />
-              <span className="text-gray-300">Trending News:</span>
+              <span className="text-gray-300">Sales Tracking:</span>
               <span className="hover:text-white cursor-pointer transition-colors hidden sm:block">
-                We Believe Announce Will the iPhone this Day...
+                Close more deals with AI-powered pipeline analytics
               </span>
             </div>
           </div>
