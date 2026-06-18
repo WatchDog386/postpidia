@@ -1,11 +1,13 @@
 @import "tailwindcss" source(none);
+@import "@fontsource-variable/spline-sans";
+@import "@fontsource-variable/playfair-display";
+
 @source "../src";
 
 @theme inline {
+  --font-sans: "Spline Sans", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
-  --font-sans:
-    Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-    sans-serif;
 
   --color-brand-red: #dc2626;
   --color-brand-red-dark: #b91c1c;
@@ -28,13 +30,37 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 17px;
   }
   body {
-    background-color: #ffffff;
-    color: #111111;
+    background:
+      radial-gradient(1000px 420px at 8% 96%, rgba(255, 0, 123, 0.07), transparent 60%),
+      radial-gradient(900px 380px at 92% 12%, rgba(90, 69, 253, 0.06), transparent 62%),
+      #0f0f0f;
+    color: #e5e5e5;
     font-family: var(--font-sans);
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.6;
+    min-height: 100vh;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.15;
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0,
+      transparent 220px,
+      rgba(90, 69, 253, 0.25) 221px,
+      transparent 222px,
+      transparent 520px
+    );
   }
   h1,
   h2,
@@ -42,13 +68,13 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-serif);
-    font-weight: 700;
-    color: #111111;
+    font-family: var(--font-sans);
+    font-weight: 800;
+    color: #ffffff;
     letter-spacing: -0.02em;
   }
   p {
-    color: #444444;
+    color: #a0a0a0;
   }
   a {
     color: inherit;

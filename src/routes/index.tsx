@@ -40,35 +40,27 @@ export const Route = createFileRoute("/")({
       { title: "Postpidia — Sales Tracking Software" },
       { name: "description", content: "Track, analyze, and close more deals with Postpidia" },
     ],
-    links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap",
-      },
-    ],
+    links: [],
   }),
   component: Landing,
 });
 
-// Exact Tag Color Mapper from the design
 const getCategoryStyles = (category: string) => {
   const cat = category.toLowerCase();
-  if (cat.includes("fashion") || cat.includes("design") || cat.includes("leads") || cat.includes("lead")) return "bg-[#ff007b] text-white"; 
-  if (cat.includes("food") || cat.includes("grading") || cat.includes("pipeline") || cat.includes("dashboard")) return "bg-[#ff6a00] text-white"; 
-  if (cat.includes("travel") || cat.includes("graphics") || cat.includes("forecast") || cat.includes("reports")) return "bg-[#00c3ff] text-white"; 
-  if (cat.includes("tech") || cat.includes("editing") || cat.includes("crm") || cat.includes("integrate") || cat.includes("reporting") || cat.includes("integrations")) return "bg-[#006aff] text-white"; 
-  if (cat.includes("creative") || cat.includes("analytics") || cat.includes("sales")) return "bg-[#ffb300] text-black"; 
-  if (cat.includes("sports")) return "bg-[#4caf50] text-white"; 
-  if (cat.includes("racing") || cat.includes("production")) return "bg-[#ff5722] text-white"; 
-  if (cat.includes("music") || cat.includes("team")) return "bg-[#f44336] text-white"; 
+  if (cat.includes("fashion") || cat.includes("design") || cat.includes("leads") || cat.includes("lead")) return "bg-[#ff007b] text-white";
+  if (cat.includes("food") || cat.includes("grading") || cat.includes("pipeline") || cat.includes("dashboard")) return "bg-[#ff6a00] text-white";
+  if (cat.includes("travel") || cat.includes("graphics") || cat.includes("forecast") || cat.includes("reports")) return "bg-[#00c3ff] text-white";
+  if (cat.includes("tech") || cat.includes("editing") || cat.includes("crm") || cat.includes("integrate") || cat.includes("reporting") || cat.includes("integrations")) return "bg-[#006aff] text-white";
+  if (cat.includes("creative") || cat.includes("analytics") || cat.includes("sales")) return "bg-[#ffb300] text-black";
+  if (cat.includes("sports")) return "bg-[#4caf50] text-white";
+  if (cat.includes("racing") || cat.includes("production")) return "bg-[#ff5722] text-white";
+  if (cat.includes("music") || cat.includes("team")) return "bg-[#f44336] text-white";
   return "bg-indigo-600 text-white";
 };
 
 export default function Landing() {
   return (
-    <div className="bg-[#111111] text-gray-200 min-h-screen font-['Plus_Jakarta_Sans',sans-serif] antialiased">
+    <div className="min-h-screen antialiased">
       <Nav />
       <main className="relative">
         <FloatingThemeToggle />
@@ -127,13 +119,9 @@ function Nav() {
             >
               {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
-            <a href="#" className="flex items-center gap-2">
-              <div className="bg-gradient-to-tr from-[#ff007b] to-[#ff5722] text-white w-10 h-10 flex items-center justify-center font-bold text-xl">
-                P
-              </div>
-               <div className="text-2xl font-bold tracking-tight text-white leading-none">
-                 Postpidia
-               </div>
+            <a href="#" className="flex items-center gap-3">
+              <img src="/logo.png" alt="Postpidia" className="h-10 w-auto" />
+              <span className="text-2xl font-bold tracking-tight text-white leading-none">Postpidia</span>
             </a>
           </div>
 
@@ -147,10 +135,10 @@ function Nav() {
               Postpidia Sales Tracking — Close More Deals
             </h2>
             
-            <motion.button 
+            <motion.button
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
-              className="relative bg-[#00d084] text-white font-bold text-[11px] uppercase tracking-wider px-6 py-2.5 z-10 shadow-[0_4px_0_0_#009c63] active:translate-y-[4px] active:shadow-none transition-all duration-150 rounded"
+              className="relative bg-[#00d084] text-white font-bold text-[11px] uppercase tracking-wider px-6 py-2.5 z-10 rounded-full hover:opacity-90 transition-all duration-200"
             >
               GET STARTED
             </motion.button>
@@ -426,10 +414,10 @@ function BottomSection() {
         <SectionHeader 
           title="Trending Stories"
           endSlot={
-            <motion.button 
+            <motion.button
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
-              className="relative bg-[#5c45fd] text-white text-[10px] font-bold uppercase tracking-widest px-4 py-2 flex items-center gap-2 shadow-[0_4px_0_0_#4430ca] active:translate-y-[4px] active:shadow-none transition-all duration-150 rounded"
+              className="relative bg-[#5c45fd] text-white text-[10px] font-bold uppercase tracking-widest px-5 py-2 flex items-center gap-2 rounded-full hover:opacity-90 transition-all duration-200"
             >
               ALL STORIES <ChevronRight className="w-3 h-3" />
             </motion.button>
@@ -440,10 +428,10 @@ function BottomSection() {
           {/* Left Card — Featured Story (full-height) */}
           <div className="bg-[#1a1a1a] p-8 flex flex-col justify-center relative overflow-hidden rounded-[2px] h-[400px] md:h-full group border border-[#222]">
             <div className="relative z-10 w-[60%] ml-auto text-right flex flex-col items-end">
-              <span className="text-[#ff007b] text-[11px] font-bold uppercase tracking-[0.2em] mb-2">FEATURED</span>
+              <span className="bg-[#ff007b] text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm mb-2">FEATURED</span>
               <h3 className="text-white text-[22px] lg:text-[28px] font-black leading-tight mb-3">{stories[0].title}</h3>
               <p className="text-gray-400 text-[12px] mb-6 font-medium">{stories[0].subtitle}</p>
-              <button className="bg-transparent border-[1.5px] border-white text-white hover:bg-white hover:text-[#111] rounded-full px-6 py-2.5 h-10 w-fit text-[11px] font-bold uppercase tracking-wider transition-all duration-300">
+              <button className="bg-transparent border-[1.5px] border-white text-white rounded-full px-6 py-2.5 h-10 w-fit text-[11px] font-bold uppercase tracking-wider hover:bg-white hover:text-[#111] transition-all duration-200">
                 Read Story
               </button>
             </div>
@@ -457,7 +445,7 @@ function BottomSection() {
             {/* Top Row — 2 smaller cards */}
             <div className="grid grid-cols-2 gap-6 h-[200px] md:h-[calc(50%-12px)]">
               <div className="bg-[#5c45fd] p-5 relative overflow-hidden rounded-[2px] flex flex-col justify-start group border border-[#6b56ff]">
-                <div className="bg-white/20 text-white text-[9px] font-bold px-2.5 py-1 rounded-[2px] w-fit mb-2 relative z-10 tracking-widest">
+                <div className="bg-white/20 text-white text-[9px] font-bold px-2.5 py-1 rounded-sm w-fit mb-2 relative z-10 tracking-widest">
                   {stories[1].tag}
                 </div>
                 <h4 className="text-white text-[15px] font-bold mb-1 relative z-10 leading-tight">{stories[1].title}</h4>
@@ -470,7 +458,7 @@ function BottomSection() {
                 </div>
               </div>
               <div className="bg-[#ff007b] p-5 relative overflow-hidden rounded-[2px] flex flex-col justify-start group border border-[#ff1a8a]">
-                <div className="bg-white/20 text-white text-[9px] font-bold px-2.5 py-1 rounded-[2px] w-fit mb-2 relative z-10 tracking-widest">
+                <div className="bg-white/20 text-white text-[9px] font-bold px-2.5 py-1 rounded-sm w-fit mb-2 relative z-10 tracking-widest">
                   {stories[2].tag}
                 </div>
                 <h4 className="text-white text-[15px] font-bold mb-1 relative z-10 leading-tight">{stories[2].title}</h4>
@@ -487,10 +475,10 @@ function BottomSection() {
             {/* Bottom Row — wider CTA card */}
             <div className="bg-[#1a1a1a] p-6 relative overflow-hidden rounded-[2px] h-[200px] md:h-[calc(50%-12px)] flex flex-col justify-center group border border-[#222]">
               <div className="relative z-10">
-                <p className="text-[#ff007b] text-[10px] font-bold uppercase tracking-[0.2em] mb-1.5">FEATURES</p>
+                <p className="bg-[#ff007b] text-white text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-sm inline-block mb-3">FEATURES</p>
                 <h4 className="text-white text-[20px] lg:text-[24px] font-bold mb-1">Sales Tracking Platform</h4>
                 <p className="text-gray-400 text-[11px] font-bold tracking-widest uppercase mb-3">ALL FEATURES THIS WEEK</p>
-                <a href="#" className="inline-flex items-center gap-2 bg-transparent border border-white text-white hover:bg-white hover:text-[#111] text-[11px] font-bold uppercase tracking-wider px-5 py-2.5 transition-all duration-300">
+                <a href="#" className="inline-flex items-center gap-2 bg-transparent border border-white text-white rounded-full text-[11px] font-bold uppercase tracking-wider px-5 py-2.5 hover:bg-white hover:text-[#111] transition-all duration-200">
                   View All <ChevronRight className="w-3.5 h-3.5" />
                 </a>
               </div>
@@ -516,7 +504,7 @@ function HowItWorksSection() {
   return (
     <section className="bg-[#0b0b0b] py-24 text-center mt-20">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
-        <div className="inline-block border border-[#df9a28]/40 text-[#df9a28] bg-[#df9a28]/5 rounded-full px-4 py-1 text-[11px] font-bold uppercase tracking-widest mb-4">
+        <div className="inline-block border border-[#df9a28]/40 text-[#df9a28] bg-[#df9a28]/5 rounded-full px-5 py-1.5 text-[11px] font-bold uppercase tracking-widest mb-4">
           Process
         </div>
         <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight">
@@ -683,10 +671,10 @@ function PricingSection() {
                 <motion.button 
                   whileHover={{ y: -2 }}
                   whileTap={{ y: 0 }}
-                  className={`w-full font-bold text-sm tracking-wider py-4 px-6 rounded-xl mt-8 transition-all duration-150 ${
+                  className={`w-full font-bold text-sm tracking-wider py-4 px-6 rounded-full mt-8 transition-all duration-200 ${
                     tier.popular
-                      ? "bg-[#5c45fd] text-white hover:bg-[#4a3ae0]"
-                      : "bg-transparent text-white border border-[#333] hover:border-[#5c45fd]"
+                      ? "bg-[#5c45fd] text-white hover:opacity-90"
+                      : "bg-transparent text-white border border-[#555] hover:border-[#5c45fd] hover:bg-white/5"
                   }`}
                 >
                   Subscribe Now
@@ -720,7 +708,7 @@ function ContactSection() {
               Have questions? Our support team is ready to help you with any enquiry.
             </p>
             <div className="flex justify-center">
-              <Button className="bg-white text-[#ff007b] hover:bg-gray-100 rounded-full px-6 py-2 h-9 text-[10px] font-extrabold uppercase tracking-widest">
+              <Button className="bg-white text-[#ff007b] hover:bg-gray-100 rounded-full px-8 py-2 h-9 text-[10px] font-extrabold uppercase tracking-widest transition-all duration-200">
                 LET'S CHAT
               </Button>
             </div>
@@ -742,7 +730,7 @@ function ContactSection() {
               CONTACT US
               <span className="w-1.5 h-1.5 rounded-full bg-[#ff007b]"></span>
             </div>
-            <h2 className="text-white font-display font-[900] text-[32px] md:text-[42px] leading-[1.1] mb-10">
+            <h2 className="text-white font-[900] text-[32px] md:text-[42px] leading-[1.1] mb-10">
               <span className="text-[#ff007b]">Reach</span> & Get In Touch<br />
               With Us !
             </h2>
@@ -781,7 +769,7 @@ function ContactSection() {
             <div className="mt-2 text-left">
               <Button
                 type="submit"
-                className="bg-[#ff007b] hover:bg-[#e0006b] text-white rounded-full px-8 py-6 h-12 text-[11px] font-extrabold uppercase tracking-widest shadow-md transition-transform hover:-translate-y-0.5 w-[200px]"
+                className="bg-[#ff007b] hover:opacity-90 text-white rounded-full px-8 py-6 h-12 text-[11px] font-extrabold uppercase tracking-widest transition-all duration-200 w-[200px]"
               >
                 SEND MESSAGE
               </Button>
@@ -809,17 +797,17 @@ function CTASection() {
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <motion.button 
-              whileHover={{ y: -3 }}
+              whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
-              className="bg-[#5c45fd] text-white font-bold text-xs uppercase tracking-widest px-8 py-3.5 flex items-center gap-2 shadow-[0_5px_0_0_#4430ca] active:translate-y-[5px] active:shadow-none transition-all duration-150 rounded"
+              className="bg-[#5c45fd] text-white font-bold text-xs uppercase tracking-widest px-8 py-3.5 flex items-center gap-2 rounded-full hover:opacity-90 transition-all duration-200"
             >
               <span>Get Started Now</span>
               <ArrowUpRight className="w-4 h-4" />
             </motion.button>
             <motion.button 
-              whileHover={{ y: -3 }}
+              whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
-              className="bg-transparent text-white border border-gray-700 font-bold text-xs uppercase tracking-widest px-8 py-3.5 shadow-[0_5px_0_0_#222] active:translate-y-[5px] active:shadow-none transition-all duration-150 rounded hover:bg-white/5"
+              className="bg-transparent text-white border border-gray-600 font-bold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full hover:bg-white/10 hover:border-white transition-all duration-200"
             >
               View Case Studies
             </motion.button>
@@ -839,13 +827,9 @@ function Footer() {
     <footer className="bg-[#161616] border-t border-[#222] pt-16 pb-8">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-10 mb-12">
         <div className="col-span-2 lg:col-span-4 flex flex-col space-y-6">
-          <a href="#" className="flex items-center gap-2">
-            <div className="bg-gradient-to-tr from-[#ff007b] to-[#ff5722] text-white w-9 h-9 flex items-center justify-center font-bold text-lg">
-              P
-            </div>
-            <div className="text-xl font-bold tracking-tight text-white leading-none">
-              Postpidia
-            </div>
+          <a href="#" className="flex items-center gap-3">
+            <img src="/logo.png" alt="Postpidia" className="h-10 w-auto" />
+            <span className="text-xl font-bold tracking-tight text-white leading-none">Postpidia</span>
           </a>
           <p className="text-gray-400 text-xs leading-relaxed max-w-sm font-medium">
             Sales tracking platform designed for modern teams. Track deals, forecast revenue, and close more with data-driven insights and automation.
