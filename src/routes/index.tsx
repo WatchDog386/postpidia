@@ -37,8 +37,8 @@ import { Toaster } from "@/components/ui/sonner";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Aura Social — Sales Tracking Software" },
-      { name: "description", content: "Track, analyze, and close more deals with Aura Social" },
+      { title: "Postpidia — Sales Tracking Software" },
+      { name: "description", content: "Track, analyze, and close more deals with Postpidia" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -135,7 +135,7 @@ function Nav() {
                 P
               </div>
                <div className="text-2xl font-bold tracking-tight text-white leading-none">
-                 Aura
+                 Postpidia
                </div>
             </a>
           </div>
@@ -147,7 +147,7 @@ function Nav() {
             <div className="absolute left-8 top-0 w-16 h-16 bg-yellow-400 [clip-path:polygon(50%_0,100%_50%,50%_100%,0_50%)]"></div>
             
             <h2 className="text-black font-black text-xl z-10 ml-16">
-              Aura Sales Tracking — Close More Deals
+              Postpidia Sales Tracking — Close More Deals
             </h2>
             
             <motion.button 
@@ -267,7 +267,7 @@ function HeroSection() {
               Turn Your Data Into Revenue
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-gray-300 text-[11px] font-bold tracking-wider mt-5 uppercase">
-              <span>BY AURA</span>
+              <span>BY POSTPIDIA</span>
               <span className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5" /> JUN 18, 2026</span>
               <span className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5" /> 12K+ DEALS</span>
               <span className="flex items-center gap-1.5"><Eye className="h-3.5 w-3.5" /> 95% ACCURACY</span>
@@ -280,13 +280,13 @@ function HeroSection() {
           <div className="group cursor-pointer">
             <div className="relative overflow-hidden mb-4">
               <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&h=380&fit=crop" alt="Why Choose Us" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
-              <span className={`absolute top-4 left-4 px-2 py-1 text-[9px] font-bold tracking-widest ${getCategoryStyles("ANALYTICS")}`}>WHY AURA</span>
+              <span className={`absolute top-4 left-4 px-2 py-1 text-[9px] font-bold tracking-widest ${getCategoryStyles("ANALYTICS")}`}>WHY US</span>
             </div>
             <h3 className="font-extrabold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#ff007b] transition-colors">
               Built for Sales Teams That Want to Close More
             </h3>
             <div className="flex items-center gap-4 text-gray-500 text-[10px] font-bold mt-3 uppercase tracking-wider">
-              <span>BY AURA</span>
+              <span>BY POSTPIDIA</span>
               <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> JUN 18, 2026</span>
               <span className="flex items-center gap-1"><TrendingUp className="h-3 w-3" /> +47% CONVERSION</span>
             </div>
@@ -301,7 +301,7 @@ function HeroSection() {
               Trusted by 10,000+ Sales Professionals Worldwide
             </h3>
             <div className="flex items-center gap-4 text-gray-500 text-[10px] font-bold mt-3 uppercase tracking-wider">
-              <span>BY AURA</span>
+              <span>BY POSTPIDIA</span>
               <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> JUN 18, 2026</span>
               <span className="flex items-center gap-1"><TrendingUp className="h-3 w-3" /> 4.9/5 RATING</span>
             </div>
@@ -526,7 +526,7 @@ function BottomSection() {
 
 function HowItWorksSection() {
   const steps = [
-    { step: "01", title: "Connect Your Tools", desc: "Integrate your CRM, email, calendar, and payment platforms. Aura syncs all your sales data automatically." },
+    { step: "01", title: "Connect Your Tools", desc: "Integrate your CRM, email, calendar, and payment platforms. Postpidia syncs all your sales data automatically." },
     { step: "02", title: "Track Every Deal", desc: "Log deals, set stages, and update progress with a simple drag-and-drop interface. Never lose sight of an opportunity." },
     { step: "03", title: "Analyze & Forecast", desc: "Get AI-powered insights on your pipeline health, conversion rates, and revenue forecasts with 95% accuracy." },
     { step: "04", title: "Close & Scale", desc: "Automate follow-ups, generate reports, and replicate your winning sales playbook across the entire team." }
@@ -826,7 +826,7 @@ function CTASection() {
             Ready to Close More Deals?
           </h2>
           <p className="text-gray-300 text-sm max-w-xl mx-auto mb-10 leading-relaxed font-medium">
-            Join thousands of sales teams using Aura to track, analyze, and close deals faster than ever before.
+            Join thousands of sales teams using Postpidia to track, analyze, and close deals faster than ever before.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <motion.button 
@@ -916,7 +916,7 @@ function Footer() {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8 pt-8 border-t border-[#222] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-bold text-gray-500">
-        <div>&copy; {new Date().getFullYear()} AURA SOCIAL. ALL RIGHTS RESERVED.</div>
+        <div>&copy; {new Date().getFullYear()} POSTPIDIA. ALL RIGHTS RESERVED.</div>
         <div className="flex flex-wrap gap-x-6 gap-y-2">
           {legalityLinks.map((link) => (
             <a key={link} href="#" className="hover:text-gray-300 transition-colors">{link}</a>
