@@ -108,14 +108,11 @@ function Nav() {
           </div>
           <div className="hidden lg:flex items-center gap-4 text-gray-400">
             <div className="flex items-center gap-3">
-              <span>Follow Us</span>
-              <Facebook className="h-3.5 w-3.5 hover:text-white cursor-pointer" />
-              <Twitter className="h-3.5 w-3.5 hover:text-white cursor-pointer" />
-              <Linkedin className="h-3.5 w-3.5 hover:text-white cursor-pointer" />
-              <Instagram className="h-3.5 w-3.5 hover:text-white cursor-pointer" />
-              <Youtube className="h-3.5 w-3.5 hover:text-white cursor-pointer" />
+              <span>Contact:</span>
+              <Phone className="h-3.5 w-3.5 text-[#00d084]" />
+              <span className="text-gray-300">+1 (555) 123-4567</span>
             </div>
-            <User className="h-3.5 w-3.5 hover:text-white cursor-pointer ml-2" />
+            <Mail className="h-3.5 w-3.5 hover:text-white cursor-pointer" />
           </div>
         </div>
       </div>
