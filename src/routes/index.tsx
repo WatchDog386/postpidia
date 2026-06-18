@@ -180,23 +180,7 @@ function Nav() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-4 w-full lg:w-auto justify-end">
-            <div className="relative hidden sm:flex items-center w-64 border border-[#333] focus-within:border-[#ff007b] transition-colors">
-              <input
-                type="text"
-                placeholder="Search ..."
-                className="bg-transparent text-xs text-gray-200 placeholder:text-gray-600 pl-3 pr-10 py-2 w-full focus:outline-none"
-              />
-              <Search className="h-3.5 w-3.5 text-gray-400 absolute right-3 pointer-events-none" />
-            </div>
-            <motion.button 
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
-              className="relative bg-[#5c45fd] text-white font-bold px-6 py-2 text-[11px] tracking-wider uppercase shadow-[0_4px_0_0_#4430ca] active:translate-y-[4px] active:shadow-none transition-all duration-150 rounded"
-            >
-              LOGIN
-            </motion.button>
-          </div>
+          <div className="flex items-center gap-4 w-full lg:w-auto justify-end"></div>
         </div>
       </div>
 
