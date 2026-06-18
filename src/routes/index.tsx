@@ -557,7 +557,7 @@ function PricingSection() {
     {
       name: "Starter",
       price: isYearly ? 39 : 49,
-      gradient: "from-blue-600 via-purple-600 to-purple-700",
+      popular: false,
       features: [
         "Up to 500 deals tracked",
         "3 team members",
@@ -571,8 +571,8 @@ function PricingSection() {
     },
     {
       name: "Professional",
-      price: isYearly ? 69 : 89,
-      gradient: "from-orange-500 via-red-500 to-pink-600",
+      price: isYearly ? 79 : 99,
+      popular: true,
       features: [
         "Unlimited deals tracked",
         "10 team members",
@@ -586,8 +586,8 @@ function PricingSection() {
     },
     {
       name: "Enterprise",
-      price: isYearly ? 99 : 129,
-      gradient: "from-blue-500 via-cyan-500 to-teal-500",
+      price: isYearly ? 149 : 199,
+      popular: false,
       features: [
         "Unlimited everything",
         "Unlimited team members",
@@ -606,10 +606,10 @@ function PricingSection() {
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-extrabold text-white mb-4 tracking-tight">
-            Choose your plan
+            Simple, Transparent Pricing
           </h2>
           <p className="text-gray-400 text-sm max-w-2xl mx-auto leading-relaxed font-medium">
-            Scale your sales tracking from solo to enterprise. All plans include a 14-day free trial.
+            Choose the plan that matches your sales tracking needs. All plans include a 14-day free trial.
           </p>
         </div>
 
@@ -643,59 +643,57 @@ function PricingSection() {
           {tiers.map((tier, index) => (
             <div 
               key={index} 
-              className={`relative rounded-2xl overflow-hidden flex flex-col min-h-[600px] transition-transform hover:scale-105 duration-300`}
+              className={`relative rounded-2xl overflow-hidden flex flex-col transition-transform hover:scale-105 duration-300 ${
+                tier.popular
+                  ? "border-2 border-[#5c45fd] bg-[#1a1a1a]"
+                  : "border border-[#222] bg-[#1a1a1a]"
+              }`}
             >
-              {/* Gradient Background */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${tier.gradient} opacity-90`} />
+              {/* Most Popular Badge */}
+              {tier.popular && (
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-[#5c45fd] text-white text-[10px] font-bold uppercase tracking-widest px-6 py-2 rounded-b-lg z-10">
+                  Most Popular
+                </div>
+              )}
               
               {/* Content */}
-              <div className="relative z-10 flex flex-col h-full p-8">
-                <h3 className="text-2xl font-bold text-white mb-8 tracking-tight">
+              <div className="flex flex-col h-full p-8 pt-12">
+                <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">
                   {tier.name}
                 </h3>
 
+                <div className="flex items-baseline gap-1 mb-8">
+                  <span className="text-5xl font-black text-white tracking-tight">
+                    ${tier.price}
+                  </span>
+                  <span className="text-sm text-gray-400 font-medium">
+                    /month
+                  </span>
+                </div>
+
                 <ul className="space-y-4 mb-auto">
                   {tier.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-center gap-3 text-sm font-medium text-white/90">
-                      <Check className="w-4 h-4 shrink-0 text-white" />
+                    <li key={fIdx} className="flex items-center gap-3 text-sm font-medium text-gray-300">
+                      <Check className={`w-4 h-4 shrink-0 ${tier.popular ? "text-[#5c45fd]" : "text-gray-500"}`} />
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-8">
-                  <div className="flex items-baseline gap-1 mb-6">
-                    <span className="text-5xl font-black text-white tracking-tight">
-                      ${tier.price}
-                    </span>
-                    <span className="text-sm text-white/80 font-medium">
-                      per month
-                    </span>
-                  </div>
-
-                  <motion.button 
-                    whileHover={{ y: -2 }}
-                    whileTap={{ y: 0 }}
-                    className={`w-full font-bold text-sm uppercase tracking-wider py-4 px-6 rounded-xl flex items-center justify-center gap-2 transition-all duration-150 ${
-                      index === 1 
-                        ? "bg-[#111111] text-white shadow-lg" 
-                        : "bg-[#111111]/80 text-white backdrop-blur-sm hover:bg-[#111111]"
-                    }`}
-                  >
-                    <span>Sign up</span>
-                    <ChevronRight className="w-4 h-4" />
-                  </motion.button>
-                </div>
+                <motion.button 
+                  whileHover={{ y: -2 }}
+                  whileTap={{ y: 0 }}
+                  className={`w-full font-bold text-sm tracking-wider py-4 px-6 rounded-xl mt-8 transition-all duration-150 ${
+                    tier.popular
+                      ? "bg-[#5c45fd] text-white hover:bg-[#4a3ae0]"
+                      : "bg-transparent text-white border border-[#333] hover:border-[#5c45fd]"
+                  }`}
+                >
+                  Subscribe Now
+                </motion.button>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Footer Note */}
-        <div className="text-center mt-12">
-          <p className="text-gray-500 text-xs font-medium">
-            © 2020 BooStock. Designed by Harry Boo
-          </p>
         </div>
       </div>
     </section>
