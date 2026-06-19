@@ -29,6 +29,13 @@ import {
   Clock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import whyImg from "@/public/why.png";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -547,7 +554,7 @@ function HowItWorksSection() {
               className="flex flex-col items-center text-center bg-[#1a1a1a] rounded-xl p-6 shadow-sm border border-transparent transition-all duration-300 relative overflow-hidden"
             >
               {/* Background number */}
-              <div className="absolute -top-4 -right-4 text-[100px] md:text-[120px] font-bold text-white/[0.04] leading-none select-none pointer-events-none">
+              <div className="absolute top-1 right-2 text-[100px] md:text-[120px] font-bold text-white/[0.06] leading-none select-none pointer-events-none">
                 {item.step}
               </div>
 
@@ -583,59 +590,78 @@ function PricingSection() {
   const router = useRouter();
   const [yearly, setYearly] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", company: "", message: "" });
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSending(true);
+    const subject = encodeURIComponent(`Enterprise Inquiry from ${formData.name}`);
+    const body = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCompany: ${formData.company}\n\nMessage:\n${formData.message}`
+    );
+    window.location.href = `mailto:support@postpidia.com?subject=${subject}&body=${body}`;
+    setTimeout(() => {
+      setSending(false);
+      setDialogOpen(false);
+      setFormData({ name: "", email: "", phone: "", company: "", message: "" });
+    }, 500);
+  };
 
   const plans = [
     {
-      name: "Starter",
-      desc: "Perfect for small projects & occasional estimates",
-      monthly: 49,
-      yearly: 39,
-      popular: false,
-      features: [
-        "AI Auto-Takeoff & Measurements",
-        "Excel (BOQ) Export Integration",
-        "PDF & DWG Format Support",
-        "Secure Cloud Storage Included",
-        "Up to 5 Projects per Month",
-      ],
-    },
-    {
-      name: "Professional",
-      desc: "Best value for growing construction teams",
+      name: "Startup",
+      desc: "Perfect for small brands getting started with video content",
       monthly: 99,
       yearly: 79,
-      popular: true,
+      popular: false,
       features: [
-        "AI Auto-Takeoff & Measurements",
-        "Excel (BOQ) Export Integration",
-        "Branded PDF Quotes Generation",
-        "Unlimited File Revisions",
-        "Local Material Prices Database",
-        "PDF & DWG Format Support",
-        "Secure Cloud Storage Included",
-        "Up to 20 Projects per Month",
-        "Priority Email Support",
+        "Up to 4 Edited Videos",
+        "Royalty-Free Background Music",
+        "Advanced Color Grading",
+        "Noise Reduction & Audio Leveling",
+        "2 Revisions per Video",
+        "Custom Thumbnail (1 per video)",
+        "3% Sales Commission Agreement",
       ],
     },
     {
-      name: "Enterprise",
-      desc: "For heavy-volume firms & large-scale projects",
-      monthly: 199,
-      yearly: 159,
+      name: "Essential",
+      desc: "Best value for growing brands ready to scale their content output",
+      monthly: 149,
+      yearly: 119,
+      popular: true,
+      features: [
+        "Up to 5 Edited Videos",
+        "Dynamic Motion Graphics",
+        "Advanced Color Correction",
+        "A/B Testing Thumbnail Variations",
+        "3 Revisions per Video",
+        "Dedicated Project Manager",
+        "Multi-Platform Exports (TikTok/YT/IG)",
+        "3% Sales Commission Agreement",
+      ],
+    },
+    {
+      name: "Growth Pro",
+      desc: "Full-service for brands serious about dominating social commerce",
+      monthly: 189,
+      yearly: 151,
       popular: false,
       features: [
-        "AI Auto-Takeoff & Measurements",
-        "Excel (BOQ) Export Integration",
-        "Branded PDF Quotes Generation",
-        "Unlimited File Revisions",
-        "Local Material Prices Database",
-        "Secure Cloud Storage Included",
-        "PDF & DWG Format Support",
-        "Unlimited Projects per Month",
-        "24/7 Priority Support",
-        "Dedicated Account Manager",
-        "Custom Integrations Available",
-        "Team Collaboration Tools",
+        "Up to 8 Edited Videos",
+        "High-End 2D/3D Animations",
+        "Custom Brand Identity Kit",
+        "Premium Stock Footage Access",
+        "Performance Analytics Consulting",
+        "Unlimited Revisions",
+        "Dedicated Project Manager",
+        "Postpidia Asset Library Access",
+        "24-Hour Priority Support",
+        "Professional Voiceover Integration",
+        "SEO & Keyword Strategy for Video",
+        "3% Sales Commission Agreement",
       ],
     },
   ];
@@ -771,7 +797,107 @@ function PricingSection() {
             );
           })}
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-10 bg-gradient-to-r from-[#27272a] to-[#1e1e22] rounded-2xl border border-transparent hover:border-[#f0514e]/20 transition-all duration-300 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6"
+        >
+          <div className="flex-1">
+            <div className="flex items-center gap-3 mb-2">
+              <h3 className="text-2xl font-bold text-white">Enterprise</h3>
+              <span className="bg-[#f0514e] text-white text-[10px] font-bold px-2.5 py-1 rounded-lg leading-none">
+                Custom
+              </span>
+            </div>
+            <p className="text-[15px] text-gray-300 mb-4">
+              Need a tailored solution for your business? Get a custom plan with dedicated support, personalized onboarding, and enterprise-grade features.
+            </p>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mb-4">
+              {[
+                "Custom Video Volume & Pricing",
+                "Dedicated Account Manager",
+                "Priority 24/7 Support",
+                "Custom Integrations & API Access",
+                "Team Collaboration Tools",
+                "Custom Brand Identity Kit",
+                "Performance Analytics Dashboard",
+                "SLA Guarantees",
+              ].map((feature, j) => (
+                <li key={j} className="flex items-center gap-2">
+                  <div className="w-1 h-1 rounded-full bg-[#f0514e] shrink-0" />
+                  <span className="text-[13px] text-gray-200">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <motion.button
+            whileHover={{ y: -2 }}
+            whileTap={{ y: 0 }}
+            onClick={() => setDialogOpen(true)}
+            className="shrink-0 bg-[#f0514e] text-white text-[13px] font-medium px-8 py-3.5 rounded-full hover:opacity-90 transition-all duration-200 shadow-lg shadow-[#f0514e]/30"
+          >
+            Contact Sales
+          </motion.button>
+        </motion.div>
       </div>
+
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="bg-[#1e1e22] border border-[#333] text-white max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-white text-xl">Contact Sales</DialogTitle>
+            <DialogDescription className="text-gray-400 text-sm">
+              Fill in your details and we'll get back to you within 24 hours.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleSubmit} className="space-y-4 mt-2">
+            <Input
+              placeholder="Full Name"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              required
+              className="bg-[#27272a] border-[#444] text-white placeholder:text-gray-500 text-sm"
+            />
+            <Input
+              type="email"
+              placeholder="Email Address"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              required
+              className="bg-[#27272a] border-[#444] text-white placeholder:text-gray-500 text-sm"
+            />
+            <Input
+              type="tel"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              className="bg-[#27272a] border-[#444] text-white placeholder:text-gray-500 text-sm"
+            />
+            <Input
+              placeholder="Company Name"
+              value={formData.company}
+              onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+              className="bg-[#27272a] border-[#444] text-white placeholder:text-gray-500 text-sm"
+            />
+            <Textarea
+              placeholder="Tell us about your project..."
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+              required
+              rows={4}
+              className="bg-[#27272a] border-[#444] text-white placeholder:text-gray-500 text-sm resize-none"
+            />
+            <Button
+              type="submit"
+              disabled={sending}
+              className="w-full bg-[#f0514e] hover:bg-[#d94441] text-white text-sm font-medium py-2.5 rounded-full cursor-pointer"
+            >
+              {sending ? "Opening Email..." : "Send Inquiry"}
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
@@ -779,63 +905,57 @@ function PricingSection() {
 const testimonialsData = [
   {
     id: 1,
-    company: "Velocity Sales Inc",
-    name: "Velocity Sales Inc",
+    company: "Adobe",
+    name: "Adobe",
     quote:
-      "Postpidia's pipeline analytics cut our sales cycle by 40%. We can see exactly where every deal stands and what needs attention — game changer for our team.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
-    overlay: "rgba(126, 64, 160, 0.32)",
+      "Postpidia's video editing pipeline transformed our content workflow. The quality and turnaround time exceeded our expectations.",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Adobe_Corporate_Logo.png",
+    overlay: "rgba(255, 0, 0, 0.25)",
   },
   {
     id: 2,
-    company: "Summit Revenue Group",
-    name: "Summit Revenue Group",
+    company: "Canva",
+    name: "Canva",
     quote:
-      "The AI-powered forecasting is eerily accurate — 95% prediction accuracy has completely changed how we plan our quarterly targets and resource allocation.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
-    overlay: "rgba(203, 84, 84, 0.34)",
+      "The motion graphics and color grading Postpidia delivers are top-tier. Our social engagement jumped 200% in the first month.",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/bb/Canva_Logo.svg",
+    overlay: "rgba(0, 153, 204, 0.30)",
   },
   {
     id: 3,
-    company: "Peak Performance Sales",
-    name: "Peak Performance Sales",
+    company: "CapCut",
+    name: "CapCut",
     quote:
-      "Lead scoring and automated follow-ups saved my team hundreds of hours. We went from chasing every lead to focusing only on the ones that actually convert.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
-    overlay: "rgba(65, 31, 76, 0.34)",
+      "Working with Postpidia has streamlined our entire content production. Their multi-platform exports are a huge time saver.",
+    imageUrl: "https://logo-teka.com/wp-content/uploads/2026/02/capcut-icon-logo.png",
+    overlay: "rgba(0, 0, 0, 0.25)",
   },
   {
     id: 4,
-    company: "GrowthPoint Strategies",
-    name: "GrowthPoint Strategies",
+    company: "DaVinci Resolve",
+    name: "DaVinci Resolve",
     quote:
-      "The custom dashboards give me real-time visibility into our entire sales operation. I can spot trends and adjust strategy on the fly — it's like having a crystal ball.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80",
-    overlay: "rgba(52, 76, 142, 0.32)",
+      "Postpidia's color grading expertise is on another level. They understand cinematic quality and deliver consistently.",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4d/DaVinci_Resolve_Studio.png",
+    overlay: "rgba(30, 30, 30, 0.35)",
   },
   {
     id: 5,
-    company: "NexGen Sales Solutions",
-    name: "NexGen Sales Solutions",
+    company: "Frame.io",
+    name: "Frame.io",
     quote:
-      "Integrating Postpidia with our CRM and Slack was seamless. Now our entire workflow — from lead capture to closed deal — lives in one place. Absolutely essential.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80",
-    overlay: "rgba(142, 71, 132, 0.33)",
+      "The integration with our review workflow was seamless. Postpidia understands how creative teams need to operate.",
+    imageUrl: "https://vectorseek.com/wp-content/uploads/2023/08/Frame.io-Logo-Vector.svg-.png",
+    overlay: "rgba(0, 200, 255, 0.25)",
   },
   {
     id: 6,
-    company: "Titan Closing Team",
-    name: "Titan Closing Team",
+    company: "Vimeo",
+    name: "Vimeo",
     quote:
-      "The gamification features turned our sales floor into a friendly competition. Our team's productivity jumped 35% in the first month. Best investment we've made.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
-    overlay: "rgba(176, 72, 70, 0.34)",
+      "Consistent quality, fast turnaround, and a team that actually cares about your brand. Postpidia is a game changer.",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Vimeo_Logo.svg",
+    overlay: "rgba(0, 0, 0, 0.30)",
   },
 ];
 
@@ -919,7 +1039,7 @@ function TestimonialsSection() {
                       <img
                         src={item.imageUrl}
                         alt={`${item.name} testimonial`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain bg-[#1a1a1a] p-8"
                         loading="lazy"
                       />
                       <div
