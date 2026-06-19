@@ -12,6 +12,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@fontsource-variable/outfit": "^5.2.8",
     "@fontsource-variable/playfair-display": "^5.2.8",
     "@fontsource-variable/plus-jakarta-sans": "^5.2.8",
     "@fontsource-variable/spline-sans": "^5.2.8",

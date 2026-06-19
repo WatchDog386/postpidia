@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @import "@fontsource-variable/spline-sans";
 @import "@fontsource-variable/playfair-display";
+@import "@fontsource-variable/outfit";
 
 @source "../src";
 
@@ -30,7 +31,7 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-size: 17px;
+    font-size: 15px;
   }
   body {
     background:
@@ -69,7 +70,7 @@
   h5,
   h6 {
     font-family: var(--font-sans);
-    font-weight: 800;
+    font-weight: 600;
     color: #ffffff;
     letter-spacing: -0.02em;
   }
@@ -85,4 +86,77 @@
     height: auto;
     display: block;
   }
+}
+
+.hero-pattern {
+  background: #08090b;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 55%;
+  height: 100%;
+  background: #14161a;
+  clip-path: polygon(0 0, 100% 45%, 0 100%);
+  pointer-events: none;
+  z-index: -2;
+}
+
+.hero-pattern::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 100%;
+  background: #0e1014;
+  clip-path: polygon(0 0, 100% 30%, 25% 100%, 0 100%);
+  pointer-events: none;
+  z-index: -3;
+}
+
+.hero-diagonal-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #14161a;
+  clip-path: polygon(55% 0, 100% 0, 100% 100%, 35% 100%);
+  pointer-events: none;
+  z-index: -4;
+}
+
+.hero-diagonal-right::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #111317;
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, 50% 100%);
+  z-index: -1;
+}
+
+.hero-diagonal::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 100vw;
+  height: 100vw;
+  max-width: 1000px;
+  max-height: 1000px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: -1;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.45) 0%, rgba(239, 68, 68, 0.2) 30%, transparent 65%);
+  mix-blend-mode: screen;
+  filter: blur(50px);
 }
