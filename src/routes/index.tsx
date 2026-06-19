@@ -335,12 +335,12 @@ function ServicesSection() {
   const [sliderPage, setSliderPage] = useState(0);
 
   const services = [
-    { category: "LEAD TRACKING", title: "Lead Management", desc: "Capture, organize, and score leads from every channel. Automated follow-ups ensure no opportunity slips through the cracks.", img: "https://i.pinimg.com/736x/e2/69/5c/e2695c5fd083846c994a188a600391a7.jpg" },
-    { category: "PIPELINE", title: "Pipeline Analytics", desc: "Visual deal stages with drag-and-drop management. See exactly where every deal stands and what needs attention.", img: "https://i.pinimg.com/736x/ca/cd/60/cacd603db5f2fe0bb5597a8609db302f.jpg" },
-    { category: "FORECASTING", title: "Revenue Forecasting", desc: "AI-powered predictions with 95% accuracy. Know your future revenue and make data-driven business decisions confidently.", img: "https://i.pinimg.com/736x/f2/9e/d1/f29ed15a266d6542359e09d5b220b94a.jpg" },
-    { category: "DASHBOARDS", title: "Custom Dashboards", desc: "Real-time sales KPIs, conversion funnels, and team performance metrics all in one customizable view.", img: "https://i.pinimg.com/1200x/03/26/a9/0326a925dd0e9a63f270e4fb23547a87.jpg" },
-    { category: "INTEGRATIONS", title: "Seamless Integrations", desc: "Connect with your CRM, email marketing, Stripe, Slack, and 200+ tools. Your data syncs automatically.", img: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=500&h=350&fit=crop" },
-    { category: "REPORTING", title: "Automated Reporting", desc: "Generate and schedule custom sales reports. Share insights with your team automatically via email or Slack.", img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=500&h=350&fit=crop" },
+    { category: "EDITING", title: "Video Editing", desc: "Professional editing tailored for TikTok Shop, Instagram Reels, YouTube Shorts and Amazon product videos.", img: "https://i.pinimg.com/736x/e2/69/5c/e2695c5fd083846c994a188a600391a7.jpg" },
+    { category: "MOTION", title: "Motion Graphics", desc: "Dynamic 2D/3D animations, text overlays, and visual effects that grab attention and drive engagement.", img: "https://i.pinimg.com/736x/ca/cd/60/cacd603db5f2fe0bb5597a8609db302f.jpg" },
+    { category: "THUMBNAIL", title: "Thumbnail Design", desc: "A/B tested thumbnail variations designed to maximize click-through rates and views on every platform.", img: "https://i.pinimg.com/736x/f2/9e/d1/f29ed15a266d6542359e09d5b220b94a.jpg" },
+    { category: "COLOR", title: "Color Grading", desc: "Advanced color correction and grading to give your content a cinematic, brand-consistent look.", img: "https://i.pinimg.com/1200x/03/26/a9/0326a925dd0e9a63f270e4fb23547a87.jpg" },
+    { category: "ANALYTICS", title: "Performance Analytics", desc: "Data-driven insights on content performance. SEO and keyword strategy for every video we deliver.", img: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=500&h=350&fit=crop" },
+    { category: "AUDIO", title: "Audio Production", desc: "Professional noise reduction, audio leveling, and royalty-free background music selection.", img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=500&h=350&fit=crop" },
   ];
 
   const visibleServices = sliderPage === 0 ? services.slice(0, 4) : services.slice(2, 6);
@@ -551,16 +551,11 @@ function HowItWorksSection() {
                 {item.step}
               </div>
 
-              {/* Icon Container */}
-              <div className="relative mb-5">
-                <div className="w-16 h-16 flex items-center justify-center bg-[#222] rounded-lg transition-colors duration-300">
-                  <img
-                    src={item.iconUrl}
-                    alt={item.title}
-                    className="w-8 h-8 object-contain transition-all duration-300"
-                  />
-                </div>
-              </div>
+              <img
+                src={item.iconUrl}
+                alt={item.title}
+                className="w-16 h-16 object-contain mb-5"
+              />
 
               {/* Text Content */}
               <h3 className="text-[15px] font-bold text-[#f0514e] mb-2 uppercase tracking-tight">
