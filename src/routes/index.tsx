@@ -84,7 +84,19 @@ export default function Landing() {
 
 function Nav() {
   const [open, setOpen] = useState(false);
-  const navLinks = ["Features", "Pricing", "How It Works", "Contact"];
+  const navLinks = [
+    { label: "Features", href: "#services" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "How It Works", href: "#how-it-works" },
+    { label: "Contact", href: "#contact" },
+  ];
+
+  const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    setOpen(false);
+  };
 
   return (
     <header className="bg-black/40 backdrop-blur-sm">
@@ -131,6 +143,10 @@ function Nav() {
             <motion.button
               whileHover={{ y: -2 }}
               whileTap={{ y: 0 }}
+              onClick={() => {
+                const el = document.querySelector("#pricing");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
               className="relative bg-[#00d084] text-white font-medium text-[11px] uppercase tracking-wider px-6 py-2.5 z-10 rounded-full hover:opacity-90 transition-all duration-200"
             >
               GET STARTED
@@ -146,13 +162,14 @@ function Nav() {
       <div className="bg-black/20">
         <div className="max-w-[1400px] mx-auto px-4 lg:px-8 h-12 flex items-center justify-between">
           <nav className="hidden lg:flex items-center gap-6">
-            {navLinks.map((label) => (
+            {navLinks.map((item) => (
               <a
-                key={label}
-                href="#"
+                key={item.label}
+                href={item.href}
+                onClick={(e) => scrollTo(e, item.href)}
                 className="text-[13px] font-medium text-gray-200 hover:text-[#f0514e] transition-colors"
               >
-                {label}
+                {item.label}
               </a>
             ))}
           </nav>
@@ -171,13 +188,14 @@ function Nav() {
             className="lg:hidden bg-black/30 backdrop-blur-sm px-4 py-4"
           >
             <div className="space-y-0">
-              {navLinks.map((label) => (
+              {navLinks.map((item) => (
                 <a
-                  key={label}
-                  href="#"
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => scrollTo(e, item.href)}
                   className="block py-3 text-sm font-medium text-gray-300 hover:text-[#f0514e]"
                 >
-                  {label}
+                  {item.label}
                 </a>
               ))}
             </div>
@@ -328,8 +346,10 @@ function ServicesSection() {
   const visibleServices = sliderPage === 0 ? services.slice(0, 4) : services.slice(2, 6);
 
   return (
-    <section className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-20">
-      <SectionHeader title="Sales Tracking Features" />
+    <section id="services" className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-20">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
+        <h2 className="text-4xl md:text-[44px] font-light text-white">Services Built to Convert</h2>
+      </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {visibleServices.map((item, idx) => (
@@ -494,7 +514,7 @@ function HowItWorksSection() {
   ];
 
   return (
-      <section className="bg-[#111111] font-['Outfit_Variable',_sans-serif] py-16 overflow-hidden">
+      <section id="how-it-works" className="bg-[#111111] font-['Outfit_Variable',_sans-serif] py-16 overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Section Heading */}
         <div className="mb-14 text-center">
@@ -524,8 +544,13 @@ function HowItWorksSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="flex flex-col items-center text-center bg-[#1a1a1a] rounded-xl p-6 shadow-sm border border-transparent transition-all duration-300"
+              className="flex flex-col items-center text-center bg-[#1a1a1a] rounded-xl p-6 shadow-sm border border-transparent transition-all duration-300 relative overflow-hidden"
             >
+              {/* Background number */}
+              <div className="absolute -top-4 -right-4 text-[100px] md:text-[120px] font-bold text-white/[0.04] leading-none select-none pointer-events-none">
+                {item.step}
+              </div>
+
               {/* Icon Container */}
               <div className="relative mb-5">
                 <div className="w-16 h-16 flex items-center justify-center bg-[#222] rounded-lg transition-colors duration-300">
@@ -534,9 +559,6 @@ function HowItWorksSection() {
                     alt={item.title}
                     className="w-8 h-8 object-contain transition-all duration-300"
                   />
-                </div>
-                <div className="absolute -top-2 -right-2 bg-[#f0514e] text-white text-[8px] font-mono font-bold px-1.5 py-0.5 rounded uppercase tracking-wider border border-[#111]">
-                  {item.step}
                 </div>
               </div>
 
@@ -624,7 +646,7 @@ function PricingSection() {
   ];
 
   return (
-    <section className="bg-[#111111] py-16 flex items-center justify-center font-sans tracking-wide">
+    <section id="pricing" className="bg-[#111111] py-16 flex items-center justify-center font-sans tracking-wide">
       <div className="max-w-6xl w-full px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -734,13 +756,20 @@ function PricingSection() {
                     whileTap={{ y: 0 }}
                     onClick={(e) => {
                       e.stopPropagation();
-                      router.navigate({ to: "/auth" });
+                      router.navigate({
+                        to: "/payment",
+                        search: {
+                          plan: plan.name,
+                          price: String(price),
+                          billing: yearly ? "yearly" : "monthly",
+                        },
+                      });
                     }}
-                    className={`w-full bg-[#00d084] text-white text-[11px] font-medium uppercase tracking-wider px-6 py-2.5 rounded-full hover:opacity-90 transition-all duration-200 ${
+                    className={`w-full bg-[#00d084] text-white text-[11px] font-medium lowercase tracking-wider px-6 py-2.5 rounded-full hover:opacity-90 transition-all duration-200 ${
                       activeIndex === i ? "opacity-100" : "opacity-70 hover:opacity-100"
                     }`}
                   >
-                    Get Started
+                    subscribe now
                   </motion.button>
                 </div>
               </motion.div>
@@ -755,62 +784,62 @@ function PricingSection() {
 const testimonialsData = [
   {
     id: 1,
-    company: "JTech AI Ltd",
-    name: "Michael Johnson",
+    company: "Velocity Sales Inc",
+    name: "Velocity Sales Inc",
     quote:
-      "JTech AI reduced our estimation time by 70% and improved accuracy by 40%. The AI-powered insights have transformed how we approach project budgeting.",
+      "Postpidia's pipeline analytics cut our sales cycle by 40%. We can see exactly where every deal stands and what needs attention — game changer for our team.",
     imageUrl:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
     overlay: "rgba(126, 64, 160, 0.32)",
   },
   {
     id: 2,
-    company: "UrbanBuild Group",
-    name: "Sarah Williams",
+    company: "Summit Revenue Group",
+    name: "Summit Revenue Group",
     quote:
-      "We're now able to bid on more projects with confidence. The platform's ability to learn from past data has been a game changer for our margins.",
+      "The AI-powered forecasting is eerily accurate — 95% prediction accuracy has completely changed how we plan our quarterly targets and resource allocation.",
     imageUrl:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
     overlay: "rgba(203, 84, 84, 0.34)",
   },
   {
     id: 3,
-    company: "BuildPro Inc",
-    name: "David Chen",
+    company: "Peak Performance Sales",
+    name: "Peak Performance Sales",
     quote:
-      "The automated BOQ generation has saved my team countless hours. We can finally focus on project delivery rather than administrative paperwork.",
+      "Lead scoring and automated follow-ups saved my team hundreds of hours. We went from chasing every lead to focusing only on the ones that actually convert.",
     imageUrl:
-      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
     overlay: "rgba(65, 31, 76, 0.34)",
   },
   {
     id: 4,
-    company: "Leipzig-Halle Airport",
-    name: "Lars Ohse",
+    company: "GrowthPoint Strategies",
+    name: "GrowthPoint Strategies",
     quote:
-      "The bidder workflow is particularly popular with our vendors because the completeness checks and standards alignment are excellent.",
+      "The custom dashboards give me real-time visibility into our entire sales operation. I can spot trends and adjust strategy on the fly — it's like having a crystal ball.",
     imageUrl:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80",
     overlay: "rgba(52, 76, 142, 0.32)",
   },
   {
     id: 5,
-    company: "ab ARCHITECT",
-    name: "Amy Baker",
+    company: "NexGen Sales Solutions",
+    name: "NexGen Sales Solutions",
     quote:
-      "I've been impressed by JTech's willingness to improve the product based on real user feedback. It feels like a true technical partnership.",
+      "Integrating Postpidia with our CRM and Slack was seamless. Now our entire workflow — from lead capture to closed deal — lives in one place. Absolutely essential.",
     imageUrl:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=1200&q=80",
     overlay: "rgba(142, 71, 132, 0.33)",
   },
   {
     id: 6,
-    company: "Delta Constructors",
-    name: "Daniel Reed",
+    company: "Titan Closing Team",
+    name: "Titan Closing Team",
     quote:
-      "The platform gives us clear traceability from quantities to costs. That clarity improved trust with clients and internal teams.",
+      "The gamification features turned our sales floor into a friendly competition. Our team's productivity jumped 35% in the first month. Best investment we've made.",
     imageUrl:
-      "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
     overlay: "rgba(176, 72, 70, 0.34)",
   },
 ];
@@ -858,41 +887,17 @@ function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="py-20 testimonials-bg scroll-mt-28 relative overflow-hidden"
+      className="py-20 bg-[#111111] scroll-mt-28 relative overflow-hidden"
       style={{
         fontFamily: "'Outfit', sans-serif",
         WebkitFontSmoothing: "antialiased",
         MozOsxFontSmoothing: "grayscale",
       }}
     >
-      <style>{`
-        .testimonials-bg {
-          background:
-            radial-gradient(1000px 420px at 8% 96%, rgba(240,81,78,0.08), transparent 60%),
-            radial-gradient(900px 380px at 92% 12%, rgba(240,81,78,0.06), transparent 62%),
-            #1a1b22;
-        }
-        .testimonials-bg::before {
-          content: "";
-          position: absolute;
-          inset: 0;
-          pointer-events: none;
-          opacity: 0.24;
-          background-image:
-            repeating-linear-gradient(
-              135deg,
-              transparent 0,
-              transparent 220px,
-              rgba(240,81,78,0.28) 221px,
-              transparent 222px,
-              transparent 520px
-            );
-        }
-      `}</style>
 
       <div className="max-w-[1260px] mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-center text-white text-2xl md:text-[42px] font-normal tracking-tight mb-11 md:mb-12 relative z-10">
-          What Our Clients Say
+        <h2 className="text-center text-white text-4xl md:text-[44px] font-light mb-11 md:mb-12 relative z-10">
+          Trusted by Growing Brands
         </h2>
 
         <div className="relative z-10">
@@ -936,7 +941,7 @@ function TestimonialsSection() {
                     </div>
 
                     <div className="pt-4">
-                      <h3 className="text-[#f05847] text-[32px] md:text-[40px] font-medium leading-[1.05] tracking-tight">
+                      <h3 className="text-[#f05847] text-[22px] md:text-[24px] font-medium leading-tight tracking-tight whitespace-nowrap">
                         {item.name}
                       </h3>
                       <p className="mt-2.5 text-white/90 text-[12px] md:text-[13px] leading-relaxed font-medium">
@@ -978,7 +983,7 @@ function ContactSection() {
   };
 
   return (
-    <section className="bg-[#111111] pt-16 pb-16">
+    <section id="contact" className="bg-[#111111] pt-16 pb-16">
       <div className="max-w-[1100px] mx-auto px-4 lg:px-8 relative flex flex-col lg:flex-row items-end gap-16 lg:gap-12">
         <div className="w-full lg:w-[45%] relative flex items-end justify-center lg:justify-end pt-32 lg:pt-0 -mb-16">
           <div className="absolute top-10 lg:-top-10 left-0 lg:left-0 xl:left-[-20px] z-10 bg-[#f0514e] rounded-[24px] text-white p-8 w-[240px] sm:w-[280px] shadow-2xl">
@@ -1098,20 +1103,19 @@ function CTASection() {
 }
 
 function Footer() {
-  const categories = ["Lead Management", "Pipeline", "Forecasting", "Reports", "Integrations", "Dashboard", "Mobile"];
-  const companyLinks = ["About Us", "Features", "Pricing", "Contact Info", "Careers"];
-  const legalityLinks = ["Terms of Service", "Privacy Policy", "Content Guidelines", "Cookie Settings"];
+  const quickLinks = ["Services", "Pricing", "How It Works", "Contact"];
+  const legalLinks = ["Privacy Policy", "Terms of Service", "Legal Notice"];
 
   return (
     <footer className="bg-[#161616] border-t border-[#222] pt-16 pb-8">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-10 mb-12">
-        <div className="col-span-2 lg:col-span-4 flex flex-col space-y-6">
+        <div className="col-span-2 lg:col-span-5 flex flex-col space-y-6">
           <a href="#" className="flex items-center gap-3">
             <img src="/logo.png" alt="Postpidia" className="h-10 w-auto" />
             <span className="text-xl font-medium tracking-tight text-white leading-none">Postpidia</span>
           </a>
           <p className="text-gray-400 text-xs leading-relaxed max-w-sm font-medium">
-            Sales tracking platform designed for modern teams. Track deals, forecast revenue, and close more with data-driven insights and automation.
+            Postpidia delivers high-conversion video editing tailored for social commerce platforms. Boost your brand with expert content production.
           </p>
           <div className="flex items-center gap-3 text-gray-500">
             <Facebook className="h-4 w-4 hover:text-white cursor-pointer transition-colors" />
@@ -1123,44 +1127,41 @@ function Footer() {
         </div>
 
         <div className="col-span-1 lg:col-span-3">
-          <h4 className="text-[11px] font-medium text-white uppercase tracking-wider mb-4 border-l-2 border-[#f0514e] pl-3">Categories</h4>
+          <h4 className="text-[11px] font-medium text-white uppercase tracking-wider mb-4 border-l-2 border-[#f0514e] pl-3">Quick Links</h4>
           <ul className="space-y-2 text-xs font-semibold text-gray-400">
-            {categories.map((cat) => (
-              <li key={cat} className="hover:text-[#f0514e] cursor-pointer transition-colors flex items-center gap-1.5 group">
+            {quickLinks.map((link) => (
+              <li key={link} className="hover:text-[#f0514e] cursor-pointer transition-colors flex items-center gap-1.5 group">
                 <span className="w-1 h-1 bg-gray-600 rounded-full group-hover:bg-[#f0514e]" />
-                {cat}
+                {link}
               </li>
             ))}
           </ul>
         </div>
 
         <div className="col-span-1 lg:col-span-2">
-          <h4 className="text-[11px] font-medium text-white uppercase tracking-wider mb-4 border-l-2 border-[#5c45fd] pl-3">Company</h4>
+          <h4 className="text-[11px] font-medium text-white uppercase tracking-wider mb-4 border-l-2 border-[#5c45fd] pl-3">Legal</h4>
           <ul className="space-y-2 text-xs font-semibold text-gray-400">
-            {companyLinks.map((link) => (
+            {legalLinks.map((link) => (
               <li key={link} className="hover:text-white cursor-pointer transition-colors">{link}</li>
             ))}
           </ul>
         </div>
 
-        <div className="col-span-2 lg:col-span-3 flex flex-col space-y-4">
-          <h4 className="text-[11px] font-medium text-white uppercase tracking-wider border-l-2 border-[#df9a28] pl-3">Newsletter</h4>
+        <div className="col-span-2 lg:col-span-2 flex flex-col space-y-3">
+          <h4 className="text-[11px] font-medium text-white uppercase tracking-wider border-l-2 border-[#df9a28] pl-3">Contact</h4>
           <p className="text-gray-400 text-xs font-medium leading-relaxed">
-            Subscribe for sales tips, product updates, and exclusive offers.
+            Have questions? Reach out to our team.
           </p>
-          <div className="relative flex items-center border border-[#333] focus-within:border-[#df9a28] bg-[#111] transition-colors rounded overflow-hidden">
-            <input type="email" placeholder="Your Email..." className="bg-transparent text-xs text-gray-200 placeholder:text-gray-600 pl-3 pr-12 py-2.5 w-full focus:outline-none" />
-            <button className="bg-[#df9a28] text-black h-full px-3 absolute right-0 flex items-center justify-center hover:bg-[#c9861f] transition-colors">
-              <Send className="w-3.5 h-3.5" />
-            </button>
-          </div>
+          <a href="mailto:support@postpidia.com" className="text-[#f0514e] text-xs font-semibold hover:underline">
+            support@postpidia.com
+          </a>
         </div>
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8 pt-8 border-t border-[#222] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-medium text-gray-500">
-        <div>&copy; {new Date().getFullYear()} POSTPIDIA. ALL RIGHTS RESERVED.</div>
+        <div>&copy; {new Date().getFullYear()} Postpidia. All rights reserved.</div>
         <div className="flex flex-wrap gap-x-6 gap-y-2">
-          {legalityLinks.map((link) => (
+          {legalLinks.map((link) => (
             <a key={link} href="#" className="hover:text-gray-300 transition-colors">{link}</a>
           ))}
         </div>
