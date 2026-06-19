@@ -59,7 +59,7 @@ const getCategoryStyles = (category: string) => {
   return "bg-indigo-600 text-white";
 };
 
-export default function Landing() {
+function Landing() {
   return (
     <div className="min-h-screen antialiased">
       <div className="hero-pattern hero-diagonal w-full">
