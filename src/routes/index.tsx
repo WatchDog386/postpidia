@@ -1012,7 +1012,7 @@ function TestimonialsSection() {
 
       <div className="max-w-[1260px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-white text-4xl md:text-[44px] font-light mb-11 md:mb-12 relative z-10">
-          Trusted by Growing Brands
+          Working with Trusted Brands
         </h2>
 
         <div className="relative z-10">
