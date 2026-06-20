@@ -963,7 +963,7 @@ const testimonialsData = [
     name: "Cruva AI",
     quote:
       "Postpidia's AI-driven video production integrates perfectly with our affiliate workflow. The quality and speed are unmatched.",
-    imageUrl: "https://logo.clearbit.com/cruva.com",
+    imageUrl: "https://img.brandfetch.io/cruva.com",
     overlay: "rgba(0, 0, 0, 0.30)",
   },
   {
@@ -972,7 +972,7 @@ const testimonialsData = [
     name: "Kalodata",
     quote:
       "The data-backed video strategies Postpidia delivers have helped our clients achieve record-breaking TikTok Shop sales.",
-    imageUrl: "https://logo.clearbit.com/kalodata.com",
+    imageUrl: "https://img.brandfetch.io/kalodata.com",
     overlay: "rgba(86, 161, 237, 0.30)",
   },
   {
@@ -981,7 +981,7 @@ const testimonialsData = [
     name: "TikTok Shop",
     quote:
       "Postpidia's content creation aligns perfectly with TikTok Shop's ecosystem. Their videos drive real conversions.",
-    imageUrl: "https://cdn.brandfetch.io/id6_hif3jX/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1776620051574",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Tiktok_icon.svg/480px-Tiktok_icon.svg.png",
     overlay: "rgba(0, 0, 0, 0.25)",
   },
   {
