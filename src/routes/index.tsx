@@ -905,6 +905,33 @@ function PricingSection() {
 const testimonialsData = [
   {
     id: 1,
+    company: "Cruva AI",
+    name: "Cruva AI",
+    quote:
+      "Postpidia's AI-driven video production integrates perfectly with our affiliate workflow. The quality and speed are unmatched.",
+    imageUrl: "https://cdn.brandfetch.io/cruva.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
+    overlay: "rgba(0, 0, 0, 0.30)",
+  },
+  {
+    id: 2,
+    company: "Kalodata",
+    name: "Kalodata",
+    quote:
+      "The data-backed video strategies Postpidia delivers have helped our clients achieve record-breaking TikTok Shop sales.",
+    imageUrl: "https://cdn.brandfetch.io/kalodata.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
+    overlay: "rgba(86, 161, 237, 0.30)",
+  },
+  {
+    id: 3,
+    company: "TikTok Shop",
+    name: "TikTok Shop",
+    quote:
+      "Postpidia's content creation aligns perfectly with TikTok Shop's ecosystem. Their videos drive real conversions.",
+    imageUrl: "https://cdn.brandfetch.io/tiktokshop.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
+    overlay: "rgba(0, 0, 0, 0.25)",
+  },
+  {
+    id: 4,
     company: "Adobe",
     name: "Adobe",
     quote:
@@ -913,7 +940,7 @@ const testimonialsData = [
     overlay: "rgba(255, 0, 0, 0.25)",
   },
   {
-    id: 2,
+    id: 5,
     company: "Canva",
     name: "Canva",
     quote:
@@ -922,7 +949,7 @@ const testimonialsData = [
     overlay: "rgba(0, 153, 204, 0.30)",
   },
   {
-    id: 3,
+    id: 6,
     company: "CapCut",
     name: "CapCut",
     quote:
@@ -931,7 +958,7 @@ const testimonialsData = [
     overlay: "rgba(0, 0, 0, 0.25)",
   },
   {
-    id: 4,
+    id: 7,
     company: "DaVinci Resolve",
     name: "DaVinci Resolve",
     quote:
@@ -940,7 +967,7 @@ const testimonialsData = [
     overlay: "rgba(30, 30, 30, 0.35)",
   },
   {
-    id: 5,
+    id: 8,
     company: "Frame.io",
     name: "Frame.io",
     quote:
@@ -949,40 +976,13 @@ const testimonialsData = [
     overlay: "rgba(0, 200, 255, 0.25)",
   },
   {
-    id: 6,
+    id: 9,
     company: "Vimeo",
     name: "Vimeo",
     quote:
       "Consistent quality, fast turnaround, and a team that actually cares about your brand. Postpidia is a game changer.",
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Vimeo_Logo.svg",
     overlay: "rgba(0, 0, 0, 0.30)",
-  },
-  {
-    id: 7,
-    company: "Cruva AI",
-    name: "Cruva AI",
-    quote:
-      "Postpidia's AI-driven video production integrates perfectly with our affiliate workflow. The quality and speed are unmatched.",
-    imageUrl: "https://img.brandfetch.io/cruva.com",
-    overlay: "rgba(0, 0, 0, 0.30)",
-  },
-  {
-    id: 8,
-    company: "Kalodata",
-    name: "Kalodata",
-    quote:
-      "The data-backed video strategies Postpidia delivers have helped our clients achieve record-breaking TikTok Shop sales.",
-    imageUrl: "https://img.brandfetch.io/kalodata.com",
-    overlay: "rgba(86, 161, 237, 0.30)",
-  },
-  {
-    id: 9,
-    company: "TikTok Shop",
-    name: "TikTok Shop",
-    quote:
-      "Postpidia's content creation aligns perfectly with TikTok Shop's ecosystem. Their videos drive real conversions.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Tiktok_icon.svg/480px-Tiktok_icon.svg.png",
-    overlay: "rgba(0, 0, 0, 0.25)",
   },
   {
     id: 10,
