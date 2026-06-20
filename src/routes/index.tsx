@@ -611,10 +611,10 @@ function PricingSection() {
 
   const plans = [
     {
-      name: "Startup",
+      name: "Basic",
       desc: "Perfect for small brands getting started with video content",
-      monthly: 99,
-      yearly: 79,
+      monthly: 49,
+      yearly: 39,
       popular: false,
       features: [
         "Up to 4 Edited Videos",
@@ -629,8 +629,8 @@ function PricingSection() {
     {
       name: "Essential",
       desc: "Best value for growing brands ready to scale their content output",
-      monthly: 149,
-      yearly: 119,
+      monthly: 99,
+      yearly: 79,
       popular: true,
       features: [
         "Up to 5 Edited Videos",
@@ -644,10 +644,10 @@ function PricingSection() {
       ],
     },
     {
-      name: "Growth Pro",
+      name: "Professional",
       desc: "Full-service for brands serious about dominating social commerce",
-      monthly: 189,
-      yearly: 151,
+      monthly: 199,
+      yearly: 159,
       popular: false,
       features: [
         "Up to 8 Edited Videos",
@@ -947,15 +947,6 @@ const testimonialsData = [
       "The motion graphics and color grading Postpidia delivers are top-tier. Our social engagement jumped 200% in the first month.",
     imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/bb/Canva_Logo.svg",
     overlay: "rgba(0, 153, 204, 0.30)",
-  },
-  {
-    id: 6,
-    company: "CapCut",
-    name: "CapCut",
-    quote:
-      "Working with Postpidia has streamlined our entire content production. Their multi-platform exports are a huge time saver.",
-    imageUrl: "https://logo-teka.com/wp-content/uploads/2026/02/capcut-icon-logo.png",
-    overlay: "rgba(0, 0, 0, 0.25)",
   },
   {
     id: 7,
