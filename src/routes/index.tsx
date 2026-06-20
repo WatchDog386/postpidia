@@ -55,15 +55,16 @@ export const Route = createFileRoute("/")({
 
 const getCategoryStyles = (category: string) => {
   const cat = category.toLowerCase();
-  if (cat.includes("fashion") || cat.includes("design") || cat.includes("leads") || cat.includes("lead")) return "bg-[#f0514e] text-white";
-  if (cat.includes("food") || cat.includes("grading") || cat.includes("pipeline") || cat.includes("dashboard")) return "bg-[#ff6a00] text-white";
-  if (cat.includes("travel") || cat.includes("graphics") || cat.includes("forecast") || cat.includes("reports")) return "bg-[#00c3ff] text-white";
-  if (cat.includes("tech") || cat.includes("editing") || cat.includes("crm") || cat.includes("integrate") || cat.includes("reporting") || cat.includes("integrations")) return "bg-[#006aff] text-white";
-  if (cat.includes("creative") || cat.includes("analytics") || cat.includes("sales")) return "bg-[#ffb300] text-black";
-  if (cat.includes("sports")) return "bg-[#4caf50] text-white";
-  if (cat.includes("racing") || cat.includes("production")) return "bg-[#ff5722] text-white";
-  if (cat.includes("music") || cat.includes("team")) return "bg-[#f44336] text-white";
-  return "bg-indigo-600 text-white";
+  const base = "px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-r-full rounded-bl-full rounded-tl-none";
+  if (cat.includes("fashion") || cat.includes("design") || cat.includes("leads") || cat.includes("lead")) return `${base} bg-[#f0514e] text-white`;
+  if (cat.includes("food") || cat.includes("grading") || cat.includes("pipeline") || cat.includes("dashboard")) return `${base} bg-[#ff6a00] text-white`;
+  if (cat.includes("travel") || cat.includes("graphics") || cat.includes("forecast") || cat.includes("reports")) return `${base} bg-[#00c3ff] text-white`;
+  if (cat.includes("tech") || cat.includes("editing") || cat.includes("crm") || cat.includes("integrate") || cat.includes("reporting") || cat.includes("integrations")) return `${base} bg-[#006aff] text-white`;
+  if (cat.includes("creative") || cat.includes("analytics") || cat.includes("sales")) return `${base} bg-[#ffb300] text-black`;
+  if (cat.includes("sports")) return `${base} bg-[#4caf50] text-white`;
+  if (cat.includes("racing") || cat.includes("production")) return `${base} bg-[#ff5722] text-white`;
+  if (cat.includes("music") || cat.includes("team")) return `${base} bg-[#f44336] text-white`;
+  return `${base} bg-indigo-600 text-white`;
 };
 
 function Landing() {
@@ -246,7 +247,7 @@ function HeroSection() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/60 to-transparent z-10" />
           <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 z-20">
-            <span className={`px-2 py-1 text-[10px] font-medium tracking-widest ${getCategoryStyles("SALES")}`}>
+            <span className={getCategoryStyles("SALES")}>
               SALES TRACKING
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-white mt-4 leading-tight tracking-tight">
@@ -266,7 +267,7 @@ function HeroSection() {
           <div className="group cursor-pointer">
             <div className="relative overflow-hidden mb-4">
               <img src="https://i.pinimg.com/1200x/d7/e0/d2/d7e0d280728e0a201b7139334b09920b.jpg" alt="Why Choose Us" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
-              <span className={`absolute top-4 left-4 px-2 py-1 text-[9px] font-medium tracking-widest ${getCategoryStyles("ANALYTICS")}`}>WHY US</span>
+              <span className={`absolute top-4 left-4 ${getCategoryStyles("ANALYTICS")}`}>WHY US</span>
             </div>
             <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
               Built for Sales Teams That Want to Close More
@@ -281,7 +282,7 @@ function HeroSection() {
           <div className="group cursor-pointer">
             <div className="relative overflow-hidden mb-4">
               <img src="https://i.pinimg.com/736x/94/53/0c/94530cf01d8d7f935a07097ce6d61a2c.jpg" alt="Trusted Platform" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
-              <span className={`absolute top-4 left-4 px-2 py-1 text-[9px] font-medium tracking-widest ${getCategoryStyles("SALES")}`}>TRUSTED</span>
+              <span className={`absolute top-4 left-4 ${getCategoryStyles("SALES")}`}>TRUSTED</span>
             </div>
             <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
               Trusted by 10,000+ Sales Professionals Worldwide
@@ -308,8 +309,8 @@ function HeroSection() {
             </div>
             <div className="flex flex-col justify-center min-h-[100px] py-1">
               <div className="mb-2">
-                 <span className={`px-1.5 py-0.5 text-[8px] font-medium uppercase tracking-widest ${getCategoryStyles(story.category)}`}>
-                   {story.category}
+                 <span className={getCategoryStyles(story.category)}>
+                    {story.category}
                  </span>
               </div>
               <h4 className="font-semibold text-[15px] text-gray-200 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
@@ -367,7 +368,7 @@ function ServicesSection() {
                 alt={item.title}
                 className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
               />
-              <span className={`absolute top-4 left-4 px-2 py-1 text-[9px] font-medium tracking-widest ${getCategoryStyles(item.category)}`}>
+              <span className={`absolute top-4 left-4 ${getCategoryStyles(item.category)}`}>
                 {item.category}
               </span>
             </div>
@@ -447,7 +448,7 @@ function BottomSection() {
           {/* Left Card — Featured Story (full-height) */}
           <div className="bg-black p-8 flex flex-col justify-center relative overflow-hidden rounded-[2px] h-[400px] md:h-full group border border-[#0a3a1e]">
             <div className="relative z-10 w-[60%] ml-auto text-right flex flex-col items-end">
-              <span className="bg-[#f0514e] text-white text-[10px] font-medium uppercase tracking-widest px-2.5 py-1 rounded-sm mb-2">FEATURED</span>
+              <span className={`${getCategoryStyles("SALES")} mb-2`}>FEATURED</span>
               <h3 className="text-white text-[22px] lg:text-[28px] font-bold leading-tight mb-3">{stories[0].title}</h3>
               <p className="text-gray-400 text-[12px] mb-6 font-medium">{stories[0].subtitle}</p>
               <button className="bg-transparent border-[1.5px] border-white text-white rounded-full px-6 py-2.5 h-10 w-fit text-[11px] font-medium uppercase tracking-wider hover:bg-white hover:text-[#111] transition-all duration-200">
@@ -493,8 +494,8 @@ function BottomSection() {
 
             {/* Bottom Row — wider CTA card */}
             <div className="bg-[#1a1a1a] p-6 relative overflow-hidden rounded-[2px] h-[200px] md:h-[calc(50%-12px)] flex flex-col justify-center group border border-[#222]">
+              <p className={`absolute top-3 left-3 z-20 ${getCategoryStyles("SALES")}`}>Sales Tracking</p>
               <div className="relative z-10">
-                <p className="bg-[#f0514e] text-white text-[10px] font-medium uppercase tracking-widest px-2.5 py-1 rounded-sm inline-block mb-3">FEATURES</p>
                 <h4 className="text-white text-[20px] lg:text-[24px] font-medium mb-1">Sales Tracking Platform</h4>
                 <p className="text-gray-400 text-[11px] font-medium tracking-widest uppercase mb-3">ALL FEATURES THIS WEEK</p>
                 <a href="#" className="inline-flex items-center gap-2 bg-transparent border border-white text-white rounded-full text-[11px] font-medium uppercase tracking-wider px-5 py-2.5 hover:bg-white hover:text-[#111] transition-all duration-200">
@@ -802,7 +803,7 @@ function PricingSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-10 bg-gradient-to-r from-[#27272a] to-[#1e1e22] rounded-2xl border border-transparent hover:border-[#f0514e]/20 transition-all duration-300 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6"
+          className="mt-10 bg-gradient-to-r from-[#27272a] to-[#1e1e22] rounded-none border border-transparent hover:border-[#f0514e]/20 transition-all duration-300 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6"
         >
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
