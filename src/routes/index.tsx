@@ -957,6 +957,42 @@ const testimonialsData = [
     imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Vimeo_Logo.svg",
     overlay: "rgba(0, 0, 0, 0.30)",
   },
+  {
+    id: 7,
+    company: "Cruva AI",
+    name: "Cruva AI",
+    quote:
+      "Postpidia's AI-driven video production integrates perfectly with our affiliate workflow. The quality and speed are unmatched.",
+    imageUrl: "https://logo.clearbit.com/cruva.com",
+    overlay: "rgba(0, 0, 0, 0.30)",
+  },
+  {
+    id: 8,
+    company: "Kalodata",
+    name: "Kalodata",
+    quote:
+      "The data-backed video strategies Postpidia delivers have helped our clients achieve record-breaking TikTok Shop sales.",
+    imageUrl: "https://logo.clearbit.com/kalodata.com",
+    overlay: "rgba(86, 161, 237, 0.30)",
+  },
+  {
+    id: 9,
+    company: "TikTok Shop",
+    name: "TikTok Shop",
+    quote:
+      "Postpidia's content creation aligns perfectly with TikTok Shop's ecosystem. Their videos drive real conversions.",
+    imageUrl: "https://cdn.brandfetch.io/id6_hif3jX/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1776620051574",
+    overlay: "rgba(0, 0, 0, 0.25)",
+  },
+  {
+    id: 10,
+    company: "FastMoss",
+    name: "FastMoss",
+    quote:
+      "Postpidia understands TikTok commerce deeply. Their video production quality helps our users maximize engagement and ROI.",
+    imageUrl: "https://cdn.brandfetch.io/iddtWGI7z6/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1776620051524",
+    overlay: "rgba(254, 32, 98, 0.25)",
+  },
 ];
 
 const PER_VIEW = 3;
