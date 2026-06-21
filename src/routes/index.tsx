@@ -419,7 +419,7 @@ function BottomSection() {
       title: "How Postpidia Helps Brands Decode TikTok Shop Trends Before They Peak",
       subtitle: "Real-time analytics that turned a skincare brand's slow quarter into their best ever",
       tag: "Trending",
-      img: "https://i.pinimg.com/736x/4f/93/95/4f9395967943801e1ac0bba5f718e516.jpg",
+      img: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&h=600&fit=crop",
       body: "When GlowRoot Skincare noticed their TikTok Shop sales plateauing in Q2, they turned to Postpidia's sales intelligence dashboard for answers. Within minutes, the platform's trending product tracker revealed that niacinamide serums were surging across Southeast Asian markets — a signal their team had completely missed by relying on manual spreadsheet tracking.\n\nPostpidia's real-time data pipeline aggregates millions of transactions daily across TikTok Shop, giving brands a window into what's selling, who's buying, and which creators are driving the most conversions. For GlowRoot, the insight was immediate and actionable: they repositioned their niacinamide product line, partnered with three mid-tier creators that Postpidia's influencer analytics flagged as high-conversion, and adjusted their pricing to match the competitive sweet spot the platform identified.\n\nThe result? A 217% increase in monthly revenue and a top-10 ranking in their product category within six weeks. GlowRoot's founder now checks Postpidia before making any inventory decision. As she put it: 'Before Postpidia, we were guessing. Now we know.'",
     },
     {
@@ -427,7 +427,7 @@ function BottomSection() {
       title: "The Creator ROI Playbook: Measuring What Actually Matters on TikTok Shop",
       subtitle: "Why follower counts mislead and how Postpidia's engagement-to-revenue metrics changed the game",
       tag: "New",
-      img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&h=350&fit=crop",
+      img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&h=600&fit=crop",
       body: "For months, fitness apparel brand KinetikFit was pouring budget into creator partnerships based on one metric: follower count. They booked creators with 500K+ followers and watched their cost-per-acquisition climb while conversion rates flatlined. The disconnect was obvious — reach doesn't equal revenue.\n\nPostpidia's creator analytics module gave KinetikFit a completely different lens. Instead of surface-level metrics, the platform tracks engagement-to-revenue ratios: how many viewers actually click through, add to cart, and complete a purchase after watching a creator's content. The data revealed that creators in the 15K-80K follower range consistently outperformed mega-influencers on TikTok Shop, with conversion rates 3.4x higher on average.\n\nArmed with this insight, KinetikFit rebuilt their creator roster from scratch. They replaced three high-cost mega-influencer deals with twelve micro and mid-tier creators selected through Postpidia's performance rankings. Campaign costs dropped 62%, while total attributed revenue increased 89%. The lesson was clear: on TikTok Shop, authenticity and niche audience alignment beat raw reach every time — and Postpidia makes that data impossible to ignore.",
     },
     {
@@ -435,7 +435,7 @@ function BottomSection() {
       title: "Why Your Competitor's Best-Seller Is Your Next Opportunity",
       subtitle: "How competitive gap analysis on Postpidia reveals untapped product categories",
       tag: "Hot",
-      img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&h=350&fit=crop",
+      img: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&h=600&fit=crop",
       body: "Every TikTok Shop seller knows the feeling: you spot a competitor's product climbing the best-seller list, and your first instinct is to replicate it. But Postpidia's competitive analytics engine suggests a smarter move — look at the gaps around that product, not the product itself.\n\nWhen home goods brand NestaLiving analyzed a competitor's viral bamboo utensil set through Postpidia, they noticed something the competitor missed. While the utensil set dominated the 'eco kitchen' category, related searches for 'travel-friendly eco cutlery' were growing 340% month-over-month with almost zero inventory supply. Postpidia's demand-supply gap indicator flagged it as a high-opportunity zone — strong demand, minimal competition, and a clear adjacent positioning to an already-validated market.\n\nNestaLiving launched a compact travel cutlery kit within three weeks. Postpidia's pricing intelligence helped them undercut the competitor's price point by 12% while maintaining healthy margins, and their product launch was featured in Postpidia's 'Rising Products' feed — driving organic discovery. Within two months, the travel kit outsold the original bamboo set in its category. Competitive intelligence isn't about copying; it's about seeing what the competition can't.",
     },
   ];
