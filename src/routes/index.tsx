@@ -303,7 +303,7 @@ function HeroSection() {
       </div>
 
   {/* Mobile Card Layout */}
-  <div className="lg:hidden grid grid-cols-2 gap-4">
+  <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
     {sideStories.map((story, idx) => (
       <div key={idx} className="bg-[#0a0a0a] group cursor-pointer flex flex-col relative overflow-hidden rounded-[2px] h-[220px] border border-[#222]">
         <div className="absolute inset-0 pointer-events-none">
@@ -416,6 +416,9 @@ function ServicesSection() {
                 <span>FEATURES</span>
                 <span className="flex items-center gap-1.5"><Check className="h-3 w-3 text-[#5c45fd]" /> READY</span>
               </div>
+            </div>
+            <div className="absolute bottom-4 right-4 text-5xl font-bold text-white/5 select-none pointer-events-none">
+              {String(idx + 1).padStart(2, '0')}
             </div>
           </div>
         ))}
