@@ -269,7 +269,7 @@ function HeroSection() {
         </div>
 
         {/* 2-Column Split Cards Below Hero */}
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid sm:grid-cols-2 gap-8">
           <div className="group cursor-pointer">
             <div className="relative overflow-hidden mb-4">
               <img src="https://i.pinimg.com/1200x/d7/e0/d2/d7e0d280728e0a201b7139334b09920b.jpg" alt="Why Choose Us" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -394,7 +394,7 @@ function ServicesSection() {
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {visibleServices.map((item, idx) => (
-          <div key={idx} className="bg-[#1a1a1a] group cursor-pointer flex flex-col h-full border border border-[#222] hover:border-[#333] transition-colors">
+          <div key={idx} className="bg-[#1a1a1a] group cursor-pointer flex flex-col h-full border border border-[#222] hover:border-[#333] transition-colors relative">
             <div className="relative overflow-hidden bg-black shrink-0 aspect-[4/3]">
               <img
                 src={item.img}
