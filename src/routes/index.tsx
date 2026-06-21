@@ -415,25 +415,28 @@ function ServicesSection() {
 function BottomSection() {
   const stories = [
     {
-      category: "SALES",
-      title: "How Top Sales Teams Close 3X More Deals With Data",
-      subtitle: "Data-driven selling strategies that work",
+      category: "SALES INTELLIGENCE",
+      title: "How Postpidia Helps Brands Decode TikTok Shop Trends Before They Peak",
+      subtitle: "Real-time analytics that turned a skincare brand's slow quarter into their best ever",
       tag: "Trending",
       img: "https://i.pinimg.com/736x/4f/93/95/4f9395967943801e1ac0bba5f718e516.jpg",
+      body: "When GlowRoot Skincare noticed their TikTok Shop sales plateauing in Q2, they turned to Postpidia's sales intelligence dashboard for answers. Within minutes, the platform's trending product tracker revealed that niacinamide serums were surging across Southeast Asian markets — a signal their team had completely missed by relying on manual spreadsheet tracking.\n\nPostpidia's real-time data pipeline aggregates millions of transactions daily across TikTok Shop, giving brands a window into what's selling, who's buying, and which creators are driving the most conversions. For GlowRoot, the insight was immediate and actionable: they repositioned their niacinamide product line, partnered with three mid-tier creators that Postpidia's influencer analytics flagged as high-conversion, and adjusted their pricing to match the competitive sweet spot the platform identified.\n\nThe result? A 217% increase in monthly revenue and a top-10 ranking in their product category within six weeks. GlowRoot's founder now checks Postpidia before making any inventory decision. As she put it: 'Before Postpidia, we were guessing. Now we know.'",
     },
     {
-      category: "SALES",
-      title: "AI-Powered Forecasting: The Future of Revenue Prediction",
-      subtitle: "Machine learning in sales",
+      category: "CREATOR ECONOMICS",
+      title: "The Creator ROI Playbook: Measuring What Actually Matters on TikTok Shop",
+      subtitle: "Why follower counts mislead and how Postpidia's engagement-to-revenue metrics changed the game",
       tag: "New",
       img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=500&h=350&fit=crop",
+      body: "For months, fitness apparel brand KinetikFit was pouring budget into creator partnerships based on one metric: follower count. They booked creators with 500K+ followers and watched their cost-per-acquisition climb while conversion rates flatlined. The disconnect was obvious — reach doesn't equal revenue.\n\nPostpidia's creator analytics module gave KinetikFit a completely different lens. Instead of surface-level metrics, the platform tracks engagement-to-revenue ratios: how many viewers actually click through, add to cart, and complete a purchase after watching a creator's content. The data revealed that creators in the 15K-80K follower range consistently outperformed mega-influencers on TikTok Shop, with conversion rates 3.4x higher on average.\n\nArmed with this insight, KinetikFit rebuilt their creator roster from scratch. They replaced three high-cost mega-influencer deals with twelve micro and mid-tier creators selected through Postpidia's performance rankings. Campaign costs dropped 62%, while total attributed revenue increased 89%. The lesson was clear: on TikTok Shop, authenticity and niche audience alignment beat raw reach every time — and Postpidia makes that data impossible to ignore.",
     },
     {
-      category: "SALES",
-      title: "Pipeline Management Secrets From Million-Dollar Reps",
-      subtitle: "Proven pipeline tactics",
+      category: "MARKET ANALYTICS",
+      title: "Why Your Competitor's Best-Seller Is Your Next Opportunity",
+      subtitle: "How competitive gap analysis on Postpidia reveals untapped product categories",
       tag: "Hot",
       img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&h=350&fit=crop",
+      body: "Every TikTok Shop seller knows the feeling: you spot a competitor's product climbing the best-seller list, and your first instinct is to replicate it. But Postpidia's competitive analytics engine suggests a smarter move — look at the gaps around that product, not the product itself.\n\nWhen home goods brand NestaLiving analyzed a competitor's viral bamboo utensil set through Postpidia, they noticed something the competitor missed. While the utensil set dominated the 'eco kitchen' category, related searches for 'travel-friendly eco cutlery' were growing 340% month-over-month with almost zero inventory supply. Postpidia's demand-supply gap indicator flagged it as a high-opportunity zone — strong demand, minimal competition, and a clear adjacent positioning to an already-validated market.\n\nNestaLiving launched a compact travel cutlery kit within three weeks. Postpidia's pricing intelligence helped them undercut the competitor's price point by 12% while maintaining healthy margins, and their product launch was featured in Postpidia's 'Rising Products' feed — driving organic discovery. Within two months, the travel kit outsold the original bamboo set in its category. Competitive intelligence isn't about copying; it's about seeing what the competition can't.",
     },
   ];
 
@@ -453,7 +456,7 @@ function BottomSection() {
               <p className="text-gray-400 text-[12px] mb-6 font-medium">{stories[0].subtitle}</p>
               <Link
                 to="/story"
-                search={{ title: stories[0].title, category: "SALES", subtitle: stories[0].subtitle, img: stories[0].img, tag: stories[0].tag }}
+                search={{ title: stories[0].title, category: stories[0].category, subtitle: stories[0].subtitle, img: stories[0].img, tag: stories[0].tag, body: stories[0].body }}
                 className="bg-transparent border-[1.5px] border-white text-white rounded-full px-6 py-2.5 h-10 w-fit text-[11px] font-medium uppercase tracking-wider hover:bg-white hover:text-[#111] transition-all duration-200 inline-flex items-center"
               >
                 Read Story
@@ -474,9 +477,13 @@ function BottomSection() {
                 </div>
                 <h4 className="text-white text-[15px] font-medium mb-1 relative z-10 leading-tight">{stories[1].title}</h4>
                 <p className="text-white/70 text-[11px] relative z-10 mb-auto font-medium">{stories[1].subtitle}</p>
-                <a href="#" className="text-white text-[11px] font-medium flex items-center gap-1 hover:gap-2 transition-all relative z-10 mt-2 group/link">
+                <Link
+                  to="/story"
+                  search={{ title: stories[1].title, category: stories[1].category, subtitle: stories[1].subtitle, img: stories[1].img, tag: stories[1].tag, body: stories[1].body }}
+                  className="text-white text-[11px] font-medium flex items-center gap-1 hover:gap-2 transition-all relative z-10 mt-2 group/link"
+                >
                   Read More <ChevronRight className="w-3 h-3 transition-transform duration-300 group-hover/link:translate-x-0.5" />
-                </a>
+                </Link>
                 <div className="absolute -right-4 bottom-[-10%] w-[80%] h-[90%] pointer-events-none">
                   <img src={stories[1].img} alt={stories[1].title} className="w-full h-full object-contain opacity-30 group-hover:opacity-50 transition-all duration-700 group-hover:scale-105" />
                 </div>
@@ -487,9 +494,13 @@ function BottomSection() {
                 </div>
                 <h4 className="text-white text-[15px] font-medium mb-1 relative z-10 leading-tight">{stories[2].title}</h4>
                 <p className="text-white/70 text-[11px] relative z-10 mb-auto font-medium">{stories[2].subtitle}</p>
-                <a href="#" className="text-white text-[11px] font-medium flex items-center gap-1 hover:gap-2 transition-all relative z-10 mt-2 group/link">
+                <Link
+                  to="/story"
+                  search={{ title: stories[2].title, category: stories[2].category, subtitle: stories[2].subtitle, img: stories[2].img, tag: stories[2].tag, body: stories[2].body }}
+                  className="text-white text-[11px] font-medium flex items-center gap-1 hover:gap-2 transition-all relative z-10 mt-2 group/link"
+                >
                   Read More <ChevronRight className="w-3 h-3 transition-transform duration-300 group-hover/link:translate-x-0.5" />
-                </a>
+                </Link>
                 <div className="absolute -right-6 top-1/2 -translate-y-1/2 w-[85%] h-[120%] pointer-events-none">
                   <img src={stories[2].img} alt={stories[2].title} className="w-full h-full object-contain opacity-30 group-hover:opacity-50 transition-all duration-700 group-hover:scale-105" />
                 </div>
