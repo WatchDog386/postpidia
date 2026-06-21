@@ -303,7 +303,7 @@ function HeroSection() {
       </div>
 
   {/* Mobile Card Layout */}
-  <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <div className="lg:hidden grid grid-cols-2 gap-4">
     {sideStories.map((story, idx) => (
       <div key={idx} className="bg-[#0a0a0a] group cursor-pointer flex flex-col relative overflow-hidden rounded-[2px] h-[220px] border border-[#222]">
         <div className="absolute inset-0 pointer-events-none">
@@ -405,7 +405,7 @@ function ServicesSection() {
                 {item.category}
               </span>
             </div>
-            <div className="p-5 flex flex-col flex-grow">
+            <div className="p-5 flex flex-col flex-grow relative z-10">
               <h3 className="font-semibold text-[15px] text-gray-200 line-clamp-1 leading-snug group-hover:text-[#f0514e] transition-colors">
                 {item.title}
               </h3>
@@ -543,12 +543,14 @@ function BottomSection() {
               </div>
               <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 w-[55%] h-[120%] pointer-events-none">
                 <img src="https://i.pinimg.com/736x/6d/67/f6/6d67f6947d704ce2ab4b0feb3c5099b0.jpg" alt="Sales tracking platform" className="w-full h-full object-contain opacity-30 group-hover:opacity-50 transition-all duration-700 group-hover:scale-105" />
-              </div>
-            </div>
-          </div>
-        </div>
+<div className="absolute bottom-4 right-4 text-[60px] leading-none font-bold text-white/[0.04] select-none pointer-events-none">
+        {String(idx + 1).padStart(2, '0')}
       </div>
-    </section>
+    </div>
+  </div>
+</div>
+</div>
+</section>
   );
 }
 
