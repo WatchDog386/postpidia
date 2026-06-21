@@ -24,10 +24,7 @@ import {
   BookOpen,
   Check,
   Phone,
-  MapPin,
-  Send,
   ArrowUpRight,
-  Clock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -305,33 +302,60 @@ function HeroSection() {
         </div>
       </div>
 
-      {/* Sidebar List Grid Right */}
-      <div className="lg:col-span-4 flex flex-col space-y-6">
-        {sideStories.map((story, idx) => (
-          <div key={idx} className="flex gap-4 items-start group cursor-pointer">
-            <div className="relative shrink-0 overflow-hidden">
-              <img
-                src={story.img}
-                alt={story.title}
-                className="w-[100px] h-[100px] object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="flex flex-col justify-center min-h-[100px] py-1">
-              <div className="mb-2">
-                 <span className={getCategoryStyles(story.category)}>
-                    {story.category}
-                 </span>
-              </div>
-              <h4 className="font-semibold text-[15px] text-gray-200 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
-                {story.title}
-              </h4>
-              <div className="text-[10px] text-gray-500 mt-2 font-medium flex items-center gap-1.5 uppercase">
-                <Calendar className="h-3 w-3" /> {story.date}
-              </div>
-            </div>
+  {/* Mobile Card Layout */}
+  <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {sideStories.map((story, idx) => (
+      <div key={idx} className="bg-[#0a0a0a] group cursor-pointer flex flex-col relative overflow-hidden rounded-[2px] h-[220px] border border-[#222]">
+        <div className="absolute inset-0 pointer-events-none">
+          <img
+            src={story.img}
+            alt={story.title}
+            className="w-full h-full object-cover object-[center_35%] opacity-40 group-hover:opacity-60 transition-all duration-500 group-hover:scale-105"
+          />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10" />
+        <div className="relative z-20 flex flex-col justify-end h-full p-5">
+          <span className={`${getCategoryStyles(story.category)} w-fit mb-3`}>
+            {story.category}
+          </span>
+          <h4 className="font-semibold text-[15px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
+            {story.title}
+          </h4>
+          <div className="text-[10px] text-gray-400 mt-2 font-medium flex items-center gap-1.5 uppercase">
+            <Calendar className="h-3 w-3" /> {story.date}
           </div>
-        ))}
+        </div>
       </div>
+    ))}
+  </div>
+
+  {/* Desktop Sidebar Layout */}
+  <div className="hidden lg:flex lg:col-span-4 flex-col space-y-6">
+    {sideStories.map((story, idx) => (
+      <div key={idx} className="flex gap-4 items-start group cursor-pointer">
+        <div className="relative shrink-0 overflow-hidden">
+          <img
+            src={story.img}
+            alt={story.title}
+            className="w-[100px] h-[100px] object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </div>
+        <div className="flex flex-col justify-center min-h-[100px] py-1">
+          <div className="mb-2">
+            <span className={getCategoryStyles(story.category)}>
+              {story.category}
+            </span>
+          </div>
+          <h4 className="font-semibold text-[15px] text-gray-200 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
+            {story.title}
+          </h4>
+          <div className="text-[10px] text-gray-500 mt-2 font-medium flex items-center gap-1.5 uppercase">
+            <Calendar className="h-3 w-3" /> {story.date}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
       </div>
     </section>
   );
@@ -352,10 +376,10 @@ function ServicesSection() {
   const [sliderPage, setSliderPage] = useState(0);
 
   const services = [
-    { category: "EDITING", title: "Video Editing", desc: "Professional editing tailored for TikTok Shop, Instagram Reels, YouTube Shorts and Amazon product videos.", img: "https://i.pinimg.com/736x/e2/69/5c/e2695c5fd083846c994a188a600391a7.jpg" },
-    { category: "MOTION", title: "Motion Graphics", desc: "Dynamic 2D/3D animations, text overlays, and visual effects that grab attention and drive engagement.", img: "https://i.pinimg.com/736x/ca/cd/60/cacd603db5f2fe0bb5597a8609db302f.jpg" },
-    { category: "THUMBNAIL", title: "Thumbnail Design", desc: "A/B tested thumbnail variations designed to maximize click-through rates and views on every platform.", img: "https://i.pinimg.com/736x/f2/9e/d1/f29ed15a266d6542359e09d5b220b94a.jpg" },
-    { category: "COLOR", title: "Color Grading", desc: "Advanced color correction and grading to give your content a cinematic, brand-consistent look.", img: "https://i.pinimg.com/1200x/03/26/a9/0326a925dd0e9a63f270e4fb23547a87.jpg" },
+    { category: "EDITING", title: "Video Editing", desc: "Professional editing tailored for TikTok Shop, Instagram Reels, YouTube Shorts and Amazon product videos.", img: "https://i.pinimg.com/1200x/4e/a2/f8/4ea2f876c2a2546347f860846c44d936.jpg" },
+    { category: "MOTION", title: "Motion Graphics", desc: "Dynamic 2D/3D animations, text overlays, and visual effects that grab attention and drive engagement.", img: "https://i.pinimg.com/736x/c7/76/59/c77659f60e02cd32b2b1488946f8d534.jpg" },
+    { category: "THUMBNAIL", title: "Thumbnail Design", desc: "A/B tested thumbnail variations designed to maximize click-through rates and views on every platform.", img: "https://i.pinimg.com/736x/74/c6/79/74c679b74ddeeac0e3c2d00f2642011b.jpg" },
+    { category: "COLOR", title: "Color Grading", desc: "Advanced color correction and grading to give your content a cinematic, brand-consistent look.", img: "https://i.pinimg.com/736x/19/80/c3/1980c3b439b7314ec8ac85e25c855c00.jpg" },
     { category: "ANALYTICS", title: "Performance Analytics", desc: "Data-driven insights on content performance. SEO and keyword strategy for every video we deliver.", img: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=500&h=350&fit=crop" },
     { category: "AUDIO", title: "Audio Production", desc: "Professional noise reduction, audio leveling, and royalty-free background music selection.", img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=500&h=350&fit=crop" },
   ];
@@ -371,11 +395,11 @@ function ServicesSection() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {visibleServices.map((item, idx) => (
           <div key={idx} className="bg-[#1a1a1a] group cursor-pointer flex flex-col h-full border border border-[#222] hover:border-[#333] transition-colors">
-            <div className="relative overflow-hidden bg-black shrink-0">
+            <div className="relative overflow-hidden bg-black shrink-0 aspect-[4/3]">
               <img
                 src={item.img}
                 alt={item.title}
-                className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                className="w-full h-full object-cover object-[center_35%] transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
               />
               <span className={`absolute top-4 left-4 ${getCategoryStyles(item.category)}`}>
                 {item.category}
