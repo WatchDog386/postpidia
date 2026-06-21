@@ -48,7 +48,7 @@ const stories = [
     title: "The Price Is Right: How Dynamic Pricing Outperforms Static Models on TikTok Shop",
     subtitle: "Postpidia's pricing intelligence helped one brand find the exact price that maximized both volume and margin",
     tag: "Popular",
-    img: "https://images.unsplash.com/photo-1556742049-0cf84f6ecd75?w=800&h=600&fit=crop",
+    img: "https://images.unsplash.com/photo-1556742049-0cf84f6ecd75?q=80&w=1200&h=800&auto=format&fit=crop",
     body: [
       "Pricing on TikTok Shop is a constant balancing act. Price too high and you lose the impulse-buy audience that fuels the platform. Price too low and you erode margins to the point where creator commissions and TikTok's fees leave you underwater. Most sellers pick a price and hope. Postpidia users don't have to.",
       "When nutritional supplement brand VitaEdge launched their protein snack bars, they priced at $24.99 for a 12-pack — a number they arrived at by matching the category average shown on TikTok Shop search results. Sales were steady but unspectacular. Using Postpidia's pricing analytics, they discovered that the $19.99 price point had 4x the conversion rate with only a 15% drop in per-unit margin, while the $27.99 tier captured a premium audience segment that valued 'clean label' positioning and was virtually price-insensitive.",
@@ -60,7 +60,7 @@ const stories = [
     title: "From Zero to Top 50: A Brand's 90-Day Journey on TikTok Shop",
     subtitle: "The step-by-step playbook that took FreshBite Foods from launch to category leader",
     tag: "Trending",
-    img: "https://images.unsplash.com/photo-1547592180-85f173990390?w=800&h=600&fit=crop",
+    img: "https://images.unsplash.com/photo-1547592180-85f173990390?q=80&w=1200&h=800&auto=format&fit=crop",
     body: [
       "FreshBite Foods had no TikTok Shop presence, no creator relationships, and no social commerce experience when they signed up for Postpidia in January. Within 90 days, they ranked in the Top 50 for their food category. Their playbook was built almost entirely from Postpidia's Growth Signals — the platform's curated insights that identify which levers matter most for new sellers at each stage of their journey.",
       "Weeks 1-2 were about category selection. Postpidia's market overview showed that the 'healthy snacks' subcategory had 2.3x the growth rate of 'organic foods' with half the seller density. FreshBite positioned three hero SKUs there. Weeks 3-4 focused on creator seeding. Postpidia's creator matching tool identified eight micro-creators whose audiences overlapped with FreshBite's target demographic. They sent sample boxes with a custom promo code trackable through Postpidia's attribution dashboard.",
