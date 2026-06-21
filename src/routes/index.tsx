@@ -622,8 +622,8 @@ function PricingSection() {
     {
       name: "Essential",
       desc: "Best value for growing brands ready to scale their content output",
-      monthly: 99,
-      yearly: 79,
+      monthly: 149,
+      yearly: 119,
       popular: true,
       features: [
         "Up to 5 Edited Videos",
