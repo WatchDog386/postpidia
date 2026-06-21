@@ -269,7 +269,7 @@ function HeroSection() {
         </div>
 
         {/* 2-Column Split Cards Below Hero */}
-        <div className="grid grid-cols-2 md:grid-cols-1 gap-8">
+        <div className="grid grid-cols-2 gap-8">
           <div className="group cursor-pointer">
             <div className="relative overflow-hidden mb-4">
               <img src="https://i.pinimg.com/1200x/d7/e0/d2/d7e0d280728e0a201b7139334b09920b.jpg" alt="Why Choose Us" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
