@@ -420,6 +420,9 @@ function ServicesSection() {
             <div className="absolute bottom-4 right-4 text-5xl font-bold text-white/5 select-none pointer-events-none">
               {String(idx + 1).padStart(2, '0')}
             </div>
+            <div className="absolute bottom-4 right-4 text-5xl font-bold text-white/5 select-none pointer-events-none">
+              {String(idx + 1).padStart(2, '0')}
+            </div>
           </div>
         ))}
       </div>
@@ -546,13 +549,6 @@ function BottomSection() {
               </div>
               <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 w-[55%] h-[120%] pointer-events-none">
                 <img src="https://i.pinimg.com/736x/6d/67/f6/6d67f6947d704ce2ab4b0feb3c5099b0.jpg" alt="Sales tracking platform" className="w-full h-full object-contain opacity-30 group-hover:opacity-50 transition-all duration-700 group-hover:scale-105" />
-<div className="absolute bottom-4 right-4 text-[60px] leading-none font-bold text-white/[0.04] select-none pointer-events-none">
-        {String(idx + 1).padStart(2, '0')}
-      </div>
-    </div>
-  </div>
-</div>
-</div>
 </section>
   );
 }
