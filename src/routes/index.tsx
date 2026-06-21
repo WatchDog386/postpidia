@@ -494,7 +494,7 @@ function BottomSection() {
           {/* Right Column */}
           <div className="flex flex-col gap-6 h-full">
             {/* Top Row — 2 smaller cards */}
-            <div className="grid grid-cols-2 gap-6 h-[200px] md:h-[calc(50%-12px)]">
+            <div className="grid grid-cols-2 md:grid-cols-1 gap-6 h-[200px] md:h-[calc(50%-12px)]">
               <div className="bg-[#5c45fd] p-5 relative overflow-hidden rounded-[2px] flex flex-col justify-start group border border-[#6b56ff]">
                 <div className="bg-white/20 text-white text-[9px] font-medium px-2.5 py-1 rounded-sm w-fit mb-2 relative z-10 tracking-widest">
                   {stories[1].tag}
