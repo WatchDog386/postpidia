@@ -1203,13 +1203,9 @@ function ContactSection() {
               Have questions? Our support team is ready to help you with any enquiry.
             </p>
         <div className="flex justify-center">
-          <div className="relative">
-            <div className="bg-white text-[#f0514e] py-2.5 px-8 md:px-10 flex items-center justify-center font-medium" style={{ clipPath: "polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%)" }}>
-              <span className="text-[10px] font-semibold uppercase tracking-widest pr-5">
-                LET'S CHAT
-              </span>
-            </div>
-          </div>
+          <span className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded-r-full rounded-bl-full rounded-tl-none bg-[#ffb300] text-black cursor-default">
+            LET'S CHAT
+          </span>
         </div>
           </div>
 
