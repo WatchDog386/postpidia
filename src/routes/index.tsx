@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
@@ -89,6 +89,7 @@ function Landing() {
         <HowItWorksSection />
         <BottomSection />
         <PricingSection />
+        <ClientTestimonialsSection />
         <TestimonialsSection />
         <ContactSection />
         <CTASection />
@@ -450,6 +451,13 @@ function BottomSection() {
               <span className={`${getCategoryStyles("SALES")} mb-2`}>FEATURED</span>
               <h3 className="text-white text-[22px] lg:text-[28px] font-bold leading-tight mb-3">{stories[0].title}</h3>
               <p className="text-gray-400 text-[12px] mb-6 font-medium">{stories[0].subtitle}</p>
+              <Link
+                to="/story"
+                search={{ title: stories[0].title, category: "SALES", subtitle: stories[0].subtitle, img: stories[0].img, tag: stories[0].tag }}
+                className="bg-transparent border-[1.5px] border-white text-white rounded-full px-6 py-2.5 h-10 w-fit text-[11px] font-medium uppercase tracking-wider hover:bg-white hover:text-[#111] transition-all duration-200 inline-flex items-center"
+              >
+                Read Story
+              </Link>
             </div>
             <div className="absolute left-[-5%] bottom-0 w-[75%] h-[95%] pointer-events-none">
               <img src={stories[0].img} alt={stories[0].title} className="w-full h-full object-cover object-bottom opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105" />
@@ -494,6 +502,9 @@ function BottomSection() {
               <div className="relative z-10">
                 <h4 className="text-white text-[20px] lg:text-[24px] font-medium mb-1">Sales Tracking Platform</h4>
                 <p className="text-gray-400 text-[11px] font-medium tracking-widest uppercase mb-3">ALL FEATURES THIS WEEK</p>
+                <Link to="/stories" className="inline-flex items-center gap-2 bg-transparent border border-white text-white rounded-full text-[11px] font-medium uppercase tracking-wider px-5 py-2.5 hover:bg-white hover:text-[#111] transition-all duration-200">
+                  View All <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
               <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 w-[55%] h-[120%] pointer-events-none">
                 <img src="https://i.pinimg.com/736x/6d/67/f6/6d67f6947d704ce2ab4b0feb3c5099b0.jpg" alt="Sales tracking platform" className="w-full h-full object-contain opacity-30 group-hover:opacity-50 transition-all duration-700 group-hover:scale-105" />
@@ -909,88 +920,40 @@ function PricingSection() {
 const testimonialsData = [
   {
     id: 1,
-    company: "Cruva AI",
-    name: "Cruva AI",
-    quote:
-      "Postpidia's AI-driven video production integrates perfectly with our affiliate workflow. The quality and speed are unmatched.",
-    imageUrl: "https://cdn.brandfetch.io/cruva.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
-    overlay: "rgba(0, 0, 0, 0.30)",
+    company: "Fashion Hub Nairobi",
+    name: "Amara Okonkwo",
+    quote: "Postpidia completely transformed our TikTok Shop presence. Their video editing made our product launches go viral — we saw a 300% increase in sales within the first month. Absolutely outstanding work.",
+    imageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
+    overlay: "rgba(0, 0, 0, 0.35)",
   },
   {
     id: 2,
-    company: "Kalodata",
-    name: "Kalodata",
-    quote:
-      "The data-backed video strategies Postpidia delivers have helped our clients achieve record-breaking TikTok Shop sales.",
-    imageUrl: "https://cdn.brandfetch.io/kalodata.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
-    overlay: "rgba(86, 161, 237, 0.30)",
-  },
-  {
-    id: 3,
-    company: "TikTok Shop",
-    name: "TikTok Shop",
-    quote:
-      "Postpidia's content creation aligns perfectly with TikTok Shop's ecosystem. Their videos drive real conversions.",
-    imageUrl: "https://cdn.brandfetch.io/tiktokshop.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
-    overlay: "rgba(0, 0, 0, 0.25)",
-  },
-  {
-    id: 4,
-    company: "Adobe",
-    name: "Adobe",
-    quote:
-      "Postpidia's video editing pipeline transformed our content workflow. The quality and turnaround time exceeded our expectations.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8d/Adobe_Corporate_Logo.png",
-    overlay: "rgba(255, 0, 0, 0.25)",
-  },
-  {
-    id: 5,
-    company: "Canva",
-    name: "Canva",
-    quote:
-      "The motion graphics and color grading Postpidia delivers are top-tier. Our social engagement jumped 200% in the first month.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/en/b/bb/Canva_Logo.svg",
-    overlay: "rgba(0, 153, 204, 0.30)",
-  },
-  {
-    id: 7,
-    company: "DaVinci Resolve",
-    name: "DaVinci Resolve",
-    quote:
-      "Postpidia's color grading expertise is on another level. They understand cinematic quality and deliver consistently.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4d/DaVinci_Resolve_Studio.png",
-    overlay: "rgba(30, 30, 30, 0.35)",
-  },
-  {
-    id: 8,
-    company: "Frame.io",
-    name: "Frame.io",
-    quote:
-      "The integration with our review workflow was seamless. Postpidia understands how creative teams need to operate.",
-    imageUrl: "https://vectorseek.com/wp-content/uploads/2023/08/Frame.io-Logo-Vector.svg-.png",
-    overlay: "rgba(0, 200, 255, 0.25)",
-  },
-  {
-    id: 9,
-    company: "Vimeo",
-    name: "Vimeo",
-    quote:
-      "Consistent quality, fast turnaround, and a team that actually cares about your brand. Postpidia is a game changer.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Vimeo_Logo.svg",
+    company: "TechVibe Electronics",
+    name: "David Kimani",
+    quote: "As a tech retailer, product videos are everything. Postpidia's team understands how to showcase electronics in a way that drives clicks and conversions. Our brand engagement has never been stronger.",
+    imageUrl: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop",
     overlay: "rgba(0, 0, 0, 0.30)",
   },
   {
-    id: 10,
-    company: "FastMoss",
-    name: "FastMoss",
-    quote:
-      "Postpidia understands TikTok commerce deeply. Their video production quality helps our users maximize engagement and ROI.",
-    imageUrl: "https://cdn.brandfetch.io/iddtWGI7z6/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1776620051524",
-    overlay: "rgba(254, 32, 98, 0.25)",
+    id: 3,
+    company: "FreshBite Foods",
+    name: "Grace Njoroge",
+    quote: "Running a food brand on social media requires constant content. Postpidia delivers scroll-stopping videos that make our products look irresistible. Our followers grew by 10K in just 3 months.",
+    imageUrl: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=300&fit=crop",
+    overlay: "rgba(0, 0, 0, 0.30)",
+  },
+  {
+    id: 4,
+    company: "Style Lounge Boutique",
+    name: "Kevin Mwangi",
+    quote: "What sets Postpidia apart is their understanding of social commerce. They don't just edit videos — they create content that converts viewers into buyers. Our ROI has doubled since partnering with them.",
+    imageUrl: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=300&fit=crop",
+    overlay: "rgba(0, 0, 0, 0.35)",
   },
 ];
 
 const PER_VIEW = 3;
+const SLIDE = 1;
 
 type Testimonial = {
   id: number;
@@ -1005,12 +968,16 @@ function TestimonialsSection() {
   const [page, setPage] = useState(0);
   const [direction, setDirection] = useState(1);
 
-  const totalPages = Math.ceil(testimonialsData.length / PER_VIEW);
+  const totalPages = testimonialsData.length;
 
   const pages = useMemo(() => {
     const arr: Testimonial[][] = [];
-    for (let i = 0; i < testimonialsData.length; i += PER_VIEW) {
-      arr.push(testimonialsData.slice(i, i + PER_VIEW));
+    for (let i = 0; i < testimonialsData.length; i += SLIDE) {
+      const slice: Testimonial[] = [];
+      for (let j = 0; j < PER_VIEW; j++) {
+        slice.push(testimonialsData[(i + j) % testimonialsData.length]);
+      }
+      arr.push(slice);
     }
     return arr;
   }, []);
@@ -1043,7 +1010,7 @@ function TestimonialsSection() {
 
       <div className="max-w-[1260px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-white text-4xl md:text-[44px] font-light mb-11 md:mb-12 relative z-10">
-          Working with Trusted Brands
+          What Our Clients Say
         </h2>
 
         <div className="relative z-10">
@@ -1059,42 +1026,37 @@ function TestimonialsSection() {
                 className="grid grid-cols-1 md:grid-cols-3 gap-5"
               >
                 {pages[page].map((item, idx) => (
-                  <motion.article
-                    key={item.id}
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.45, delay: idx * 0.12 }}
-                    className="group"
-                  >
-                    <div className="relative h-[220px] md:h-[250px] overflow-hidden">
-                      <img
-                        src={item.imageUrl}
-                        alt={`${item.name} testimonial`}
-                        className="w-full h-full object-contain bg-[#1a1a1a] p-8"
-                        loading="lazy"
-                      />
-                      <div
-                        className="absolute inset-0"
-                        style={{ background: item.overlay }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <p className="text-[#f05847] text-[14px] md:text-[16px] font-medium">
-                          {item.company}
-                        </p>
-                        <div className="h-[2px] w-16 bg-[#f05847] mt-1" />
-                      </div>
-                    </div>
-
-                    <div className="pt-4">
-                      <h3 className="text-[#f05847] text-[22px] md:text-[24px] font-medium leading-tight tracking-tight whitespace-nowrap">
-                        {item.name}
-                      </h3>
-                      <p className="mt-2.5 text-white/90 text-[12px] md:text-[13px] leading-relaxed font-medium">
-                        &ldquo;{item.quote}&rdquo;
-                      </p>
-                    </div>
-                  </motion.article>
+<motion.article
+          key={item.id}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: idx * 0.12 }}
+          className="group"
+        >
+          <div className="relative h-[220px] md:h-[250px] overflow-hidden rounded-[2px]">
+            <img
+              src={item.imageUrl}
+              alt={`${item.name} testimonial`}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+          </div>
+          <div className="pt-4">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-[#f05847] flex items-center justify-center text-white text-sm font-bold shrink-0">
+                {item.name.charAt(0)}
+              </div>
+              <div>
+                <h3 className="text-white text-[16px] md:text-[18px] font-semibold leading-tight">{item.name}</h3>
+                <p className="text-[#f05847] text-[11px] font-medium uppercase tracking-wider">{item.company}</p>
+              </div>
+            </div>
+            <p className="text-gray-300 text-[13px] leading-relaxed">
+              &ldquo;{item.quote}&rdquo;
+            </p>
+          </div>
+        </motion.article>
                 ))}
               </motion.div>
             </AnimatePresence>
@@ -1116,6 +1078,106 @@ function TestimonialsSection() {
             />
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+const clientTestimonials = [
+  {
+    name: "Cruva AI",
+    role: "Affiliate Marketing Platform",
+    company: "Cruva AI",
+    description: "Cruva AI helps brands manage and optimize affiliate marketing campaigns at scale. We use it to track affiliate-driven video performance, monitor conversion rates, and attribute sales to specific content pieces across TikTok Shop and other platforms.",
+    image: "https://cdn.brandfetch.io/cruva.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
+  },
+  {
+    name: "Kalodata",
+    role: "TikTok Analytics",
+    company: "Kalodata",
+    description: "Kalodata provides deep analytics for TikTok Shop sellers, tracking product trends, competitor performance, and viral content patterns. We leverage it to identify high-performing video formats and optimize our clients' content strategy for maximum sales.",
+    image: "https://cdn.brandfetch.io/kalodata.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
+  },
+  {
+    name: "TikTok Shop",
+    role: "Social Commerce",
+    company: "TikTok Shop",
+    description: "TikTok Shop is the leading social commerce platform integrating short-form video with seamless in-app purchasing. We track real-time sales data, monitor video-driven transactions, and analyze customer behavior to refine content that converts browsers into buyers.",
+    image: "https://cdn.brandfetch.io/tiktokshop.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
+  },
+  {
+    name: "FastMoss",
+    role: "TikTok Data Intelligence",
+    company: "FastMoss",
+    description: "FastMoss delivers advanced TikTok commerce intelligence, tracking trending products, shop performance, and creator analytics. We use it to benchmark our clients' video performance against market leaders and identify untapped sales opportunities.",
+    image: "https://cdn.brandfetch.io/iddtWGI7z6/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1776620051524",
+  },
+];
+
+function ClientTestimonialsSection() {
+  return (
+    <section
+      className="py-20 bg-[#111111] overflow-hidden"
+      style={{
+        fontFamily: "'Outfit', sans-serif",
+        WebkitFontSmoothing: "antialiased",
+        MozOsxFontSmoothing: "grayscale",
+      }}
+    >
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-center text-white text-4xl md:text-[44px] font-light">
+            Softwares We Use to <span className="text-[#f05847]">Track Sales</span>
+          </h2>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="max-w-7xl mx-auto"
+        >
+          <div className="grid md:grid-cols-2 gap-x-24 gap-y-16">
+            {clientTestimonials.map((item) => (
+              <div
+                key={item.name}
+                className="flex flex-col sm:flex-row gap-6 items-start"
+              >
+                <div className="w-full sm:w-[160px] h-[140px] shrink-0">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-col items-start flex-1 min-w-0">
+                  <h3 className="text-[#f05847] text-[18px] font-semibold mb-3">
+                    {item.name}
+                  </h3>
+                  <p className="text-gray-500 text-[11px] font-medium uppercase tracking-wider mb-2">
+                    {item.role}
+                  </p>
+                  <p className="text-gray-300 text-[12px] leading-relaxed mb-5">
+                    {item.description}
+                  </p>
+                  <Link
+                    to="/software"
+                    search={{ name: item.name, role: item.role, description: item.description, image: item.image }}
+                    className="bg-[#f05847] hover:bg-[#d94441] text-white rounded-none px-6 py-2.5 text-[10px] font-bold uppercase tracking-wider transition-colors mt-auto inline-flex items-center justify-center"
+                  >
+                    Learn More
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
