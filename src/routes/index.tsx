@@ -135,16 +135,16 @@ function Nav() {
       {/* Brand & Ad Spot Row */}
       <div className="bg-black/20">
         <div className="max-w-[1400px] mx-auto px-4 lg:px-8 py-2 lg:py-5 flex items-center justify-between">
-          <div className="flex items-center gap-2 lg:gap-4">
+          <div className="flex items-center w-full lg:w-auto justify-between lg:justify-start gap-2 lg:gap-4">
+            <a href="#" className="flex items-center gap-2 lg:gap-3">
+              <img src="/logo.png" alt="Postpidia" className="h-20 lg:h-28 w-auto" />
+            </a>
             <button 
               onClick={() => setOpen(!open)}
               className="text-gray-300 hover:text-white p-1 lg:hidden"
             >
-              {open ? <X className="h-5 w-5 lg:h-6 lg:w-6" /> : <Menu className="h-5 w-5 lg:h-6 lg:w-6" />}
+              {open ? <X className="h-8 w-8 lg:h-6 lg:w-6" /> : <Menu className="h-8 w-8 lg:h-6 lg:w-6" />}
             </button>
-            <a href="#" className="flex items-center gap-2 lg:gap-3">
-              <img src="/logo.png" alt="Postpidia" className="h-20 lg:h-28 w-auto" />
-            </a>
           </div>
 
           {/* Ad Banner */}
