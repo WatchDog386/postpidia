@@ -107,9 +107,13 @@ function Nav() {
 
   const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     setOpen(false);
+    const el = document.querySelector(href);
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 150);
+    }
   };
 
   return (
@@ -139,8 +143,7 @@ function Nav() {
               {open ? <X className="h-5 w-5 lg:h-6 lg:w-6" /> : <Menu className="h-5 w-5 lg:h-6 lg:w-6" />}
             </button>
             <a href="#" className="flex items-center gap-2 lg:gap-3">
-              <img src="/logo.png" alt="Postpidia" className="h-7 lg:h-10 w-auto" />
-              <span className="text-lg lg:text-2xl font-medium tracking-tight text-white leading-none">Postpidia</span>
+              <img src="/logo.png" alt="Postpidia" className="h-20 lg:h-28 w-auto" />
             </a>
           </div>
 
@@ -174,8 +177,8 @@ function Nav() {
 
       {/* Main Nav Links Row */}
       <div className="bg-black/20">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 h-0 lg:h-12 flex items-center justify-between">
-          <nav className="hidden lg:flex items-center gap-6">
+        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 hidden lg:flex h-12 items-center justify-between">
+          <nav className="flex items-center gap-6">
             {navLinks.map((item) => (
               <a
                 key={item.label}
@@ -193,29 +196,22 @@ function Nav() {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-black/30 backdrop-blur-sm px-4 py-4"
-          >
-            <div className="space-y-0">
-              {navLinks.map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={(e) => scrollTo(e, item.href)}
-                  className="block py-3 text-sm font-medium text-gray-300 hover:text-[#f0514e]"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {open && (
+        <div className="lg:hidden bg-black/90 backdrop-blur-sm px-4 py-4 relative z-50">
+          <div className="space-y-0">
+            {navLinks.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => scrollTo(e, item.href)}
+                className="block py-3 text-sm font-medium text-gray-300 hover:text-[#f0514e]"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
@@ -952,34 +948,34 @@ function PricingSection() {
 const testimonialsData = [
   {
     id: 1,
-    company: "Fashion & Retail",
-    name: "Fashion Hub Nairobi",
+    company: "Beauty & Cosmetics",
+    name: "The First Lady Beauty Shop",
     quote: "Postpidia completely transformed our TikTok Shop presence. Their video editing made our product launches go viral — we saw a 300% increase in sales within the first month. Absolutely outstanding work.",
-    imageUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop",
+    imageUrl: "https://i.pinimg.com/736x/a1/51/b3/a151b351f59a0f322d1676bde4804eba.jpg",
     overlay: "rgba(0, 0, 0, 0.35)",
   },
   {
     id: 2,
     company: "Consumer Electronics",
     name: "TechVibe Electronics",
-    quote: "As a tech retailer, product videos are everything. Postpidia's team understands how to showcase electronics in a way that drives clicks and conversions. Our brand engagement has never been stronger.",
-    imageUrl: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop",
+    quote: "As a tech retailer in Singapore, product videos are everything. Postpidia's team understands how to showcase electronics in a way that drives clicks and conversions. Our brand engagement has never been stronger.",
+    imageUrl: "https://i.pinimg.com/736x/26/51/b4/2651b49b8e82db47d4130fb80f51b95e.jpg",
     overlay: "rgba(0, 0, 0, 0.30)",
   },
   {
     id: 3,
     company: "Food & Beverage",
     name: "FreshBite Foods",
-    quote: "Running a food brand on social media requires constant content. Postpidia delivers scroll-stopping videos that make our products look irresistible. Our followers grew by 10K in just 3 months.",
-    imageUrl: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop",
+    quote: "Running a food brand in the UK on social media requires constant content. Postpidia delivers scroll-stopping videos that make our products look irresistible. Our followers grew by 10K in just 3 months.",
+    imageUrl: "https://i.pinimg.com/1200x/a0/54/ef/a054ef97e0a3f27433179ae840bfe440.jpg",
     overlay: "rgba(0, 0, 0, 0.30)",
   },
   {
     id: 4,
     company: "Luxury Boutique",
     name: "Style Lounge Boutique",
-    quote: "What sets Postpidia apart is their understanding of social commerce. They don't just edit videos — they create content that converts viewers into buyers. Our ROI has doubled since partnering with them.",
-    imageUrl: "https://assets.vogue.in/photos/5ce4a28bb40d263bbed764a1/16:9/w_1280,c_limit/TASSELStyleLounge.jpg?mbid=social_retweet",
+    quote: "What sets Postpidia apart is their understanding of social commerce in Dubai. They don't just edit videos — they create content that converts viewers into buyers. Our ROI has doubled since partnering with them.",
+    imageUrl: "https://i.pinimg.com/1200x/f1/d5/c0/f1d5c0f13640cf7029414e36f9e3e00f.jpg",
     overlay: "rgba(0, 0, 0, 0.35)",
   },
 ];
@@ -1121,28 +1117,28 @@ const clientTestimonials = [
     role: "Affiliate Marketing Platform",
     company: "Cruva AI",
     description: "Cruva AI helps brands manage and optimize affiliate marketing campaigns at scale. We use it to track affiliate-driven video performance, monitor conversion rates, and attribute sales to specific content pieces across TikTok Shop and other platforms.",
-    image: "https://cdn.brandfetch.io/cruva.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
+    image: "/cruva.png",
   },
   {
     name: "Kalodata",
     role: "TikTok Analytics",
     company: "Kalodata",
     description: "Kalodata provides deep analytics for TikTok Shop sellers, tracking product trends, competitor performance, and viral content patterns. We leverage it to identify high-performing video formats and optimize our clients' content strategy for maximum sales.",
-    image: "https://cdn.brandfetch.io/kalodata.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
+    image: "/kalodata.png",
   },
   {
     name: "TikTok Shop",
     role: "Social Commerce",
     company: "TikTok Shop",
     description: "TikTok Shop is the leading social commerce platform integrating short-form video with seamless in-app purchasing. We track real-time sales data, monitor video-driven transactions, and analyze customer behavior to refine content that converts browsers into buyers.",
-    image: "https://cdn.brandfetch.io/tiktokshop.com/w/400/h/400/theme/dark/icon?c=1bxid64Mup7aczewSAYMX",
+    image: "/tiktok.png",
   },
   {
     name: "FastMoss",
     role: "TikTok Data Intelligence",
     company: "FastMoss",
     description: "FastMoss delivers advanced TikTok commerce intelligence, tracking trending products, shop performance, and creator analytics. We use it to benchmark our clients' video performance against market leaders and identify untapped sales opportunities.",
-    image: "https://cdn.brandfetch.io/iddtWGI7z6/w/400/h/400/theme/dark/icon.jpeg?c=1bxid64Mup7aczewSAYMX&t=1776620051524",
+    image: "/fastmoss.png",
   },
 ];
 
@@ -1181,11 +1177,27 @@ function ClientTestimonialsSection() {
                 key={item.name}
                 className="flex flex-col sm:flex-row gap-6 items-start"
               >
-                <div className="w-full sm:w-[160px] h-auto sm:h-[140px] shrink-0">
+                <div className="relative w-full sm:w-[220px] h-[180px] shrink-0">
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
+                    <svg width="180" height="200" viewBox="0 0 180 200" className="overflow-visible">
+                      <line x1="90" y1="0" x2="90" y2="14" stroke="#666" strokeWidth="1.5" />
+                      <path d="M72 14 L108 14 L105 22 L75 22 Z" fill="#fff" opacity="0.15" />
+                      <path d="M75 22 L105 22 L98 32 Q90 35 82 32 Z" fill="#fff" opacity="0.25" />
+                      <ellipse cx="90" cy="34" rx="14" ry="3" fill="#fff" opacity="0.4" />
+                      <ellipse cx="90" cy="34" rx="6" ry="1.5" fill="#fff" opacity="0.8" className="animate-pulse" />
+                      <path d="M15 36 L165 36 L200 200 Q90 180 -20 200 Z" fill="url(#lampBeam)" opacity="0.15" className="animate-pulse" style={{ animationDuration: "3s" }} />
+                      <defs>
+                        <radialGradient id="lampBeam" cx="50%" cy="0%" r="80%" fx="50%" fy="0%">
+                          <stop offset="0%" stopColor="#ffffff" stopOpacity="0.35" />
+                          <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                        </radialGradient>
+                      </defs>
+                    </svg>
+                  </div>
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-full h-auto sm:h-full object-contain sm:object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <div className="flex flex-col items-start flex-1 min-w-0">
