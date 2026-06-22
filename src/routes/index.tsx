@@ -116,7 +116,7 @@ function Nav() {
     <header className="bg-black/40 backdrop-blur-sm">
       {/* Top Ticker Row */}
       <div className="bg-black/20">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 py-2 flex items-center justify-end text-[11px] font-semibold">
+        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 py-1 lg:py-2 flex items-center justify-end text-[11px] font-semibold">
           <div className="hidden lg:flex items-center gap-4 text-gray-400">
             <div className="flex items-center gap-3">
               <span>Contact:</span>
@@ -130,17 +130,17 @@ function Nav() {
 
       {/* Brand & Ad Spot Row */}
       <div className="bg-black/20">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 py-5 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 py-2 lg:py-5 flex items-center justify-between">
+          <div className="flex items-center gap-2 lg:gap-4">
             <button 
               onClick={() => setOpen(!open)}
               className="text-gray-300 hover:text-white p-1 lg:hidden"
             >
-              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {open ? <X className="h-5 w-5 lg:h-6 lg:w-6" /> : <Menu className="h-5 w-5 lg:h-6 lg:w-6" />}
             </button>
-            <a href="#" className="flex items-center gap-3">
-              <img src="/logo.png" alt="Postpidia" className="h-10 w-auto" />
-              <span className="text-2xl font-medium tracking-tight text-white leading-none">Postpidia</span>
+            <a href="#" className="flex items-center gap-2 lg:gap-3">
+              <img src="/logo.png" alt="Postpidia" className="h-7 lg:h-10 w-auto" />
+              <span className="text-lg lg:text-2xl font-medium tracking-tight text-white leading-none">Postpidia</span>
             </a>
           </div>
 
@@ -174,7 +174,7 @@ function Nav() {
 
       {/* Main Nav Links Row */}
       <div className="bg-black/20">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 h-12 flex items-center justify-between">
+        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 h-0 lg:h-12 flex items-center justify-between">
           <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((item) => (
               <a
@@ -461,37 +461,54 @@ function BottomSection() {
   ];
 
   return (
-    <section className="py-8 md:py-16 overflow-hidden mt-8 md:mt-16">
+    <section className="py-16 overflow-hidden mt-16">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
         <SectionHeader 
           title="Trending Stories"
         />
 
-        <div className="grid md:grid-cols-[1fr_1fr] gap-6 md:h-[320px]">
+        <div className="grid md:grid-cols-[1fr_1fr] gap-6 md:h-[420px]">
           {/* Left Card — Featured Story (full-height) */}
-          <div className="bg-black p-6 sm:p-8 flex flex-col justify-end relative overflow-hidden rounded-[2px] h-[300px] md:h-full group border border-[#0a3a1e]">
-            <div className="absolute inset-0 z-0">
-              <img src={stories[0].img} alt={stories[0].title} className="w-full h-full object-cover object-center opacity-40 group-hover:opacity-60 transition-all duration-700 group-hover:scale-105" />
+          <div className="bg-black p-8 flex flex-col justify-center md:justify-center relative overflow-hidden rounded-[2px] h-[400px] md:h-full group border border-[#0a3a1e]">
+            {/* Mobile: full background image layout */}
+            <div className="md:hidden absolute inset-0 z-0">
+              <img src={stories[0].img} alt={stories[0].title} className="w-full h-full object-cover object-center opacity-40" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
             </div>
-            <div className="relative z-10 w-full flex flex-col items-start">
-              <span className={`${getCategoryStyles("SALES")} mb-3`}>FEATURED</span>
-              <h3 className="text-white text-[20px] sm:text-[24px] lg:text-[30px] font-bold leading-tight mb-2 max-w-full">{stories[0].title}</h3>
-              <p className="text-gray-300 text-[13px] sm:text-[14px] mb-5 font-medium max-w-full line-clamp-2">{stories[0].subtitle}</p>
+            <div className="md:hidden relative z-10 w-full flex flex-col items-start justify-end h-full pb-0">
+              <span className={`${getCategoryStyles("SALES")} mb-2`}>FEATURED</span>
+              <h3 className="text-white text-[18px] font-bold leading-tight mb-2 max-w-full">{stories[0].title}</h3>
+              <p className="text-gray-300 text-[12px] mb-4 font-medium max-w-full line-clamp-2">{stories[0].subtitle}</p>
               <Link
                 to="/story"
                 search={{ title: stories[0].title, category: stories[0].category, subtitle: stories[0].subtitle, img: stories[0].img, tag: stories[0].tag, body: stories[0].body }}
-                className="bg-white text-black rounded-full px-6 py-2.5 h-10 w-fit text-[11px] font-medium uppercase tracking-wider hover:bg-gray-200 transition-all duration-200 inline-flex items-center"
+                className="bg-white text-black rounded-full px-5 py-2 h-9 w-fit text-[10px] font-medium uppercase tracking-wider hover:bg-gray-200 transition-all duration-200 inline-flex items-center"
               >
                 Read Story
               </Link>
+            </div>
+            {/* Desktop: original layout */}
+            <div className="hidden md:flex relative z-10 w-[60%] ml-auto text-right flex-col items-end">
+              <span className={`${getCategoryStyles("SALES")} mb-2`}>FEATURED</span>
+              <h3 className="text-white text-[22px] lg:text-[28px] font-bold leading-tight mb-3">{stories[0].title}</h3>
+              <p className="text-gray-400 text-[12px] mb-6 font-medium">{stories[0].subtitle}</p>
+              <Link
+                to="/story"
+                search={{ title: stories[0].title, category: stories[0].category, subtitle: stories[0].subtitle, img: stories[0].img, tag: stories[0].tag, body: stories[0].body }}
+                className="bg-transparent border-[1.5px] border-white text-white rounded-full px-6 py-2.5 h-10 w-fit text-[11px] font-medium uppercase tracking-wider hover:bg-white hover:text-[#111] transition-all duration-200 inline-flex items-center"
+              >
+                Read Story
+              </Link>
+            </div>
+            <div className="hidden md:block absolute left-[-5%] bottom-0 w-[75%] h-[95%] pointer-events-none">
+              <img src={stories[0].img} alt={stories[0].title} className="w-full h-full object-cover object-bottom opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105" />
             </div>
           </div>
 
           {/* Right Column */}
           <div className="flex flex-col gap-6 h-full">
             {/* Top Row — 2 smaller cards */}
-            <div className="grid grid-cols-2 md:grid-cols-1 gap-6 h-[200px] md:h-[calc(50%-12px)]">
+            <div className="grid grid-cols-2 gap-6 h-[200px]">
               <div className="bg-[#5c45fd] p-5 relative overflow-hidden rounded-[2px] flex flex-col justify-start group border border-[#6b56ff]">
                 <div className="bg-white/20 text-white text-[9px] font-medium px-2.5 py-1 rounded-sm w-fit mb-2 relative z-10 tracking-widest">
                   {stories[1].tag}
@@ -561,8 +578,8 @@ function HowItWorksSection() {
       <section id="how-it-works" className="bg-[#111111] font-['Outfit_Variable',_sans-serif] py-8 md:py-16 overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Section Heading */}
-        <div className="mb-14 text-center">
-          <div className="inline-flex items-center gap-2 mb-3">
+        <div className="mb-8 md:mb-14 text-center">
+          <div className="inline-flex items-center gap-2 mb-2 md:mb-3">
             <div className="h-[1.5px] w-6 bg-[#f0514e]"></div>
             <span className="text-[10px] font-bold uppercase tracking-[2.5px] text-gray-500">
               Process
@@ -580,7 +597,7 @@ function HowItWorksSection() {
         </div>
 
         {/* Process Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8">
           {steps.map((item, i) => (
             <motion.div
               key={item.step}
@@ -588,30 +605,32 @@ function HowItWorksSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.4 }}
-              className="flex flex-col items-center text-center bg-[#1a1a1a] rounded-xl p-6 shadow-sm border border-transparent transition-all duration-300 relative overflow-hidden"
+              className="flex flex-row md:flex-col items-center text-center bg-[#1a1a1a] rounded-xl p-3 md:p-6 shadow-sm border border-transparent transition-all duration-300 relative overflow-hidden gap-3 md:gap-0"
             >
               {/* Background number */}
-              <div className="absolute top-1 right-2 text-[100px] md:text-[120px] font-bold text-white/[0.06] leading-none select-none pointer-events-none">
+              <div className="absolute top-1 right-2 text-[60px] md:text-[120px] font-bold text-white/[0.06] leading-none select-none pointer-events-none">
                 {item.step}
               </div>
 
               <img
                 src={item.iconUrl}
                 alt={item.title}
-                className="w-16 h-16 object-contain mb-5"
+                className="w-10 h-10 md:w-16 md:h-16 object-contain shrink-0"
               />
 
               {/* Text Content */}
-              <h3 className="text-[15px] font-bold text-[#f0514e] mb-2 uppercase tracking-tight">
-                {item.title}
-              </h3>
-              <p className="text-[12px] text-gray-400 leading-relaxed">
-                {item.desc}
-              </p>
+              <div className="text-left md:text-center flex-1 min-w-0">
+                <h3 className="text-[12px] md:text-[15px] font-bold text-[#f0514e] mb-0.5 md:mb-2 uppercase tracking-tight">
+                  {item.title}
+                </h3>
+                <p className="text-[11px] md:text-[12px] text-gray-400 leading-relaxed line-clamp-2 md:line-clamp-none">
+                  {item.desc}
+                </p>
+              </div>
 
               {/* Arrow indicator on mobile */}
               {i < steps.length - 1 && (
-                <div className="md:hidden mt-4 text-[#f0514e]">
+                <div className="hidden md:block mt-4 text-[#f0514e]">
                   <ChevronRight className="w-4 h-4" />
                 </div>
               )}
