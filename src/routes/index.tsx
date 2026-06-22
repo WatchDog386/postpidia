@@ -232,12 +232,12 @@ function FloatingThemeToggle() {
 
 function HeroSection() {
   const sideStories = [
-    { category: "LEADS", title: "Capture & qualify leads from every channel automatically", date: "JUL 07, 2022", img: "https://images.unsplash.com/photo-1552581234-26160f608093?w=150&h=150&fit=crop" },
-    { category: "PIPELINE", title: "Visual pipeline management with drag-and-drop deal stages", date: "JUL 07, 2022", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=150&h=150&fit=crop" },
-    { category: "FORECAST", title: "AI-powered revenue forecasting with 95% accuracy", date: "JUL 07, 2022", img: "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=150&h=150&fit=crop" },
-    { category: "REPORTS", title: "Real-time sales dashboards and custom performance reports", date: "JUL 07, 2022", img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=150&h=150&fit=crop" },
-    { category: "TEAM", title: "Team performance tracking with gamification & leaderboards", date: "JUL 07, 2022", img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=150&h=150&fit=crop" },
-    { category: "INTEGRATE", title: "Seamless integration with CRM, email, and payment tools", date: "JUL 07, 2022", img: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=150&h=150&fit=crop" },
+    { category: "LEADS", title: "Capture & qualify leads from every channel automatically", date: "JUL 07, 2022", img: "https://i.pinimg.com/1200x/ab/e1/38/abe13885449b56a818403f649c05ed55.jpg" },
+    { category: "PIPELINE", title: "Visual pipeline management with drag-and-drop deal stages", date: "JUL 07, 2022", img: "https://i.pinimg.com/736x/ca/cd/60/cacd603db5f2fe0bb5597a8609db302f.jpg" },
+    { category: "FORECAST", title: "AI-powered revenue forecasting with 95% accuracy", date: "JUL 07, 2022", img: "https://i.pinimg.com/736x/e3/c1/10/e3c110b221f1cacd08f236e80f866d49.jpg" },
+    { category: "REPORTS", title: "Real-time sales dashboards and custom performance reports", date: "JUL 07, 2022", img: "https://i.pinimg.com/736x/f0/fb/d1/f0fbd17474021f02239a1c4acb3e5e27.jpg" },
+    { category: "TEAM", title: "Team performance tracking with gamification & leaderboards", date: "JUL 07, 2022", img: "https://i.pinimg.com/1200x/ee/7b/e8/ee7be8016dcf5d4a95a0553262da9f94.jpg" },
+    { category: "INTEGRATE", title: "Seamless integration with CRM, email, and payment tools", date: "JUL 07, 2022", img: "https://i.pinimg.com/1200x/34/bd/81/34bd81754eeb8a74b932d42deb38354a.jpg" },
   ];
 
   return (
@@ -272,7 +272,7 @@ function HeroSection() {
         <div className="grid grid-cols-2 gap-8">
           <div className="group cursor-pointer">
             <div className="relative overflow-hidden mb-4">
-              <img src="https://i.pinimg.com/1200x/d7/e0/d2/d7e0d280728e0a201b7139334b09920b.jpg" alt="Why Choose Us" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src="https://i.pinimg.com/1200x/97/1d/0b/971d0b4b34ea1a6164684cec46ef1b75.jpg" alt="Why Choose Us" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
               <span className={`absolute top-4 left-4 ${getCategoryStyles("ANALYTICS")}`}>WHY US</span>
             </div>
             <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
@@ -282,7 +282,7 @@ function HeroSection() {
 
           <div className="group cursor-pointer">
             <div className="relative overflow-hidden mb-4">
-              <img src="https://i.pinimg.com/736x/94/53/0c/94530cf01d8d7f935a07097ce6d61a2c.jpg" alt="Trusted Platform" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
+              <img src="https://i.pinimg.com/736x/a3/18/7b/a3187bf90437ecae83c1151812a60340.jpg" alt="Trusted Platform" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
               <span className={`absolute top-4 left-4 ${getCategoryStyles("SALES")}`}>TRUSTED</span>
             </div>
             <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
@@ -363,18 +363,14 @@ function SectionHeader({ title, endSlot }: { title: string, endSlot?: React.Reac
 }
 
 function ServicesSection() {
-  const [sliderPage, setSliderPage] = useState(0);
-
   const services = [
     { category: "EDITING", title: "Video Editing", desc: "Professional editing tailored for TikTok Shop, Instagram Reels, YouTube Shorts and Amazon product videos.", img: "https://i.pinimg.com/1200x/4e/a2/f8/4ea2f876c2a2546347f860846c44d936.jpg" },
     { category: "MOTION", title: "Motion Graphics", desc: "Dynamic 2D/3D animations, text overlays, and visual effects that grab attention and drive engagement.", img: "https://i.pinimg.com/736x/c7/76/59/c77659f60e02cd32b2b1488946f8d534.jpg" },
     { category: "THUMBNAIL", title: "Thumbnail Design", desc: "A/B tested thumbnail variations designed to maximize click-through rates and views on every platform.", img: "https://i.pinimg.com/736x/74/c6/79/74c679b74ddeeac0e3c2d00f2642011b.jpg" },
     { category: "COLOR", title: "Color Grading", desc: "Advanced color correction and grading to give your content a cinematic, brand-consistent look.", img: "https://i.pinimg.com/736x/19/80/c3/1980c3b439b7314ec8ac85e25c855c00.jpg" },
-    { category: "ANALYTICS", title: "Performance Analytics", desc: "Data-driven insights on content performance. SEO and keyword strategy for every video we deliver.", img: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=500&h=350&fit=crop" },
-    { category: "AUDIO", title: "Audio Production", desc: "Professional noise reduction, audio leveling, and royalty-free background music selection.", img: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=500&h=350&fit=crop" },
+    { category: "ANALYTICS", title: "Performance Analytics", desc: "Data-driven insights on content performance. SEO and keyword strategy for every video we deliver.", img: "https://i.pinimg.com/1200x/3f/bd/39/3fbd39179ec2be6cd25a41cfdfe94b9a.jpg" },
+    { category: "AUDIO", title: "Audio Production", desc: "Professional noise reduction, audio leveling, and royalty-free background music selection.", img: "https://i.pinimg.com/736x/a1/89/22/a1892208824db9a0574252c8fb632bb2.jpg" },
   ];
-
-  const visibleServices = sliderPage === 0 ? services.slice(0, 4) : services.slice(2, 6);
 
   return (
     <section id="services" className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-20">
@@ -382,9 +378,9 @@ function ServicesSection() {
         <h2 className="text-4xl md:text-[44px] font-light text-white">Services Built to Convert</h2>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-        {visibleServices.map((item, idx) => (
-          <div key={idx} className="bg-[#1a1a1a] group cursor-pointer flex flex-col h-full border border-[#222] hover:border-[#333] transition-colors relative">
+      <div className="flex flex-col lg:grid lg:grid-cols-4 gap-3 sm:gap-6">
+        {services.map((item, idx) => (
+          <div key={idx} className={`bg-[#1a1a1a] group cursor-pointer flex flex-col h-full border border-[#222] hover:border-[#333] transition-colors relative ${idx === 4 ? 'lg:col-start-2' : ''} ${idx === 5 ? 'lg:col-start-3' : ''}`}>
             <div className="relative overflow-hidden bg-black shrink-0 aspect-[4/3]">
               <img
                 src={item.img}
@@ -410,23 +406,8 @@ function ServicesSection() {
             <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 text-3xl sm:text-5xl font-bold text-white/5 select-none pointer-events-none">
               {String(idx + 1).padStart(2, '0')}
             </div>
-            <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 text-3xl sm:text-5xl font-bold text-white/5 select-none pointer-events-none">
-              {String(idx + 1).padStart(2, '0')}
-            </div>
           </div>
         ))}
-      </div>
-      
-      {/* Pagination Slider Dots */}
-      <div className="flex items-center justify-center gap-2 mt-8">
-         <button 
-           onClick={() => setSliderPage(0)}
-           className={`h-1.5 transition-all duration-300 ${sliderPage === 0 ? "w-6 bg-[#5c45fd]" : "w-1.5 bg-gray-500"}`}
-         />
-         <button 
-           onClick={() => setSliderPage(1)}
-           className={`h-1.5 transition-all duration-300 ${sliderPage === 1 ? "w-6 bg-[#5c45fd]" : "w-1.5 bg-gray-500"}`}
-         />
       </div>
     </section>
   );
@@ -1404,14 +1385,32 @@ function Footer() {
             support@postpidia.com
           </a>
         </div>
+
+        <div className="col-span-1 lg:col-span-2">
+          <h4 className="text-[11px] font-medium text-white uppercase tracking-wider mb-4 border-l-2 border-[#5c45fd] pl-3">Legal</h4>
+          <ul className="space-y-2 text-xs font-semibold text-gray-400">
+            <li className="hover:text-[#5c45fd] transition-colors flex items-center gap-1.5 group">
+              <Link to="/privacy" className="flex items-center gap-1.5">
+                <span className="w-1 h-1 bg-gray-600 rounded-full group-hover:bg-[#5c45fd]" />
+                Privacy Policy
+              </Link>
+            </li>
+            <li className="hover:text-[#5c45fd] transition-colors flex items-center gap-1.5 group">
+              <Link to="/terms" className="flex items-center gap-1.5">
+                <span className="w-1 h-1 bg-gray-600 rounded-full group-hover:bg-[#5c45fd]" />
+                Terms of Service
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8 pt-8 border-t border-[#222] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-medium text-gray-500">
         <div>&copy; {new Date().getFullYear()} Postpidia. All rights reserved.</div>
         <div className="flex flex-wrap gap-x-6 gap-y-2">
-          {legalLinks.map((link) => (
-            <a key={link} href="#" className="hover:text-gray-300 transition-colors">{link}</a>
-          ))}
+          <Link to="/privacy" className="hover:text-gray-300 transition-colors">Privacy Policy</Link>
+          <Link to="/terms" className="hover:text-gray-300 transition-colors">Terms of Service</Link>
+          <span className="text-gray-600">Legal Notice</span>
         </div>
       </div>
     </footer>
