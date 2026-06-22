@@ -269,7 +269,7 @@ function HeroSection() {
         </div>
 
         {/* 2-Column Split Cards Below Hero */}
-        <div className="grid sm:grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-8">
           <div className="group cursor-pointer">
             <div className="relative overflow-hidden mb-4">
               <img src="https://i.pinimg.com/1200x/d7/e0/d2/d7e0d280728e0a201b7139334b09920b.jpg" alt="Why Choose Us" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -278,11 +278,6 @@ function HeroSection() {
             <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
               Built for Sales Teams That Want to Close More
             </h3>
-            <div className="flex items-center gap-4 text-gray-500 text-[10px] font-medium mt-3 uppercase tracking-wider">
-              <span>BY POSTPIDIA</span>
-              <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> JUN 18, 2026</span>
-              <span className="flex items-center gap-1"><TrendingUp className="h-3 w-3" /> +47% CONVERSION</span>
-            </div>
           </div>
 
           <div className="group cursor-pointer">
@@ -293,17 +288,12 @@ function HeroSection() {
             <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
               Trusted by 10,000+ Sales Professionals Worldwide
             </h3>
-            <div className="flex items-center gap-4 text-gray-500 text-[10px] font-medium mt-3 uppercase tracking-wider">
-              <span>BY POSTPIDIA</span>
-              <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> JUN 18, 2026</span>
-              <span className="flex items-center gap-1"><TrendingUp className="h-3 w-3" /> 4.9/5 RATING</span>
-            </div>
           </div>
         </div>
       </div>
 
   {/* Mobile Card Layout */}
-  <div className="lg:hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+  <div className="lg:hidden grid grid-cols-2 gap-4">
     {sideStories.map((story, idx) => (
       <div key={idx} className="bg-[#0a0a0a] group cursor-pointer flex flex-col relative overflow-hidden rounded-[2px] h-[220px] border border-[#222]">
         <div className="absolute inset-0 pointer-events-none">
@@ -392,35 +382,35 @@ function ServicesSection() {
         <h2 className="text-4xl md:text-[44px] font-light text-white">Services Built to Convert</h2>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         {visibleServices.map((item, idx) => (
-          <div key={idx} className="bg-[#1a1a1a] group cursor-pointer flex flex-col h-full border border border-[#222] hover:border-[#333] transition-colors relative">
+          <div key={idx} className="bg-[#1a1a1a] group cursor-pointer flex flex-col h-full border border-[#222] hover:border-[#333] transition-colors relative">
             <div className="relative overflow-hidden bg-black shrink-0 aspect-[4/3]">
               <img
                 src={item.img}
                 alt={item.title}
                 className="w-full h-full object-cover object-[center_35%] transition-transform duration-500 group-hover:scale-105 opacity-90 group-hover:opacity-100"
               />
-              <span className={`absolute top-4 left-4 ${getCategoryStyles(item.category)}`}>
+              <span className={`absolute top-2 left-2 sm:top-4 sm:left-4 ${getCategoryStyles(item.category)}`}>
                 {item.category}
               </span>
             </div>
-            <div className="p-5 flex flex-col flex-grow relative z-10">
-              <h3 className="font-semibold text-[15px] text-gray-200 line-clamp-1 leading-snug group-hover:text-[#f0514e] transition-colors">
+            <div className="p-2 sm:p-5 flex flex-col flex-grow relative z-10">
+              <h3 className="font-semibold text-[11px] sm:text-[15px] text-gray-200 line-clamp-1 leading-snug group-hover:text-[#f0514e] transition-colors">
                 {item.title}
               </h3>
-              <p className="text-xs text-gray-400 mt-2 line-clamp-3 leading-relaxed font-medium">
+              <p className="text-[10px] sm:text-xs text-gray-400 mt-1 sm:mt-2 line-clamp-2 sm:line-clamp-3 leading-relaxed font-medium">
                 {item.desc}
               </p>
-              <div className="flex items-center gap-3 mt-auto pt-4 text-[10px] text-gray-500 uppercase tracking-widest font-medium">
-                <span>FEATURES</span>
-                <span className="flex items-center gap-1.5"><Check className="h-3 w-3 text-[#5c45fd]" /> READY</span>
+              <div className="flex items-center gap-2 sm:gap-3 mt-auto pt-2 sm:pt-4 text-[9px] sm:text-[10px] text-gray-500 uppercase tracking-widest font-medium">
+                <span className="hidden sm:inline">FEATURES</span>
+                <span className="flex items-center gap-1"><Check className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-[#5c45fd]" /> READY</span>
               </div>
             </div>
-            <div className="absolute bottom-4 right-4 text-5xl font-bold text-white/5 select-none pointer-events-none">
+            <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 text-3xl sm:text-5xl font-bold text-white/5 select-none pointer-events-none">
               {String(idx + 1).padStart(2, '0')}
             </div>
-            <div className="absolute bottom-4 right-4 text-5xl font-bold text-white/5 select-none pointer-events-none">
+            <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 text-3xl sm:text-5xl font-bold text-white/5 select-none pointer-events-none">
               {String(idx + 1).padStart(2, '0')}
             </div>
           </div>
@@ -471,29 +461,30 @@ function BottomSection() {
   ];
 
   return (
-    <section className="py-16 overflow-hidden mt-16">
+    <section className="py-8 md:py-16 overflow-hidden mt-8 md:mt-16">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
         <SectionHeader 
           title="Trending Stories"
         />
 
-        <div className="grid md:grid-cols-[1fr_1fr] gap-6 md:h-[420px]">
+        <div className="grid md:grid-cols-[1fr_1fr] gap-6 md:h-[320px]">
           {/* Left Card — Featured Story (full-height) */}
-          <div className="bg-black p-8 flex flex-col justify-center relative overflow-hidden rounded-[2px] h-[400px] md:h-full group border border-[#0a3a1e]">
-            <div className="relative z-10 w-[60%] ml-auto text-right flex flex-col items-end">
-              <span className={`${getCategoryStyles("SALES")} mb-2`}>FEATURED</span>
-              <h3 className="text-white text-[22px] lg:text-[28px] font-bold leading-tight mb-3">{stories[0].title}</h3>
-              <p className="text-gray-400 text-[12px] mb-6 font-medium">{stories[0].subtitle}</p>
+          <div className="bg-black p-6 sm:p-8 flex flex-col justify-end relative overflow-hidden rounded-[2px] h-[300px] md:h-full group border border-[#0a3a1e]">
+            <div className="absolute inset-0 z-0">
+              <img src={stories[0].img} alt={stories[0].title} className="w-full h-full object-cover object-center opacity-40 group-hover:opacity-60 transition-all duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+            </div>
+            <div className="relative z-10 w-full flex flex-col items-start">
+              <span className={`${getCategoryStyles("SALES")} mb-3`}>FEATURED</span>
+              <h3 className="text-white text-[20px] sm:text-[24px] lg:text-[30px] font-bold leading-tight mb-2 max-w-full">{stories[0].title}</h3>
+              <p className="text-gray-300 text-[13px] sm:text-[14px] mb-5 font-medium max-w-full line-clamp-2">{stories[0].subtitle}</p>
               <Link
                 to="/story"
                 search={{ title: stories[0].title, category: stories[0].category, subtitle: stories[0].subtitle, img: stories[0].img, tag: stories[0].tag, body: stories[0].body }}
-                className="bg-transparent border-[1.5px] border-white text-white rounded-full px-6 py-2.5 h-10 w-fit text-[11px] font-medium uppercase tracking-wider hover:bg-white hover:text-[#111] transition-all duration-200 inline-flex items-center"
+                className="bg-white text-black rounded-full px-6 py-2.5 h-10 w-fit text-[11px] font-medium uppercase tracking-wider hover:bg-gray-200 transition-all duration-200 inline-flex items-center"
               >
                 Read Story
               </Link>
-            </div>
-            <div className="absolute left-[-5%] bottom-0 w-[75%] h-[95%] pointer-events-none">
-              <img src={stories[0].img} alt={stories[0].title} className="w-full h-full object-cover object-bottom opacity-70 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105" />
             </div>
           </div>
 
@@ -549,7 +540,12 @@ function BottomSection() {
               </div>
               <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 w-[55%] h-[120%] pointer-events-none">
                 <img src="https://i.pinimg.com/736x/6d/67/f6/6d67f6947d704ce2ab4b0feb3c5099b0.jpg" alt="Sales tracking platform" className="w-full h-full object-contain opacity-30 group-hover:opacity-50 transition-all duration-700 group-hover:scale-105" />
-</section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -562,7 +558,7 @@ function HowItWorksSection() {
   ];
 
   return (
-      <section id="how-it-works" className="bg-[#111111] font-['Outfit_Variable',_sans-serif] py-16 overflow-hidden">
+      <section id="how-it-works" className="bg-[#111111] font-['Outfit_Variable',_sans-serif] py-8 md:py-16 overflow-hidden">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
         {/* Section Heading */}
         <div className="mb-14 text-center">
@@ -1185,11 +1181,11 @@ function ClientTestimonialsSection() {
                 key={item.name}
                 className="flex flex-col sm:flex-row gap-6 items-start"
               >
-                <div className="w-full sm:w-[160px] h-[140px] shrink-0">
+                <div className="w-full sm:w-[160px] h-auto sm:h-[140px] shrink-0">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-auto sm:h-full object-contain sm:object-cover"
                   />
                 </div>
                 <div className="flex flex-col items-start flex-1 min-w-0">
