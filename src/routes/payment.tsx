@@ -58,6 +58,7 @@ function PaymentPage() {
   const navigate = useNavigate();
 
   const features = featuresByPlan[plan] ?? [];
+  const totalAmount = billing === "yearly" ? price * 12 : price;
   const ref = trxref || reference;
 
   useEffect(() => {
@@ -70,7 +71,7 @@ function PaymentPage() {
               email: res.data.customer.email,
               plan,
               billing,
-              amount: price,
+              amount: totalAmount,
               reference: ref,
               status: "active",
               paid_at: res.data.paid_at,
@@ -98,7 +99,7 @@ function PaymentPage() {
 
     try {
       const res = await initializePayment({
-        data: { email, amount: price, plan, billing },
+        data: { email, amount: totalAmount, plan, billing },
       });
 
       if (res.status && res.data.authorization_url) {
@@ -137,7 +138,7 @@ function PaymentPage() {
             Your <span className="text-white font-semibold">{plan}</span> plan is now active.
           </p>
           <p className="text-gray-500 text-xs mb-8">
-            Billed {billing === "yearly" ? "annually" : "monthly"} — ${price}/mo
+            Billed {billing === "yearly" ? "annually" : "monthly"} — ${totalAmount}/{billing === "yearly" ? "yr" : "mo"}
           </p>
           {email && (
             <p className="text-gray-500 text-xs mb-6">
@@ -177,8 +178,8 @@ function PaymentPage() {
                   </p>
                 </div>
                 <div className="text-right">
-                  <span className="text-3xl font-light text-[#f97316]">${price}</span>
-                  <span className="text-gray-400 text-sm">/mo</span>
+                  <span className="text-3xl font-light text-[#f97316]">${totalAmount}</span>
+                  <span className="text-gray-400 text-sm">/{billing === "yearly" ? "yr" : "mo"}</span>
                 </div>
               </div>
 
@@ -227,7 +228,7 @@ function PaymentPage() {
                   </div>
                   <div className="border-t border-[#444] pt-2 mt-2 flex justify-between text-sm">
                     <span className="text-gray-400">Total</span>
-                    <span className="text-[#f97316] font-semibold">${price}/mo</span>
+                    <span className="text-[#f97316] font-semibold">${totalAmount}/{billing === "yearly" ? "yr" : "mo"}</span>
                   </div>
                 </div>
 
@@ -242,7 +243,7 @@ function PaymentPage() {
                       Processing...
                     </>
                   ) : (
-                    `Pay $${price}/mo`
+                    `Pay $${totalAmount}/${billing === "yearly" ? "yr" : "mo"}`
                   )}
                 </button>
 
