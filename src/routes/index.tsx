@@ -18,7 +18,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
-  Mail,
   UserPlus,
   Sliders,
   BookOpen,
@@ -78,10 +77,10 @@ function Landing() {
       <div className="hero-pattern hero-diagonal w-full">
         <div className="hero-diagonal-right"></div>
         <Nav />
-      </div>
-      <main className="relative">
         <FloatingThemeToggle />
         <HeroSection />
+      </div>
+      <main className="relative">
         <ServicesSection />
         <HowItWorksSection />
         <BottomSection />
@@ -117,81 +116,56 @@ function Nav() {
   };
 
   return (
-    <header className="bg-black/40 backdrop-blur-sm">
-      {/* Top Ticker Row */}
-      <div className="bg-black/20">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 py-1 lg:py-2 flex items-center justify-end text-[11px] font-semibold">
-          <div className="hidden lg:flex items-center gap-4 text-gray-400">
-            <div className="flex items-center gap-3">
-              <span>Contact:</span>
-              <Phone className="h-3.5 w-3.5 text-[#00d084]" />
-              <span className="text-gray-300">+254 757 740186</span>
-            </div>
-            <Mail className="h-3.5 w-3.5 hover:text-white cursor-pointer" />
-          </div>
-        </div>
-      </div>
+    <header className="pt-3 lg:pt-5">
+      {/* Merged Row: Logo | Nav (center) | Ad Card (right) */}
+      <div>
+        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 flex items-center h-14 lg:h-16">
+          <a href="#" className="flex items-center shrink-0 -ml-2 lg:-ml-4 gap-2">
+            <img src="/logo.png" alt="Postpidia" className="h-10 lg:h-12 w-auto" />
+            <span className="text-white font-bold text-lg lg:text-xl tracking-tight">Postpidia</span>
+          </a>
 
-      {/* Brand & Ad Spot Row */}
-      <div className="bg-black/20">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 py-2 lg:py-5 flex items-center justify-between">
-          <div className="flex items-center w-full lg:w-auto justify-between lg:justify-start gap-2 lg:gap-4">
-            <a href="#" className="flex items-center gap-2 lg:gap-3">
-              <img src="/logo.png" alt="Postpidia" className="h-20 lg:h-28 w-auto" />
-            </a>
-            <button 
-              onClick={() => setOpen(!open)}
-              className="text-gray-300 hover:text-white p-1 lg:hidden"
-            >
-              {open ? <X className="h-8 w-8 lg:h-6 lg:w-6" /> : <Menu className="h-8 w-8 lg:h-6 lg:w-6" />}
-            </button>
-          </div>
-
-          {/* Ad Banner */}
-          <div className="hidden lg:flex flex-1 max-w-[700px] ml-8 bg-white h-[70px] relative overflow-hidden items-center justify-between px-6">
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-br from-yellow-400 via-red-500 to-purple-600 opacity-20 [clip-path:polygon(0_0,100%_0,80%_100%,0%_100%)]"></div>
-            <div className="absolute left-0 bottom-0 w-12 h-12 bg-blue-500 [clip-path:polygon(0_100%,100%_100%,0_0)]"></div>
-            <div className="absolute left-8 top-0 w-16 h-16 bg-yellow-400 [clip-path:polygon(50%_0,100%_50%,50%_100%,0_50%)]"></div>
-            
-            <h2 className="text-black font-bold text-xl z-10 ml-16">
-              Postpidia Sales Tracking — Close More Deals
-            </h2>
-            
-            <motion.button
-              whileHover={{ y: -2 }}
-              whileTap={{ y: 0 }}
-              onClick={() => {
-                const el = document.querySelector("#pricing");
-                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-              }}
-              className="relative bg-[#00d084] text-white font-medium text-[11px] uppercase tracking-wider px-6 py-2.5 z-10 rounded-full hover:opacity-90 transition-all duration-200"
-            >
-              GET STARTED
-            </motion.button>
-            
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-[#f0514e] [clip-path:polygon(20%_0,100%_0,100%_100%,0%_100%)]"></div>
-            <div className="absolute right-8 top-0 bottom-0 w-16 bg-white opacity-20 [clip-path:polygon(30%_0,100%_0,70%_100%,0%_100%)]"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Nav Links Row */}
-      <div className="bg-black/20">
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 hidden lg:flex h-12 items-center justify-between">
-          <nav className="flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-6 flex-1 justify-center">
             {navLinks.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={(e) => scrollTo(e, item.href)}
-                className="text-[13px] font-medium text-gray-200 hover:text-[#f0514e] transition-colors"
+                className="text-sm lg:text-base font-medium text-gray-200 hover:text-[#f0514e] transition-colors"
               >
                 {item.label}
               </a>
             ))}
           </nav>
 
-          <div className="flex items-center gap-4 w-full lg:w-auto justify-end"></div>
+          <div className="hidden lg:flex items-center ml-auto">
+            <div className="bg-white h-10 relative overflow-hidden flex items-center justify-between px-4">
+              <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-br from-yellow-400 via-red-500 to-purple-600 opacity-20 [clip-path:polygon(0_0,100%_0,80%_100%,0%_100%)]"></div>
+              <div className="absolute left-0 bottom-0 w-6 h-6 bg-blue-500 [clip-path:polygon(0_100%,100%_100%,0_0)]"></div>
+              <div className="absolute left-4 top-0 w-8 h-8 bg-yellow-400 [clip-path:polygon(50%_0,100%_50%,50%_100%,0_50%)]"></div>
+              <h2 className="text-black font-bold text-xs z-10 ml-10 whitespace-nowrap">Postpidia Sales Tracking</h2>
+              <motion.button
+                whileHover={{ y: -1 }}
+                whileTap={{ y: 0 }}
+                onClick={() => {
+                  const el = document.querySelector("#pricing");
+                  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
+                className="ml-3 bg-[#00d084] text-white font-medium text-[10px] uppercase tracking-wider px-3 py-1.5 z-10 rounded-full hover:opacity-90 transition-all duration-200"
+              >
+                GET STARTED
+              </motion.button>
+              <div className="absolute right-0 top-0 bottom-0 w-16 bg-[#f0514e] [clip-path:polygon(20%_0,100%_0,100%_100%,0%_100%)]"></div>
+              <div className="absolute right-4 top-0 bottom-0 w-8 bg-white opacity-20 [clip-path:polygon(30%_0,100%_0,70%_100%,0%_100%)]"></div>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setOpen(!open)}
+            className="text-gray-300 hover:text-white p-1 lg:hidden ml-auto"
+          >
+            {open ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+          </button>
         </div>
       </div>
 
