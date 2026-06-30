@@ -81,6 +81,7 @@ function Landing() {
         <HeroSection />
       </div>
       <main className="relative">
+        <StatsSection />
         <ServicesSection />
         <HowItWorksSection />
         <BottomSection />
@@ -239,25 +240,57 @@ function HeroSection() {
         </div>
 
         {/* 2-Column Split Cards Below Hero */}
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-4 lg:gap-8">
           <div className="group cursor-pointer">
-            <div className="relative overflow-hidden mb-4">
-              <img src="https://i.pinimg.com/1200x/97/1d/0b/971d0b4b34ea1a6164684cec46ef1b75.jpg" alt="Why Choose Us" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
-              <span className={`absolute top-4 left-4 ${getCategoryStyles("ANALYTICS")}`}>WHY US</span>
+            {/* Mobile: overlay layout */}
+            <div className="lg:hidden relative overflow-hidden rounded-[2px] h-[200px] border border-[#222]">
+              <div className="absolute inset-0 pointer-events-none">
+                <img src="https://i.pinimg.com/1200x/97/1d/0b/971d0b4b34ea1a6164684cec46ef1b75.jpg" alt="Why Choose Us" className="w-full h-full object-cover object-[center_35%] opacity-40 group-hover:opacity-60 transition-all duration-500 group-hover:scale-105" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10" />
+              <span className={`absolute top-3 left-3 z-20 ${getCategoryStyles("ANALYTICS")}`}>WHY US</span>
+              <div className="relative z-20 flex flex-col justify-end h-full p-4">
+                <h4 className="font-semibold text-[12px] text-gray-100 line-clamp-3 leading-snug group-hover:text-[#f0514e] transition-colors">
+                  Built for Sales Teams That Want to Close More
+                </h4>
+              </div>
             </div>
-            <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
-              Built for Sales Teams That Want to Close More
-            </h3>
+            {/* Desktop: original layout */}
+            <div className="hidden lg:block">
+              <div className="relative overflow-hidden mb-4">
+                <img src="https://i.pinimg.com/1200x/97/1d/0b/971d0b4b34ea1a6164684cec46ef1b75.jpg" alt="Why Choose Us" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
+                <span className={`absolute top-4 left-4 ${getCategoryStyles("ANALYTICS")}`}>WHY US</span>
+              </div>
+              <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
+                Built for Sales Teams That Want to Close More
+              </h3>
+            </div>
           </div>
 
           <div className="group cursor-pointer">
-            <div className="relative overflow-hidden mb-4">
-              <img src="https://i.pinimg.com/736x/a3/18/7b/a3187bf90437ecae83c1151812a60340.jpg" alt="Trusted Platform" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
-              <span className={`absolute top-4 left-4 ${getCategoryStyles("SALES")}`}>TRUSTED</span>
+            {/* Mobile: overlay layout */}
+            <div className="lg:hidden relative overflow-hidden rounded-[2px] h-[200px] border border-[#222]">
+              <div className="absolute inset-0 pointer-events-none">
+                <img src="https://i.pinimg.com/736x/a3/18/7b/a3187bf90437ecae83c1151812a60340.jpg" alt="Trusted Platform" className="w-full h-full object-cover object-[center_35%] opacity-40 group-hover:opacity-60 transition-all duration-500 group-hover:scale-105" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10" />
+              <span className={`absolute top-3 left-3 z-20 ${getCategoryStyles("SALES")}`}>TRUSTED</span>
+              <div className="relative z-20 flex flex-col justify-end h-full p-4">
+                <h4 className="font-semibold text-[12px] text-gray-100 line-clamp-3 leading-snug group-hover:text-[#f0514e] transition-colors">
+                  Trusted by 10,000+ Sales Professionals Worldwide
+                </h4>
+              </div>
             </div>
-            <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
-              Trusted by 10,000+ Sales Professionals Worldwide
-            </h3>
+            {/* Desktop: original layout */}
+            <div className="hidden lg:block">
+              <div className="relative overflow-hidden mb-4">
+                <img src="https://i.pinimg.com/736x/a3/18/7b/a3187bf90437ecae83c1151812a60340.jpg" alt="Trusted Platform" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
+                <span className={`absolute top-4 left-4 ${getCategoryStyles("SALES")}`}>TRUSTED</span>
+              </div>
+              <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
+                Trusted by 10,000+ Sales Professionals Worldwide
+              </h3>
+            </div>
           </div>
         </div>
       </div>
@@ -265,7 +298,7 @@ function HeroSection() {
   {/* Mobile Card Layout */}
   <div className="lg:hidden grid grid-cols-2 gap-4">
     {sideStories.map((story, idx) => (
-      <div key={idx} className="bg-[#0a0a0a] group cursor-pointer flex flex-col relative overflow-hidden rounded-[2px] h-[220px] border border-[#222]">
+      <div key={idx} className="bg-[#0a0a0a] group cursor-pointer flex flex-col relative overflow-hidden rounded-[2px] h-[180px] border border-[#222]">
         <div className="absolute inset-0 pointer-events-none">
           <img
             src={story.img}
@@ -274,15 +307,15 @@ function HeroSection() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10" />
-        <div className="relative z-20 flex flex-col justify-end h-full p-5">
-          <span className={`${getCategoryStyles(story.category)} w-fit mb-3`}>
-            {story.category}
-          </span>
-          <h4 className="font-semibold text-[15px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
+        <span className={`absolute top-2 left-2 z-20 ${getCategoryStyles(story.category)}`}>
+          {story.category}
+        </span>
+        <div className="relative z-20 flex flex-col justify-end h-full p-3">
+          <h4 className="font-semibold text-[12px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
             {story.title}
           </h4>
-          <div className="text-[10px] text-gray-400 mt-2 font-medium flex items-center gap-1.5 uppercase">
-            <Calendar className="h-3 w-3" /> {story.date}
+          <div className="text-[9px] text-gray-400 mt-1.5 font-medium flex items-center gap-1 uppercase">
+            <Calendar className="h-2.5 w-2.5" /> {story.date}
           </div>
         </div>
       </div>
@@ -316,6 +349,47 @@ function HeroSection() {
       </div>
     ))}
   </div>
+      </div>
+    </section>
+  );
+}
+
+function StatsSection() {
+  const stats = [
+    { value: "95%", label: "Sales Forecast Accuracy", suffix: "" },
+    { value: "10,000", label: "Sales Professionals Trust Us", suffix: "+" },
+    { value: "217", label: "Average Revenue Increase", suffix: "%" },
+    { value: "12K", label: "Deals Closed & Counting", suffix: "+" },
+    { value: "4.9", label: "Client Satisfaction Rating", suffix: "/5" },
+  ];
+
+  return (
+    <section className="py-14 md:py-20">
+      <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
+        <div className="text-center mb-10 md:mb-12">
+          <h2 className="text-4xl md:text-[44px] font-light text-white">
+            Trusted by Sales Teams Worldwide
+          </h2>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08, duration: 0.4 }}
+              className="text-center group"
+            >
+              <div className="text-3xl md:text-[44px] font-light text-white leading-none mb-2 md:mb-3 tracking-tight group-hover:text-[#f0514e] transition-colors duration-300">
+                {stat.value}<span className="text-[#f0514e]">{stat.suffix}</span>
+              </div>
+              <p className="text-[11px] md:text-sm text-gray-400 font-light leading-snug max-w-[160px] mx-auto">
+                {stat.label}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -712,6 +786,14 @@ function PricingSection() {
             </span>
           </div>
         </motion.div>
+
+        <div className="mb-8 bg-[#1a1a1a] border border-[#f0514e]/20 rounded-xl p-5 md:p-6 text-center">
+          <p className="text-white text-sm md:text-base font-light leading-relaxed">
+            <span className="text-[#f0514e] font-semibold text-lg md:text-xl">3%</span> commission{" "}
+            <span className="font-medium">only on videos that generate sales</span>.
+            <span className="text-gray-400 block sm:inline sm:ml-1"> No sale? No commission.</span>
+          </p>
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
