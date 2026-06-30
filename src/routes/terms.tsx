@@ -68,6 +68,17 @@ function TermsPage() {
               Please note that this does not apply on subscription packages.
             </p>
 
+            <h3 className="text-base font-medium text-white mt-4 mb-2">Sales Commission Agreement (3%)</h3>
+            <p>
+              A 3% sales commission applies to each edited video that generates a confirmed sale directly attributable to that video content. The commission is calculated on the total revenue value of the sale.
+            </p>
+            <p className="mt-2">
+              No commission is charged on videos that do not result in a sale. The commission is due within 14 days of the sale being confirmed and is invoiced separately from the editing service fees.
+            </p>
+            <p className="mt-2">
+              The client agrees to provide accurate sales attribution data upon request. Failure to report attributable sales may result in suspension of services until outstanding commissions are settled.
+            </p>
+
             <h3 className="text-base font-medium text-white mt-4 mb-2">Cancellation Policy</h3>
             <p>
               If the client cancels the project after the deposit has been paid, the deposit will be retained by Postpidia to cover time and costs incurred. If the project is substantially complete, the client may be liable for a percentage of the remaining balance corresponding to the work completed up to the date of cancellation.
