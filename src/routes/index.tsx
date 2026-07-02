@@ -377,45 +377,45 @@ function HeroSection() {
 const testimonials = [
   {
     name: "Ava Thompson",
-    role: "Beauty Creator",
-    quote: "Postpidia keeps my uploads consistent and my edits polished.",
+    role: "Beauty Brand Owner",
+    quote: "Postpidia's editing completely elevated our ads, and their tracking tools showed a 30% jump in direct sales.",
     image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1542596594-649edbc13630?auto=format&fit=crop&w=600&q=80",
   },
   {
     name: "Marcus Reed",
-    role: "Fitness Coach",
-    quote: "The turnaround is fast, and the final videos always feel premium.",
+    role: "E-Commerce Director",
+    quote: "They don't just edit videos. Postpidia tracked our marketing funnel and helped us double our ROI.",
     image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=600&q=80",
   },
   {
     name: "Nina Patel",
-    role: "Brand Strategist",
-    quote: "My content looks sharper, cleaner, and much more brand-ready.",
+    role: "Marketing Manager",
+    quote: "Being able to see the direct correlation between the edits and our sales growth is a game-changer.",
     image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
   },
   {
     name: "Jordan Lee",
-    role: "YouTube Educator",
-    quote: "They make long-form footage feel engaging in every format.",
+    role: "DTC Founder",
+    quote: "Since we started with Postpidia, our video ad conversions have skyrocketed. Their metrics prove it.",
     image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
   },
   {
     name: "Sofia Martinez",
-    role: "Lifestyle Creator",
-    quote: "Postpidia gave my videos a more polished, trustworthy look.",
+    role: "Social Media Lead",
+    quote: "Our engagement went up, but more importantly, Postpidia showed us exactly how those views turned into revenue.",
     image:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80",
   },
   {
     name: "Daniel Okafor",
-    role: "Agency Founder",
-    quote: "The quality stays consistent even when the workload gets heavy.",
+    role: "Growth Marketer",
+    quote: "The combination of high-end video production and transparent sales tracking is unmatched. Postpidia delivered.",
     image:
-      "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
   },
 ];
 
