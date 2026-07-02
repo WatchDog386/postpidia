@@ -88,8 +88,13 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
             Video Editing
           </h1>
 
-          <p className="text-gray-400 text-[11px] sm:text-sm lg:text-base leading-relaxed mb-5 sm:mb-8 max-w-sm">
-            A premium video editing service that creates high-conversion video content.
+          <p className="text-gray-400 text-[11px] sm:text-sm lg:text-base leading-relaxed mb-5 sm:mb-8 max-w-lg">
+            <strong>Company Name:</strong> Postpidia (postpidia.com)<br/><br/>
+            <strong>Overview:</strong> A premium video editing service that creates high-conversion video content for social commerce platforms. An agency specializing in producing high-performing advertisements and content optimized for platforms such as TikTok Shop, Instagram, Amazon, and YouTube.<br/><br/>
+            <strong>Core Services:</strong><br/>
+            • <strong>Social Commerce Ads:</strong> High-conversion video editing optimized specifically to drive direct sales on e-commerce platforms.<br/>
+            • <strong>Platform Optimization:</strong> Tailored video content formatting for TikTok Shop, Instagram Reels, Amazon product pages, and YouTube Shorts.<br/>
+            • <strong>Expert Production:</strong> End-to-end creative assembly focused on hooks, retention pacing, and strong calls-to-action.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 sm:gap-4">
@@ -100,12 +105,6 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
             >
               View Services
             </a>
-            <button
-              onClick={goToContact}
-              className="bg-white/10 backdrop-blur-md text-gray-300 border border-white/10 rounded-full px-5 sm:px-8 py-2 sm:py-3.5 text-[11px] sm:text-sm font-medium hover:bg-white/20 transition-all cursor-pointer"
-            >
-              Contact Us
-            </button>
           </div>
         </div>
 
@@ -314,12 +313,6 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
               <p className="text-gray-300 text-[6px] sm:text-xs leading-relaxed font-semibold mb-2 sm:mb-10 px-1 sm:px-4">
                 Fast-paced, highly engaging vertical content designed for the swipe generation.
               </p>
-              <Link
-                to="/"
-                className="bg-white text-[#111] font-semibold text-[6px] sm:text-xs rounded-full px-2 sm:px-8 py-1 sm:py-3.5 w-full hover:bg-gray-200 transition-colors shadow-sm inline-block text-center"
-              >
-                See Details
-              </Link>
             </div>
 
             {/* Abroad Half Card (layered behind nicely on desktop) */}
@@ -340,12 +333,6 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
               <p className="text-gray-500 text-[6px] sm:text-xs leading-relaxed font-medium mb-2 sm:mb-10 px-1 sm:px-4">
                 Long-form content, ads, and stories that build deep brand connections.
               </p>
-              <Link
-                to="/"
-                className="bg-white text-[#111] font-semibold text-[6px] sm:text-xs rounded-full px-2 sm:px-8 py-1 sm:py-3.5 w-full hover:bg-gray-200 transition-colors inline-block text-center"
-              >
-                See Details
-              </Link>
             </div>
           </div>
         </div>
