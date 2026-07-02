@@ -199,56 +199,6 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
         </div>
       </section>
 
-      {/* Services Grid Section */}
-      <section id="services" className="py-12 sm:py-24 relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-8">
-        <div className="text-center mb-8 sm:mb-14">
-          <h2 className="text-xl sm:text-3xl font-light text-white tracking-tight">Our Services</h2>
-        </div>
-
-        {/* Backdrop blob for Services */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-red-500/10 rounded-full blur-[80px] -z-10"></div>
-
-        <div className="grid grid-cols-2 gap-3 sm:gap-6 relative z-10">
-          {/* Active/Highlighted Card */}
-          <div className="bg-gradient-to-br from-red-500/20 to-red-500/5 rounded-[16px] sm:rounded-[28px] p-3 sm:p-8 shadow-sm flex gap-2 sm:gap-5 border border-white/10">
-            <div className="w-6 sm:w-10 h-6 sm:h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 shadow-sm text-red-500">
-              <User className="w-3 sm:w-5 h-3 sm:h-5" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-white text-[11px] sm:text-lg mb-1 sm:mb-2">Social Commerce Ads</h3>
-              <p className="text-gray-400 text-[8px] sm:text-xs leading-relaxed font-medium">
-                High-conversion video content designed specifically for platforms like TikTok, Instagram Reels, and YouTube Shorts.
-              </p>
-            </div>
-          </div>
-
-          {/* Inactive Cards */}
-          <div className="bg-[#1a1a1a] rounded-[16px] sm:rounded-[28px] p-3 sm:p-8 shadow-sm flex gap-2 sm:gap-5 border border-white/5">
-            <div className="w-6 sm:w-10 h-6 sm:h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-white">
-              <Menu className="w-3 sm:w-5 h-3 sm:h-5" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-white text-[11px] sm:text-lg mb-1 sm:mb-2">Platform Optimization</h3>
-              <p className="text-gray-500 text-[8px] sm:text-xs leading-relaxed font-medium">
-                We optimize your video content to ensure it performs at its best on your target platforms.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-[#1a1a1a] rounded-[16px] sm:rounded-[28px] p-3 sm:p-8 shadow-sm flex gap-2 sm:gap-5 border border-white/5">
-            <div className="w-6 sm:w-10 h-6 sm:h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-white">
-              <MessageCircle className="w-3 sm:w-5 h-3 sm:h-5" />
-            </div>
-            <div>
-              <h3 className="font-semibold text-white text-[11px] sm:text-lg mb-1 sm:mb-2">Expert Production</h3>
-              <p className="text-gray-500 text-[8px] sm:text-xs leading-relaxed font-medium">
-                Professional editing services that elevate your brand and drive results.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Why Choose Section */}
       <section className="py-12 sm:py-24 relative w-full max-w-6xl mx-auto px-4 sm:px-8 grid grid-cols-2 gap-8 sm:gap-16 items-center">
         <div className="relative h-[180px] sm:h-[300px] lg:h-[450px] w-full flex justify-center items-center">
