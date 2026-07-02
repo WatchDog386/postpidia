@@ -88,24 +88,10 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
             Video Editing
           </h1>
 
-          <div className="text-gray-400 text-xs sm:text-sm lg:text-base leading-relaxed mb-6 sm:mb-10 max-w-lg space-y-3 sm:space-y-4">
+          <div className="text-gray-400 text-xs sm:text-sm lg:text-base leading-relaxed mb-6 sm:mb-10 max-w-lg">
             <p className="font-medium text-gray-200">
               Postpidia is a premium video editing agency crafting high-conversion content for social commerce platforms.
             </p>
-            <ul className="space-y-2 opacity-90 pl-1">
-              <li className="flex items-start gap-2">
-                <span className="text-red-500 mt-1 sm:mt-1.5 flex-shrink-0 text-[10px] sm:text-xs">■</span>
-                <span><strong>Social Ads:</strong> Driving direct sales on e-commerce platforms.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-500 mt-1 sm:mt-1.5 flex-shrink-0 text-[10px] sm:text-xs">■</span>
-                <span><strong>Optimization:</strong> Tailored for TikTok Shop, IG Reels, and YouTube Shorts.</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-red-500 mt-1 sm:mt-1.5 flex-shrink-0 text-[10px] sm:text-xs">■</span>
-                <span><strong>Expert Production:</strong> End-to-end creative designed for retention and conversion.</span>
-              </li>
-            </ul>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 sm:gap-4">
