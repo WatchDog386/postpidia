@@ -81,7 +81,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Create, schedule, publish, and grow across every social platform from one intelligent AI dashboard.",
+          "Company Name: Postpidia (postpidia.com). Overview: A premium video editing service that creates high-conversion video content for social commerce platforms. An agency specializing in producing high-performing advertisements and content optimized for platforms such as TikTok Shop, Instagram, Amazon, and YouTube. Core Services: Social Commerce Ads: High-conversion video editing optimized specifically to drive direct sales on e-commerce platforms. Platform Optimization: Tailored video content formatting for TikTok Shop, Instagram Reels, Amazon product pages, and YouTube Shorts. Expert Production: End-to-end creative assembly focused on hooks, retention pacing, and strong calls-to-action.",
       },
       { property: "og:title", content: "Postpidia — AI Social Media on Autopilot" },
       {

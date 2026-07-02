@@ -256,7 +256,7 @@ function AboutPage() {
           {/* Main Hero Image */}
           <div className="relative z-20 w-full h-full flex items-center justify-center">
             <img
-              src="/hero.png"
+              src="/hero1.png"
               className="w-full h-auto max-h-full object-contain drop-shadow-2xl"
               alt="Why Choose Postpidia"
             />
@@ -417,7 +417,7 @@ function AboutPage() {
           {/* Image side */}
           <div className="w-5/12 h-[120px] sm:h-[180px] lg:h-[280px] shrink-0 relative flex items-center justify-center">
             <img
-              src="/hero1.png"
+              src="/hero.png"
               alt="Client"
               className="w-full h-auto max-h-full object-contain drop-shadow-2xl"
             />

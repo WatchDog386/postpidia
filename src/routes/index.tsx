@@ -75,6 +75,77 @@ const getCategoryStyles = (category: string) => {
   return `${base} bg-indigo-600 text-white`;
 };
 
+function ModernTrendsSection() {
+  const trends = [
+    { title: "Building Information Modeling (BIM)", image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=400" },
+    { title: "Construction Management Software", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=400" },
+    { title: "Lean Construction", image: "https://images.unsplash.com/photo-1541888086925-0c13d33c8267?q=80&w=400" },
+    { title: "Sustainable & Green Building Practices", image: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?q=80&w=400" },
+    { title: "Automation & AI in Project Planning", image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=400" }
+  ];
+
+  return (
+    <div className="py-20 md:py-32 bg-[#F8FBFC] relative overflow-hidden" id="modern-trends">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16 md:mb-[150px]">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#0a273c] mb-2 font-sans tracking-tight">
+            Modern Trends in <br className="md:hidden" /><span className="bg-[#48d1cc] text-white px-3 py-1 mt-2 inline-block shadow-sm">Construction Management</span>
+          </h2>
+        </div>
+
+        <div className="relative w-full max-w-[800px] h-[400px] md:h-[600px] mx-auto flex items-center justify-center mt-12 md:mt-24">
+          
+          {/* Center Logo */}
+          <div className="absolute w-32 h-32 md:w-48 md:h-48 bg-[#2d2c33] rounded-full z-20 flex flex-col items-center justify-center border-[8px] border-white shadow-[0_0_40px_rgba(0,0,0,0.1)]">
+             <div className="text-white text-lg md:text-2xl font-bold flex flex-col items-center gap-1">
+               <svg viewBox="0 0 24 24" fill="none" stroke="#48d1cc" strokeWidth="2" className="w-8 h-8 md:w-12 md:h-12">
+                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                 <polyline strokeLinecap="round" strokeLinejoin="round" points="9 22 9 12 15 12 15 22" />
+               </svg>
+               <span className="tracking-tight">HomeChoice</span>
+             </div>
+          </div>
+
+          {/* Orbiting items */}
+          <div className="absolute inset-0">
+            {trends.map((trend, i) => {
+               const angle = (i * 72) - 90;
+               const radian = angle * (Math.PI / 180);
+               const radius = typeof window !== 'undefined' && window.innerWidth < 768 ? 160 : 280; 
+               // Used percentage-based offset for responsive without JS resize listener
+               const dx = Math.cos(radian) * 38;
+               const dy = Math.sin(radian) * 38;
+
+               return (
+                 <div 
+                   key={i} 
+                   className="absolute top-1/2 left-1/2 flex flex-col items-center justify-center w-40 md:w-56 -ml-20 md:-ml-28 -mt-20 md:-mt-28 group"
+                   style={{ 
+                      transform: `translate(calc(${dx} * 1cqw), calc(${dy} * 1cqw))`,
+                      left: `calc(50% + ${dx}%)`,
+                      top: `calc(50% + ${dy}%)`
+                   }}
+                 >
+                    <div className="relative w-24 h-24 md:w-40 md:h-40 overflow-hidden border-[6px] border-white shadow-xl shadow-black/10 transition-transform duration-300 group-hover:scale-105" 
+                         style={{ borderRadius: '50% 50% 50% 50%' }}>
+                       <img src={trend.image} alt={trend.title} className="w-full h-full object-cover" />
+                       <div className="absolute inset-0 border-4 border-[#48d1cc]/40 rounded-full"></div>
+                       <div className="absolute inset-0 bg-[#48d1cc]/20 mix-blend-overlay"></div>
+                    </div>
+                    <div className="mt-4 text-center px-2 bg-white/80 backdrop-blur-sm rounded-lg py-1 shadow-sm border border-black/5">
+                       <span className="text-[#48d1cc] font-bold text-lg leading-none inline-block mr-1 align-middle">■</span>
+                       <span className="text-xs md:text-sm font-semibold text-gray-800 leading-tight align-middle">{trend.title}</span>
+                    </div>
+                 </div>
+               )
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Landing() {
   return (
     <div className="min-h-screen antialiased">
@@ -86,6 +157,7 @@ function Landing() {
       </div>
       <main className="relative">
         <StatsSection />
+        <ModernTrendsSection />
         <ServicesSection />
         <TrustedCreators />
         <HowItWorksSection />
