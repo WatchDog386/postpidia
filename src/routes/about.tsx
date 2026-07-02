@@ -34,7 +34,7 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-function AboutPage() {
+export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
   const navigate = useNavigate();
   const [testimonialIndex, setTestimonialIndex] = useState(0);
 
@@ -63,13 +63,15 @@ function AboutPage() {
   const t = testimonials[testimonialIndex];
 
   return (
-    <div className="min-h-screen antialiased font-sans overflow-hidden relative">
-      <Link
-        to="/"
-        className="fixed top-4 left-4 z-50 inline-flex items-center gap-1.5 sm:gap-2 bg-[#1a1a1a]/80 backdrop-blur-md text-gray-300 border border-white/10 rounded-full px-3 sm:px-5 py-1.5 sm:py-2.5 text-[10px] sm:text-sm font-semibold hover:bg-[#222] shadow-lg transition-all"
-      >
-        <ArrowLeft className="w-3 sm:w-4 h-3 sm:h-4" /> Back to Home
-      </Link>
+    <div className={`${isHomePage ? '' : 'min-h-screen'} antialiased font-sans overflow-hidden relative`}>
+      {!isHomePage && (
+        <Link
+          to="/"
+          className="fixed top-4 left-4 z-50 inline-flex items-center gap-1.5 sm:gap-2 bg-[#1a1a1a]/80 backdrop-blur-md text-gray-300 border border-white/10 rounded-full px-3 sm:px-5 py-1.5 sm:py-2.5 text-[10px] sm:text-sm font-semibold hover:bg-[#222] shadow-lg transition-all"
+        >
+          <ArrowLeft className="w-3 sm:w-4 h-3 sm:h-4" /> Back to Home
+        </Link>
+      )}
 
       <section className="hero-pattern hero-diagonal relative w-full pt-16 sm:pt-20 pb-24 sm:pb-32 max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 gap-8 sm:gap-12 items-center z-10">
         <div>

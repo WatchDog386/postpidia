@@ -35,6 +35,7 @@ import {
 } from "@/components/ui/dialog";
 import whyImg from "@/public/why.png";
 import { Input } from "@/components/ui/input";
+import { AboutPage } from "./about";
 import {
   Select,
   SelectContent,
@@ -91,6 +92,7 @@ function Landing() {
         <HowItWorksSection />
         <BottomSection />
         <PricingSection />
+        <AboutPage isHomePage={true} />
         <ClientTestimonialsSection />
         <TestimonialsSection />
         <ContactSection />
