@@ -88,14 +88,25 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
             Video Editing
           </h1>
 
-          <p className="text-gray-400 text-[11px] sm:text-sm lg:text-base leading-relaxed mb-5 sm:mb-8 max-w-lg">
-            <strong>Company Name:</strong> Postpidia (postpidia.com)<br/><br/>
-            <strong>Overview:</strong> A premium video editing service that creates high-conversion video content for social commerce platforms. An agency specializing in producing high-performing advertisements and content optimized for platforms such as TikTok Shop, Instagram, Amazon, and YouTube.<br/><br/>
-            <strong>Core Services:</strong><br/>
-            • <strong>Social Commerce Ads:</strong> High-conversion video editing optimized specifically to drive direct sales on e-commerce platforms.<br/>
-            • <strong>Platform Optimization:</strong> Tailored video content formatting for TikTok Shop, Instagram Reels, Amazon product pages, and YouTube Shorts.<br/>
-            • <strong>Expert Production:</strong> End-to-end creative assembly focused on hooks, retention pacing, and strong calls-to-action.
-          </p>
+          <div className="text-gray-400 text-xs sm:text-sm lg:text-base leading-relaxed mb-6 sm:mb-10 max-w-lg space-y-3 sm:space-y-4">
+            <p className="font-medium text-gray-200">
+              Postpidia is a premium video editing agency crafting high-conversion content for social commerce platforms.
+            </p>
+            <ul className="space-y-2 opacity-90 pl-1">
+              <li className="flex items-start gap-2">
+                <span className="text-red-500 mt-1 sm:mt-1.5 flex-shrink-0 text-[10px] sm:text-xs">■</span>
+                <span><strong>Social Ads:</strong> Driving direct sales on e-commerce platforms.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-500 mt-1 sm:mt-1.5 flex-shrink-0 text-[10px] sm:text-xs">■</span>
+                <span><strong>Optimization:</strong> Tailored for TikTok Shop, IG Reels, and YouTube Shorts.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-red-500 mt-1 sm:mt-1.5 flex-shrink-0 text-[10px] sm:text-xs">■</span>
+                <span><strong>Expert Production:</strong> End-to-end creative designed for retention and conversion.</span>
+              </li>
+            </ul>
+          </div>
 
           <div className="flex flex-wrap items-center gap-3 sm:gap-4">
             <a

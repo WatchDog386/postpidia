@@ -252,7 +252,6 @@ function HeroSection() {
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-gray-300 text-[11px] font-medium tracking-wider mt-5 uppercase">
               <span>BY POSTPIDIA</span>
-              <span className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5" /> JUN 18, 2026</span>
               <span className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5" /> 12K+ DEALS</span>
               <span className="flex items-center gap-1.5"><Eye className="h-3.5 w-3.5" /> 95% ACCURACY</span>
             </div>
@@ -334,9 +333,6 @@ function HeroSection() {
           <h4 className="font-semibold text-[12px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
             {story.title}
           </h4>
-          <div className="text-[9px] text-gray-400 mt-1.5 font-medium flex items-center gap-1 uppercase">
-            <Calendar className="h-2.5 w-2.5" /> {story.date}
-          </div>
         </div>
       </div>
     ))}
@@ -359,12 +355,9 @@ function HeroSection() {
               {story.category}
             </span>
           </div>
-          <h4 className="font-semibold text-[15px] text-gray-200 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
+          <h4 className="font-semibold text-[15px] text-gray-200 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors mt-2">
             {story.title}
           </h4>
-          <div className="text-[10px] text-gray-500 mt-2 font-medium flex items-center gap-1.5 uppercase">
-            <Calendar className="h-3 w-3" /> {story.date}
-          </div>
         </div>
       </div>
     ))}
