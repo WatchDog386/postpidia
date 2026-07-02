@@ -50,7 +50,11 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Postpidia — Sales Tracking Software" },
-      { name: "description", content: "Track, analyze, and close more deals with Postpidia" },
+      {
+        name: "description",
+        content:
+          "Company Name: Postpidia (postpidia.com). Overview: A premium video editing service that creates high-conversion video content for social commerce platforms. An agency specializing in producing high-performing advertisements and content optimized for platforms such as TikTok Shop, Instagram, Amazon, and YouTube. Core Services: Social Commerce Ads: High-conversion video editing optimized specifically to drive direct sales on e-commerce platforms. Platform Optimization: Tailored video content formatting for TikTok Shop, Instagram Reels, Amazon product pages, and YouTube Shorts. Expert Production: End-to-end creative assembly focused on hooks, retention pacing, and strong calls-to-action.",
+      },
     ],
     links: [],
   }),
@@ -83,6 +87,7 @@ function Landing() {
       <main className="relative">
         <StatsSection />
         <ServicesSection />
+        <TrustedCreators />
         <HowItWorksSection />
         <BottomSection />
         <PricingSection />
@@ -137,6 +142,12 @@ function Nav() {
                 {item.label}
               </a>
             ))}
+            <Link
+              to="/about"
+              className="text-sm lg:text-base font-medium text-gray-200 hover:text-[#f0514e] transition-colors"
+            >
+              About Us
+            </Link>
           </nav>
 
           <div className="hidden lg:flex items-center ml-auto">
@@ -184,6 +195,13 @@ function Nav() {
                 {item.label}
               </a>
             ))}
+            <Link
+              to="/about"
+              onClick={() => setOpen(false)}
+              className="block py-3 text-sm font-medium text-gray-300 hover:text-[#f0514e]"
+            >
+              About Us
+            </Link>
           </div>
         </div>
       )}
@@ -353,6 +371,118 @@ function HeroSection() {
     </section>
   );
 }
+
+const testimonials = [
+  {
+    name: "Ava Thompson",
+    role: "Beauty Creator",
+    quote: "Postpidia keeps my uploads consistent and my edits polished.",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    name: "Marcus Reed",
+    role: "Fitness Coach",
+    quote: "The turnaround is fast, and the final videos always feel premium.",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    name: "Nina Patel",
+    role: "Brand Strategist",
+    quote: "My content looks sharper, cleaner, and much more brand-ready.",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    name: "Jordan Lee",
+    role: "YouTube Educator",
+    quote: "They make long-form footage feel engaging in every format.",
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    name: "Sofia Martinez",
+    role: "Lifestyle Creator",
+    quote: "Postpidia gave my videos a more polished, trustworthy look.",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
+  },
+  {
+    name: "Daniel Okafor",
+    role: "Agency Founder",
+    quote: "The quality stays consistent even when the workload gets heavy.",
+    image:
+      "https://images.unsplash.com/photo-1507591064344-4c6ce005b128?auto=format&fit=crop&w=600&q=80",
+  },
+];
+
+const marqueeGroups = [0, 1];
+
+const TrustedCreators = () => {
+  return (
+    <section
+      id="trusted-creators"
+      className="relative overflow-hidden bg-[#111111] font-['Outfit_Variable',_sans-serif] py-8 md:py-12"
+    >
+      <div className="relative z-10 mx-auto max-w-[1280px] px-4 py-2 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+          className="mx-auto mb-6 max-w-[760px] text-center md:mb-10"
+        >
+          <div className="inline-flex items-center gap-2 mb-2 md:mb-3">
+            <div className="h-[1.5px] w-6 bg-[#f0514e]"></div>
+            <span className="text-[10px] font-bold uppercase tracking-[2.5px] text-gray-500">
+              Trusted by Creators
+            </span>
+            <div className="h-[1.5px] w-6 bg-[#f0514e]"></div>
+          </div>
+          <h2 className="text-3xl md:text-4xl leading-[1.15] mb-2 tracking-tight text-white">
+            <span className="font-light">Creators who move with </span>
+            <span className="font-bold text-[#f0514e]">Postpidia</span>
+          </h2>
+          <p className="text-[13px] text-gray-400 max-w-xl mx-auto leading-relaxed">
+            Real creators, real results — powered by Postpidia's premium video editing.
+          </p>
+        </motion.div>
+
+        <div className="relative overflow-hidden py-3 md:py-4">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-[#111111] via-[#111111]/85 to-transparent md:w-24" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-[#111111] via-[#111111]/85 to-transparent md:w-24" />
+
+          <div className="trusted-marquee-track marquee-track flex w-max items-stretch gap-0 will-change-transform">
+            {marqueeGroups.map((groupIndex) => (
+              <div key={groupIndex} className="flex shrink-0 items-stretch gap-6 pr-6 md:gap-8 md:pr-8">
+                {testimonials.map((item, index) => (
+                  <article
+                    key={`${groupIndex}-${item.name}-${index}`}
+                    className="flex w-[250px] shrink-0 flex-col items-center py-4 text-center md:w-[300px]"
+                  >
+                    <div className="flex h-20 w-20 items-center justify-center rounded-full border-4 border-[#222] bg-[#1a1a1a] p-1 shadow-[0_8px_18px_rgba(0,0,0,0.3)] md:h-24 md:w-24">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="h-full w-full rounded-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    <p className="text-[13px] font-medium leading-[1.55] text-gray-400 md:text-[14px]">
+                      "{item.quote}"
+                    </p>
+                  </article>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 function StatsSection() {
   const stats = [
