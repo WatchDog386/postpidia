@@ -476,9 +476,11 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
       </section>
 
       {/* Dark Footer Arc */}
-      <div className="relative w-full overflow-hidden h-16 sm:h-32 mt-8 sm:mt-20">
-        <div className="absolute bottom-[-80px] sm:bottom-[-150px] left-1/2 -translate-x-1/2 w-[150%] h-[160px] sm:h-[300px] bg-[#1a1a1a] rounded-t-[100%] border-t-[4px] sm:border-t-[8px] border-white/5"></div>
-      </div>
+      {!isHomePage && (
+        <div className="relative w-full overflow-hidden h-16 sm:h-32 mt-8 sm:mt-20">
+          <div className="absolute bottom-[-80px] sm:bottom-[-150px] left-1/2 -translate-x-1/2 w-[150%] h-[160px] sm:h-[300px] bg-[#1a1a1a] rounded-t-[100%] border-t-[4px] sm:border-t-[8px] border-white/5"></div>
+        </div>
+      )}
     </div>
   );
 }

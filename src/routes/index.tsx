@@ -447,7 +447,7 @@ const TrustedCreators = () => {
             <span className="font-bold text-[#f0514e]">Postpidia</span>
           </h2>
           <p className="text-[13px] text-gray-400 max-w-xl mx-auto leading-relaxed">
-            Real creators, real results — powered by Postpidia's premium video editing.
+            Real creators, real results. Postpidia helps businesses boost their revenue with premium video editing, while also tracking sales and monitoring growth metrics directly for your business.
           </p>
         </motion.div>
 
