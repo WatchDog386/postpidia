@@ -176,7 +176,7 @@ function Nav() {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-[280px] bg-white z-50 shadow-2xl md:hidden flex flex-col"
+            className="fixed top-4 right-4 h-auto pb-4 max-h-[calc(100vh-32px)] w-[280px] bg-white z-50 shadow-2xl rounded-2xl md:hidden flex flex-col"
           >
             <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
         <img src="/logo.png" alt="Postpidia" className="h-20 sm:h-24 w-auto" />
