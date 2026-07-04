@@ -208,8 +208,6 @@ function Nav() {
               <a href="#contact" onClick={() => setOpen(false)} className="w-full text-center bg-[#DF8885] text-white rounded-full px-5 py-3 text-sm font-semibold hover:bg-[#DF8885]/90 transition">
                 Get Started
               </a>
-              <a href="#" className="w-full text-center text-sm font-medium text-gray-600 hover:text-gray-900 py-2">Log In</a>
-              <a href="#" className="w-full text-center text-sm font-medium text-[#FF7A00] hover:text-[#FF7A00]/80 py-2">Sign Up</a>
             </div>
           </motion.div>
         </>
