@@ -127,7 +127,7 @@ function Nav() {
     <nav className="relative z-10 flex items-center justify-between px-4 sm:px-28 lg:px-72 py-4 sm:py-6 lg:py-8">
       <a href="#" className="shrink-0">
         <span className="sr-only">Postpidia</span>
-        <img src="/logo.jpeg" alt="Postpidia" className="h-7 sm:h-9 w-auto" />
+              <img src="/logo.png" alt="Postpidia" className="h-16 sm:h-20 w-auto" />
       </a>
 
       <div className="hidden md:flex items-center space-x-10 text-sm font-medium text-gray-400">
@@ -169,32 +169,50 @@ function Nav() {
       </div>
 
       {open && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-[#2A2D3A] border-t border-gray-600 px-6 py-4 z-50">
-          <div className="flex flex-col space-y-4">
-            <span className="text-base font-medium text-white">Home</span>
-            {navLinks.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => scrollTo(e, item.href)}
-                className="text-base font-medium text-gray-400 hover:text-white"
+        <>
+          <div className="fixed inset-0 bg-black/50 z-40 md:hidden" onClick={() => setOpen(false)} />
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed top-0 right-0 h-full w-[280px] bg-white z-50 shadow-2xl md:hidden flex flex-col"
+          >
+            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+        <img src="/logo.png" alt="Postpidia" className="h-20 sm:h-24 w-auto" />
+              <button onClick={() => setOpen(false)} className="text-gray-500 hover:text-gray-900 p-1">
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <div className="flex flex-col gap-1 px-4 py-6 flex-1">
+              <span className="text-sm font-semibold text-gray-900 px-3 py-2.5">Home</span>
+              {navLinks.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={(e) => scrollTo(e, item.href)}
+                  className="text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-3 py-2.5 rounded-lg transition"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <Link
+                to="/about"
+                onClick={() => setOpen(false)}
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-3 py-2.5 rounded-lg transition"
               >
-                {item.label}
+                About Us
+              </Link>
+            </div>
+            <div className="border-t border-gray-100 px-4 py-5 flex flex-col gap-3">
+              <a href="#contact" onClick={() => setOpen(false)} className="w-full text-center bg-[#DF8885] text-white rounded-full px-5 py-3 text-sm font-semibold hover:bg-[#DF8885]/90 transition">
+                Get Started
               </a>
-            ))}
-            <Link
-              to="/about"
-              onClick={() => setOpen(false)}
-              className="text-base font-medium text-gray-400 hover:text-white"
-            >
-              About Us
-            </Link>
-            <hr className="border-gray-600 my-2" />
-            <a href="#contact" className="text-base font-medium text-[#DF8885] hover:text-[#DF8885]/80">Get Started</a>
-            <a href="#" className="text-base font-medium text-gray-400 hover:text-white">Log In</a>
-            <a href="#" className="text-base font-medium text-[#FF7A00]">Sign Up</a>
-          </div>
-        </div>
+              <a href="#" className="w-full text-center text-sm font-medium text-gray-600 hover:text-gray-900 py-2">Log In</a>
+              <a href="#" className="w-full text-center text-sm font-medium text-[#FF7A00] hover:text-[#FF7A00]/80 py-2">Sign Up</a>
+            </div>
+          </motion.div>
+        </>
       )}
     </nav>
   );
@@ -212,10 +230,10 @@ function FloatingThemeToggle() {
 
 function HeroSection() {
   return (
-    <div className="relative z-10 flex flex-col flex-1 w-full">
+    <div className="relative z-10 flex flex-col flex-1 w-full pb-0 lg:pb-20">
       <div className="flex-1 flex flex-col lg:flex-row px-4 sm:px-28 lg:px-72 mt-8 sm:mt-16">
 
-        <div className="w-full lg:w-[50%] flex flex-col items-center lg:items-start pr-0 lg:pr-12 relative z-20 text-center lg:text-left">
+        <div className="w-full lg:w-[50%] flex flex-col items-center lg:items-start pr-0 lg:pr-12 relative z-20 text-center lg:text-left lg:pt-16">
 
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -471,7 +489,7 @@ function StatsSection() {
   ];
 
   return (
-    <section className="pt-10 md:pt-32 pb-6 md:pb-20 bg-[#111111]">
+    <section className="pt-10 md:pt-40 pb-6 md:pb-20 bg-[#111111]">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
         <div className="text-center mb-6 md:mb-12">
           <h2 className="text-4xl md:text-[44px] font-light text-white">
