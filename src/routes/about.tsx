@@ -27,7 +27,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Learn about Postpidia, a premium video editing agency focused on high-conversion social commerce content.",
+          "Learn about Postpidia — a premium video editing service specializing in high-conversion content for TikTok Shop, Amazon, Instagram, and YouTube with a performance-based 3% commission model.",
       },
     ],
   }),
@@ -78,29 +78,31 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full px-3 sm:px-4 py-1 mb-6 shadow-sm">
             <span className="text-red-500 text-[10px] sm:text-xs font-bold">✨</span>
             <span className="text-[10px] sm:text-xs font-semibold text-gray-400">
-              Premium Video Editing
+              About Us
             </span>
           </div>
 
           <h1 className="text-xl sm:text-3xl lg:text-6xl font-normal text-white leading-[1.1] mb-4 sm:mb-6 tracking-tight">
-            Postpidia: Premium
+            Postpidia
             <br />
-            Video Editing
+            About Us
           </h1>
 
           <div className="text-gray-400 text-xs sm:text-sm lg:text-base leading-relaxed mb-6 sm:mb-10 max-w-lg">
-            <p className="font-medium text-gray-200">
-              Postpidia is a premium video editing agency crafting high-conversion content for social commerce platforms.
+            <p className="font-medium text-gray-200 leading-relaxed">
+              Postpidia specializes in high-conversion video editing for TikTok Shop, Amazon, Instagram, and YouTube. We bridge the gap between raw content and revenue by transforming your footage into platform-optimized assets designed to sell.
+            </p>
+            <p className="mt-3 text-gray-400 leading-relaxed">
+              Our unique performance-based model aligns our success with yours: for a low monthly subscription, you receive elite-tier editing, while we retain a 3% commission on sales generated. From viral TikTok hooks to polished Amazon storefront demonstrations, we deliver the psychological triggers and visual precision necessary to dominate the social commerce landscape and maximize your ROI.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 sm:gap-4">
             <a
-              href="#services"
-              onClick={scrollToServices}
+              href="#pricing"
               className="bg-white text-[#111] rounded-full px-5 sm:px-8 py-2 sm:py-3.5 text-[11px] sm:text-sm font-semibold hover:bg-gray-200 shadow-xl cursor-pointer inline-block"
             >
-              View Services
+              Get Started
             </a>
           </div>
         </div>
@@ -343,7 +345,7 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
       {/* Testimonials */}
       <section className="bg-[#111111] py-12 sm:py-24 w-full max-w-5xl mx-auto px-4 sm:px-8 text-center relative z-10">
         <h2 className="text-xl sm:text-3xl font-light text-white mb-2 sm:mb-4 tracking-tight">
-          What our clients are saying
+          What Businesses Are Saying
         </h2>
         <p className="text-[10px] sm:text-sm font-medium text-gray-500 mb-8 sm:mb-16 max-w-lg mx-auto leading-relaxed">
           We continually strive to elevate brand presence and drive real conversion through expert video production.

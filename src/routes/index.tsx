@@ -126,7 +126,8 @@ function Nav() {
   return (
     <nav className="relative z-10 flex items-center justify-between px-4 sm:px-28 lg:px-72 py-4 sm:py-6 lg:py-8">
       <a href="#" className="shrink-0">
-        <span className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-none">Postpidia</span>
+        <span className="sr-only">Postpidia</span>
+        <img src="/logo.jpeg" alt="Postpidia" className="h-7 sm:h-9 w-auto" />
       </a>
 
       <div className="hidden md:flex items-center space-x-10 text-sm font-medium text-gray-400">
@@ -222,7 +223,7 @@ function HeroSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-4xl sm:text-4xl lg:text-[52px] text-white font-light leading-[1.05] tracking-tight mb-3 sm:mb-4"
           >
-            Turn Your Content<br />Into <span className="text-[#FF7A00]">Sales Machines</span>
+            Want to Grow<br />or <span className="text-[#FF7A00]">Boost Your Sales?</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -272,9 +273,9 @@ function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              className="bg-[#444952]/90 backdrop-blur-md p-6 rounded-[28px] w-[300px] shadow-2xl border border-white/10"
+              className="bg-gradient-to-b from-[#8b0000] to-[#000000] p-6 rounded-[28px] w-[300px] shadow-2xl border border-[#8b0000]/30"
             >
-              <div className="bg-[#99B761] w-12 h-12 rounded-full flex items-center justify-center text-[#2A2D3A] mb-4">
+              <div className="bg-white w-12 h-12 rounded-full flex items-center justify-center text-[#8b0000] mb-4">
                 <Megaphone size={22} />
               </div>
               <h3 className="text-white text-[22px] font-bold mb-1">Video Editing</h3>
@@ -287,9 +288,9 @@ function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.45 }}
-              className="bg-[#3A3F48]/80 backdrop-blur-md p-6 rounded-[28px] w-[300px] shadow-2xl border border-white/5 opacity-90"
+              className="bg-[#0a3a1e]/80 backdrop-blur-md p-6 rounded-[28px] w-[300px] shadow-2xl border border-[#0a3a1e]/50 opacity-90"
             >
-              <div className="bg-[#99B761] w-12 h-12 rounded-full flex items-center justify-center text-[#2A2D3A] mb-4">
+              <div className="bg-[#99B761] w-12 h-12 rounded-full flex items-center justify-center text-[#0a3a1e] mb-4">
                 <Grid size={22} />
               </div>
               <h3 className="text-white text-[22px] font-bold mb-1">Sales Tracking</h3>
@@ -317,9 +318,9 @@ function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.3 }}
-          className="flex-1 bg-[#444952]/90 backdrop-blur-md p-4 rounded-[20px] shadow-2xl border border-white/10"
+          className="flex-1 bg-gradient-to-b from-[#8b0000] to-[#000000] p-4 rounded-[20px] shadow-2xl border border-[#8b0000]/30"
         >
-          <div className="bg-[#99B761] w-10 h-10 rounded-full flex items-center justify-center text-[#2A2D3A] mb-3 mx-auto lg:mx-0">
+          <div className="bg-white w-10 h-10 rounded-full flex items-center justify-center text-[#8b0000] mb-3 mx-auto lg:mx-0">
             <Megaphone size={18} />
           </div>
           <h3 className="text-white text-[16px] font-bold mb-1 text-center lg:text-left">Video Editing</h3>
@@ -332,9 +333,9 @@ function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.4 }}
-          className="flex-1 bg-[#3A3F48]/80 backdrop-blur-md p-4 rounded-[20px] shadow-2xl border border-white/5"
+          className="flex-1 bg-[#0a3a1e]/80 backdrop-blur-md p-4 rounded-[20px] shadow-2xl border border-[#0a3a1e]/50"
         >
-          <div className="bg-[#99B761] w-10 h-10 rounded-full flex items-center justify-center text-[#2A2D3A] mb-3 mx-auto lg:mx-0">
+          <div className="bg-[#99B761] w-10 h-10 rounded-full flex items-center justify-center text-[#0a3a1e] mb-3 mx-auto lg:mx-0">
             <Grid size={18} />
           </div>
           <h3 className="text-white text-[16px] font-bold mb-1 text-center lg:text-left">Sales Tracking</h3>
@@ -1222,7 +1223,7 @@ function TestimonialsSection() {
 
       <div className="max-w-[1260px] mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-center text-white text-4xl md:text-[44px] font-light mb-11 md:mb-12 relative z-10">
-          What Our Clients Say
+          What Businesses Say
         </h2>
 
         <div className="relative z-10">
