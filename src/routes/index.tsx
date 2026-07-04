@@ -52,10 +52,10 @@ import { Toaster } from "@/components/ui/sonner";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "My Home — Real Estate & Properties" },
+      { title: "Postpidia — Premium Video Editing for Social Commerce" },
       {
         name: "description",
-        content: "Choose Your Best Happy Land. Real Estate & Properties For Sale Or Rent In 12+ Country.",
+        content: "Turn your content into sales machines with Postpidia. Premium video editing and sales tracking tools tailored for TikTok Shop, Instagram Reels, and YouTube Shorts.",
       },
     ],
     links: [],
