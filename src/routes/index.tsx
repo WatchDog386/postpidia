@@ -2,10 +2,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Search,
   Menu,
   X,
-  Eye,
   MessageCircle,
   Facebook,
   Twitter,
@@ -14,7 +12,6 @@ import {
   Linkedin,
   Calendar,
   User,
-  TrendingUp,
   ChevronLeft,
   ChevronRight,
   ChevronDown,
@@ -24,6 +21,11 @@ import {
   Check,
   Phone,
   ArrowUpRight,
+  Home,
+  Megaphone,
+  Grid,
+  Tag,
+  MapPin,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -50,11 +52,10 @@ import { Toaster } from "@/components/ui/sonner";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Postpidia — Sales Tracking Software" },
+      { title: "My Home — Real Estate & Properties" },
       {
         name: "description",
-        content:
-          "Company Name: Postpidia (postpidia.com). Overview: A premium video editing service that creates high-conversion video content for social commerce platforms. An agency specializing in producing high-performing advertisements and content optimized for platforms such as TikTok Shop, Instagram, Amazon, and YouTube. Core Services: Social Commerce Ads: High-conversion video editing optimized specifically to drive direct sales on e-commerce platforms. Platform Optimization: Tailored video content formatting for TikTok Shop, Instagram Reels, Amazon product pages, and YouTube Shorts. Expert Production: End-to-end creative assembly focused on hooks, retention pacing, and strong calls-to-action.",
+        content: "Choose Your Best Happy Land. Real Estate & Properties For Sale Or Rent In 12+ Country.",
       },
     ],
     links: [],
@@ -78,15 +79,14 @@ const getCategoryStyles = (category: string) => {
 
 function Landing() {
   return (
-    <div className="min-h-screen antialiased">
-      <div className="hero-pattern hero-diagonal w-full">
-        <div className="hero-diagonal-right"></div>
+    <div className="min-h-screen bg-[#111111] antialiased">
+      <div className="relative w-full overflow-hidden flex flex-col">
         <Nav />
         <FloatingThemeToggle />
         <HeroSection />
+        <StatsSection />
       </div>
       <main className="relative">
-        <StatsSection />
         <ServicesSection />
         <TrustedCreators />
         <HowItWorksSection />
@@ -124,75 +124,59 @@ function Nav() {
   };
 
   return (
-    <header className="pt-3 lg:pt-5">
-      {/* Merged Row: Logo | Nav (center) | Ad Card (right) */}
-      <div>
-        <div className="max-w-[1400px] mx-auto px-4 lg:px-8 flex items-center h-14 lg:h-16">
-          <a href="#" className="flex items-center shrink-0 -ml-2 lg:-ml-4 gap-2">
-            <img src="/logo.png" alt="Postpidia" className="h-10 lg:h-12 w-auto" />
-            <span className="text-white font-bold text-lg lg:text-xl tracking-tight">Postpidia</span>
-          </a>
+    <nav className="relative z-10 flex items-center justify-between px-4 sm:px-28 lg:px-72 py-4 sm:py-6 lg:py-8">
+      <a href="#" className="shrink-0">
+        <span className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-none">Postpidia</span>
+      </a>
 
-          <nav className="hidden lg:flex items-center gap-6 flex-1 justify-center">
-            {navLinks.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={(e) => scrollTo(e, item.href)}
-                className="text-sm lg:text-base font-medium text-gray-200 hover:text-[#f0514e] transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
-            <Link
-              to="/about"
-              className="text-sm lg:text-base font-medium text-gray-200 hover:text-[#f0514e] transition-colors"
-            >
-              About Us
-            </Link>
-          </nav>
-
-          <div className="hidden lg:flex items-center ml-auto">
-            <div className="bg-white h-10 relative overflow-hidden flex items-center justify-between px-4">
-              <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-br from-yellow-400 via-red-500 to-purple-600 opacity-20 [clip-path:polygon(0_0,100%_0,80%_100%,0%_100%)]"></div>
-              <div className="absolute left-0 bottom-0 w-6 h-6 bg-blue-500 [clip-path:polygon(0_100%,100%_100%,0_0)]"></div>
-              <div className="absolute left-4 top-0 w-8 h-8 bg-yellow-400 [clip-path:polygon(50%_0,100%_50%,50%_100%,0_50%)]"></div>
-              <h2 className="text-black font-bold text-xs z-10 ml-10 whitespace-nowrap">Postpidia Sales Tracking</h2>
-              <motion.button
-                whileHover={{ y: -1 }}
-                whileTap={{ y: 0 }}
-                onClick={() => {
-                  const el = document.querySelector("#pricing");
-                  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-                }}
-                className="ml-3 bg-[#00d084] text-white font-medium text-[10px] uppercase tracking-wider px-3 py-1.5 z-10 rounded-full hover:opacity-90 transition-all duration-200"
-              >
-                GET STARTED
-              </motion.button>
-              <div className="absolute right-0 top-0 bottom-0 w-16 bg-[#f0514e] [clip-path:polygon(20%_0,100%_0,100%_100%,0%_100%)]"></div>
-              <div className="absolute right-4 top-0 bottom-0 w-8 bg-white opacity-20 [clip-path:polygon(30%_0,100%_0,70%_100%,0%_100%)]"></div>
-            </div>
-          </div>
-
-          <button
-            onClick={() => setOpen(!open)}
-            className="text-gray-300 hover:text-white p-1 lg:hidden ml-auto"
-          >
-            {open ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
-          </button>
+      <div className="hidden md:flex items-center space-x-10 text-sm font-medium text-gray-400">
+        <div className="relative text-[#DF8885] flex flex-col items-center">
+          <span className="cursor-pointer">Home</span>
+          <span className="absolute -bottom-2 w-1.5 h-1.5 bg-[#DF8885] rounded-full"></span>
         </div>
+        {navLinks.map((item) => (
+          <a
+            key={item.label}
+            href={item.href}
+            onClick={(e) => scrollTo(e, item.href)}
+            className="hover:text-white transition"
+          >
+            {item.label}
+          </a>
+        ))}
+        <Link
+          to="/about"
+          className="hover:text-white transition"
+        >
+          About Us
+        </Link>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      <div className="flex items-center gap-4">
+        <a href="#contact" className="hidden md:block">
+          <Button className="bg-[#DF8885] hover:bg-[#DF8885]/90 text-white rounded-full px-6 text-sm font-semibold">
+            Get Started
+          </Button>
+        </a>
+
+        <button
+          onClick={() => setOpen(!open)}
+          className="text-gray-300 hover:text-white p-1 md:hidden"
+        >
+          {open ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+        </button>
+      </div>
+
       {open && (
-        <div className="lg:hidden bg-black/90 backdrop-blur-sm px-4 py-4 relative z-50">
-          <div className="space-y-0">
+        <div className="md:hidden absolute top-full left-0 w-full bg-[#2A2D3A] border-t border-gray-600 px-6 py-4 z-50">
+          <div className="flex flex-col space-y-4">
+            <span className="text-base font-medium text-white">Home</span>
             {navLinks.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={(e) => scrollTo(e, item.href)}
-                className="block py-3 text-sm font-medium text-gray-300 hover:text-[#f0514e]"
+                className="text-base font-medium text-gray-400 hover:text-white"
               >
                 {item.label}
               </a>
@@ -200,14 +184,18 @@ function Nav() {
             <Link
               to="/about"
               onClick={() => setOpen(false)}
-              className="block py-3 text-sm font-medium text-gray-300 hover:text-[#f0514e]"
+              className="text-base font-medium text-gray-400 hover:text-white"
             >
               About Us
             </Link>
+            <hr className="border-gray-600 my-2" />
+            <a href="#contact" className="text-base font-medium text-[#DF8885] hover:text-[#DF8885]/80">Get Started</a>
+            <a href="#" className="text-base font-medium text-gray-400 hover:text-white">Log In</a>
+            <a href="#" className="text-base font-medium text-[#FF7A00]">Sign Up</a>
           </div>
         </div>
       )}
-    </header>
+    </nav>
   );
 }
 
@@ -222,148 +210,141 @@ function FloatingThemeToggle() {
 }
 
 function HeroSection() {
-  const sideStories = [
-    { category: "LEADS", title: "Capture & qualify leads from every channel automatically", date: "JUL 07, 2022", img: "https://i.pinimg.com/1200x/ab/e1/38/abe13885449b56a818403f649c05ed55.jpg" },
-    { category: "PIPELINE", title: "Visual pipeline management with drag-and-drop deal stages", date: "JUL 07, 2022", img: "https://i.pinimg.com/736x/ca/cd/60/cacd603db5f2fe0bb5597a8609db302f.jpg" },
-    { category: "FORECAST", title: "AI-powered revenue forecasting with 95% accuracy", date: "JUL 07, 2022", img: "https://i.pinimg.com/736x/e3/c1/10/e3c110b221f1cacd08f236e80f866d49.jpg" },
-    { category: "REPORTS", title: "Real-time sales dashboards and custom performance reports", date: "JUL 07, 2022", img: "https://i.pinimg.com/736x/f0/fb/d1/f0fbd17474021f02239a1c4acb3e5e27.jpg" },
-    { category: "TEAM", title: "Team performance tracking with gamification & leaderboards", date: "JUL 07, 2022", img: "https://i.pinimg.com/1200x/ee/7b/e8/ee7be8016dcf5d4a95a0553262da9f94.jpg" },
-    { category: "INTEGRATE", title: "Seamless integration with CRM, email, and payment tools", date: "JUL 07, 2022", img: "https://i.pinimg.com/1200x/34/bd/81/34bd81754eeb8a74b932d42deb38354a.jpg" },
-  ];
-
   return (
-    <section className="w-full">
-      <div className="max-w-[1400px] mx-auto px-4 lg:px-8 pt-8 pb-8 grid lg:grid-cols-12 gap-8">
-      {/* Featured Large Block Left */}
-      <div className="lg:col-span-8 grid gap-8">
-        <div className="relative group overflow-hidden bg-[#1a1a1a] cursor-pointer block">
-          <img
-            src="https://i.pinimg.com/1200x/78/89/62/78896223da124b4dee27d388ce04ca36.jpg"
-            alt="Hero Banner"
-            className="w-full aspect-[16/10] sm:aspect-[21/9] lg:aspect-[16/9] object-cover object-top transition-transform duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/60 to-transparent z-10" />
-          <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-10 z-20">
-            <span className={getCategoryStyles("SALES")}>
-              SALES TRACKING
-            </span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-normal text-white mt-4 leading-tight tracking-tight">
-              Turn Your Content Into Sales Machines
-            </h1>
-            <div className="flex flex-wrap items-center gap-4 text-gray-300 text-[11px] font-medium tracking-wider mt-5 uppercase">
-              <span>BY POSTPIDIA</span>
-              <span className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5" /> 12K+ DEALS</span>
-              <span className="flex items-center gap-1.5"><Eye className="h-3.5 w-3.5" /> 95% ACCURACY</span>
-            </div>
-          </div>
+    <div className="relative z-10 flex flex-col flex-1 w-full">
+      <div className="flex-1 flex flex-col lg:flex-row px-4 sm:px-28 lg:px-72 mt-8 sm:mt-16">
+
+        <div className="w-full lg:w-[50%] flex flex-col items-center lg:items-start pr-0 lg:pr-12 relative z-20 text-center lg:text-left">
+
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-4xl sm:text-4xl lg:text-[52px] text-white font-light leading-[1.05] tracking-tight mb-3 sm:mb-4"
+          >
+            Turn Your Content<br />Into <span className="text-[#FF7A00]">Sales Machines</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="text-gray-400 text-[16px] sm:text-[15px] mb-6 sm:mb-8 leading-snug"
+          >
+            Premium video editing & sales tracking for<br />social commerce platforms
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4"
+          >
+            <a href="#services">
+              <Button className="bg-[#DF8885] hover:bg-[#DF8885]/90 text-white px-4 sm:px-6 py-3 sm:py-5 rounded-full text-sm font-semibold h-auto">
+                View Services
+              </Button>
+            </a>
+            <a href="#pricing">
+              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 px-4 sm:px-6 py-3 sm:py-5 rounded-full text-sm font-semibold h-auto">
+                See Pricing
+              </Button>
+            </a>
+          </motion.div>
         </div>
 
-        {/* 2-Column Split Cards Below Hero */}
-        <div className="grid grid-cols-2 gap-4 lg:gap-8">
-          <div className="group cursor-pointer">
-            {/* Mobile: overlay layout */}
-            <div className="lg:hidden relative overflow-hidden rounded-[2px] h-[200px] border border-[#222]">
-              <div className="absolute inset-0 pointer-events-none">
-                <img src="https://i.pinimg.com/1200x/97/1d/0b/971d0b4b34ea1a6164684cec46ef1b75.jpg" alt="Why Choose Us" className="w-full h-full object-cover object-[center_35%] opacity-40 group-hover:opacity-60 transition-all duration-500 group-hover:scale-105" />
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="hidden lg:block w-full lg:w-[50%] relative justify-center mt-8 min-h-0"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="absolute top-4 left-1/2 -translate-x-1/2 bg-[#DF8885] text-white px-6 py-3 rounded-2xl rounded-br-none text-lg font-semibold shadow-xl z-30"
+          >
+            Our Core<br />Services
+          </motion.div>
+
+          <div className="absolute top-28 left-1/2 -translate-x-1/2 flex flex-row items-center space-x-6 z-20">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="bg-[#444952]/90 backdrop-blur-md p-6 rounded-[28px] w-[300px] shadow-2xl border border-white/10"
+            >
+              <div className="bg-[#99B761] w-12 h-12 rounded-full flex items-center justify-center text-[#2A2D3A] mb-4">
+                <Megaphone size={22} />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10" />
-              <span className={`absolute top-3 left-3 z-20 ${getCategoryStyles("ANALYTICS")}`}>WHY US</span>
-              <div className="relative z-20 flex flex-col justify-end h-full p-4">
-                <h4 className="font-semibold text-[12px] text-gray-100 line-clamp-3 leading-snug group-hover:text-[#f0514e] transition-colors">
-                  Built for Sales Teams That Want to Close More
-                </h4>
+              <h3 className="text-white text-[22px] font-bold mb-1">Video Editing</h3>
+              <p className="text-gray-400 text-[13px] leading-relaxed">
+                TikTok Shop, Instagram<br />Reels, YouTube Shorts
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+              className="bg-[#3A3F48]/80 backdrop-blur-md p-6 rounded-[28px] w-[300px] shadow-2xl border border-white/5 opacity-90"
+            >
+              <div className="bg-[#99B761] w-12 h-12 rounded-full flex items-center justify-center text-[#2A2D3A] mb-4">
+                <Grid size={22} />
               </div>
-            </div>
-            {/* Desktop: original layout */}
-            <div className="hidden lg:block">
-              <div className="relative overflow-hidden mb-4">
-                <img src="https://i.pinimg.com/1200x/97/1d/0b/971d0b4b34ea1a6164684cec46ef1b75.jpg" alt="Why Choose Us" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
-                <span className={`absolute top-4 left-4 ${getCategoryStyles("ANALYTICS")}`}>WHY US</span>
-              </div>
-              <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
-                Built for Sales Teams That Want to Close More
-              </h3>
-            </div>
+              <h3 className="text-white text-[22px] font-bold mb-1">Sales Tracking</h3>
+              <p className="text-gray-400 text-[13px] leading-relaxed">
+                Real-time analytics &<br />revenue forecasting
+              </p>
+            </motion.div>
           </div>
 
-          <div className="group cursor-pointer">
-            {/* Mobile: overlay layout */}
-            <div className="lg:hidden relative overflow-hidden rounded-[2px] h-[200px] border border-[#222]">
-              <div className="absolute inset-0 pointer-events-none">
-                <img src="https://i.pinimg.com/736x/a3/18/7b/a3187bf90437ecae83c1151812a60340.jpg" alt="Trusted Platform" className="w-full h-full object-cover object-[center_35%] opacity-40 group-hover:opacity-60 transition-all duration-500 group-hover:scale-105" />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10" />
-              <span className={`absolute top-3 left-3 z-20 ${getCategoryStyles("SALES")}`}>TRUSTED</span>
-              <div className="relative z-20 flex flex-col justify-end h-full p-4">
-                <h4 className="font-semibold text-[12px] text-gray-100 line-clamp-3 leading-snug group-hover:text-[#f0514e] transition-colors">
-                  Trusted by 10,000+ Sales Professionals Worldwide
-                </h4>
-              </div>
-            </div>
-            {/* Desktop: original layout */}
-            <div className="hidden lg:block">
-              <div className="relative overflow-hidden mb-4">
-                <img src="https://i.pinimg.com/736x/a3/18/7b/a3187bf90437ecae83c1151812a60340.jpg" alt="Trusted Platform" className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105" />
-                <span className={`absolute top-4 left-4 ${getCategoryStyles("SALES")}`}>TRUSTED</span>
-              </div>
-              <h3 className="font-semibold text-[17px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
-                Trusted by 10,000+ Sales Professionals Worldwide
-              </h3>
-            </div>
-          </div>
-        </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="absolute bottom-16 right-12 text-right text-[13px] text-gray-400 leading-snug"
+          >
+            Give us a Call <span className="font-bold text-white">1-888-498-9240</span> and<br/>
+            We can set you up, or <a href="#" className="text-[#99B761] underline decoration-[#99B761]/50 underline-offset-2">check our<br/>pricing plans</a>
+          </motion.div>
+        </motion.div>
+
       </div>
 
-  {/* Mobile Card Layout */}
-  <div className="lg:hidden grid grid-cols-2 gap-4">
-    {sideStories.map((story, idx) => (
-      <div key={idx} className="bg-[#0a0a0a] group cursor-pointer flex flex-col relative overflow-hidden rounded-[2px] h-[180px] border border-[#222]">
-        <div className="absolute inset-0 pointer-events-none">
-          <img
-            src={story.img}
-            alt={story.title}
-            className="w-full h-full object-cover object-[center_35%] opacity-40 group-hover:opacity-60 transition-all duration-500 group-hover:scale-105"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent z-10" />
-        <span className={`absolute top-2 left-2 z-20 ${getCategoryStyles(story.category)}`}>
-          {story.category}
-        </span>
-        <div className="relative z-20 flex flex-col justify-end h-full p-3">
-          <h4 className="font-semibold text-[12px] text-gray-100 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors">
-            {story.title}
-          </h4>
-        </div>
-      </div>
-    ))}
-  </div>
-
-  {/* Desktop Sidebar Layout */}
-  <div className="hidden lg:flex lg:col-span-4 flex-col space-y-6">
-    {sideStories.map((story, idx) => (
-      <div key={idx} className="flex gap-4 items-start group cursor-pointer">
-        <div className="relative shrink-0 overflow-hidden">
-          <img
-            src={story.img}
-            alt={story.title}
-            className="w-[100px] h-[100px] object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-        </div>
-        <div className="flex flex-col justify-center min-h-[100px] py-1">
-          <div className="mb-2">
-            <span className={getCategoryStyles(story.category)}>
-              {story.category}
-            </span>
+      <div className="lg:hidden flex flex-row items-stretch gap-3 px-4 mt-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="flex-1 bg-[#444952]/90 backdrop-blur-md p-4 rounded-[20px] shadow-2xl border border-white/10"
+        >
+          <div className="bg-[#99B761] w-10 h-10 rounded-full flex items-center justify-center text-[#2A2D3A] mb-3 mx-auto lg:mx-0">
+            <Megaphone size={18} />
           </div>
-          <h4 className="font-semibold text-[15px] text-gray-200 line-clamp-2 leading-snug group-hover:text-[#f0514e] transition-colors mt-2">
-            {story.title}
-          </h4>
-        </div>
+          <h3 className="text-white text-[16px] font-bold mb-1 text-center lg:text-left">Video Editing</h3>
+          <p className="text-gray-400 text-[12px] leading-relaxed text-center lg:text-left">
+            TikTok Shop, Instagram<br />Reels, YouTube Shorts
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+          className="flex-1 bg-[#3A3F48]/80 backdrop-blur-md p-4 rounded-[20px] shadow-2xl border border-white/5"
+        >
+          <div className="bg-[#99B761] w-10 h-10 rounded-full flex items-center justify-center text-[#2A2D3A] mb-3 mx-auto lg:mx-0">
+            <Grid size={18} />
+          </div>
+          <h3 className="text-white text-[16px] font-bold mb-1 text-center lg:text-left">Sales Tracking</h3>
+          <p className="text-gray-400 text-[12px] leading-relaxed text-center lg:text-left">
+            Real-time analytics &<br />revenue forecasting
+          </p>
+        </motion.div>
       </div>
-    ))}
-  </div>
-      </div>
-    </section>
+
+    </div>
   );
 }
 
@@ -489,14 +470,36 @@ function StatsSection() {
   ];
 
   return (
-    <section className="py-14 md:py-20">
+    <section className="pt-10 md:pt-32 pb-6 md:pb-20 bg-[#111111]">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
-        <div className="text-center mb-10 md:mb-12">
+        <div className="text-center mb-6 md:mb-12">
           <h2 className="text-4xl md:text-[44px] font-light text-white">
             Trusted by Sales Teams Worldwide
           </h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
+
+        <div className="relative overflow-hidden md:hidden">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-10 bg-gradient-to-r from-[#111111] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-10 bg-gradient-to-l from-[#111111] to-transparent" />
+          <div className="marquee-track flex w-max items-stretch gap-0 will-change-transform">
+            {[0, 1].map((groupIdx) => (
+              <div key={groupIdx} className="flex shrink-0 items-stretch gap-8 pr-8">
+                {stats.map((stat, i) => (
+                  <div key={`${groupIdx}-${stat.label}`} className="text-center group shrink-0 w-[140px]">
+                    <div className="text-xl font-light text-white leading-none mb-1 tracking-tight">
+                      {stat.value}<span className="text-[#f0514e]">{stat.suffix}</span>
+                    </div>
+                    <p className="text-[9px] text-gray-400 font-light leading-snug max-w-[120px] mx-auto">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="hidden md:grid md:grid-cols-5 gap-8">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -506,10 +509,10 @@ function StatsSection() {
               transition={{ delay: i * 0.08, duration: 0.4 }}
               className="text-center group"
             >
-              <div className="text-3xl md:text-[44px] font-light text-white leading-none mb-2 md:mb-3 tracking-tight group-hover:text-[#f0514e] transition-colors duration-300">
+              <div className="text-[44px] font-light text-white leading-none mb-3 tracking-tight group-hover:text-[#f0514e] transition-colors duration-300">
                 {stat.value}<span className="text-[#f0514e]">{stat.suffix}</span>
               </div>
-              <p className="text-[11px] md:text-sm text-gray-400 font-light leading-snug max-w-[160px] mx-auto">
+              <p className="text-sm text-gray-400 font-light leading-snug max-w-[160px] mx-auto">
                 {stat.label}
               </p>
             </motion.div>
@@ -542,7 +545,7 @@ function ServicesSection() {
   ];
 
   return (
-    <section id="services" className="max-w-[1400px] mx-auto px-4 lg:px-8 mt-20">
+    <section id="services" className="bg-[#111111] max-w-[1400px] mx-auto px-4 lg:px-8 mt-6 md:mt-20 pt-8 pb-12">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8">
         <h2 className="text-4xl md:text-[44px] font-light text-white">Services Built to Convert</h2>
       </div>
@@ -611,7 +614,7 @@ function BottomSection() {
   ];
 
   return (
-    <section className="py-16 overflow-hidden mt-16">
+    <section className="py-16 overflow-hidden mt-16 bg-[#111111]">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8">
         <SectionHeader 
           title="Trending Stories"

@@ -73,7 +73,7 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
         </Link>
       )}
 
-      <section className="hero-pattern hero-diagonal relative w-full pt-16 sm:pt-20 pb-24 sm:pb-32 max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 gap-8 sm:gap-12 items-center z-10">
+      <section className="bg-[#111111] hero-pattern hero-diagonal relative w-full pt-16 sm:pt-20 pb-24 sm:pb-32 max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 gap-8 sm:gap-12 items-center z-10">
         <div>
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full px-3 sm:px-4 py-1 mb-6 shadow-sm">
             <span className="text-red-500 text-[10px] sm:text-xs font-bold">✨</span>
@@ -196,7 +196,7 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
       </section>
 
       {/* Why Choose Section */}
-      <section className="py-12 sm:py-24 relative w-full max-w-6xl mx-auto px-4 sm:px-8 grid grid-cols-2 gap-8 sm:gap-16 items-center">
+      <section className="bg-[#111111] py-12 sm:py-24 relative w-full max-w-6xl mx-auto px-4 sm:px-8 grid grid-cols-2 gap-8 sm:gap-16 items-center">
         <div className="relative h-[180px] sm:h-[300px] lg:h-[450px] w-full flex justify-center items-center">
           {/* Background Blob for the Avatar composition */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160px] sm:w-[260px] lg:w-[380px] h-[160px] sm:h-[260px] lg:h-[380px] bg-red-500/10 rounded-full z-0"></div>
@@ -267,7 +267,7 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
       </section>
 
       {/* Other Programs / Corporate */}
-      <section className="relative w-full py-16 sm:py-32 mt-5 sm:mt-10 overflow-hidden">
+      <section className="bg-[#111111] relative w-full py-16 sm:py-32 mt-5 sm:mt-10 overflow-hidden">
         {/* Huge wavy background shapes */}
         <div className="absolute left-[-10%] top-[20%] w-[60%] h-[80%] bg-red-500/5 rounded-r-[100px] border-r-8 border-white/5 -z-10 transform -rotate-6"></div>
         <div className="absolute right-0 bottom-0 w-[40%] h-[60%] bg-red-500/5 rounded-tl-full blur-3xl -z-10 opacity-70"></div>
@@ -341,7 +341,7 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
       </section>
 
       {/* Testimonials */}
-      <section className="py-12 sm:py-24 w-full max-w-5xl mx-auto px-4 sm:px-8 text-center relative z-10">
+      <section className="bg-[#111111] py-12 sm:py-24 w-full max-w-5xl mx-auto px-4 sm:px-8 text-center relative z-10">
         <h2 className="text-xl sm:text-3xl font-light text-white mb-2 sm:mb-4 tracking-tight">
           What our clients are saying
         </h2>
