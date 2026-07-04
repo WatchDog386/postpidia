@@ -124,7 +124,7 @@ function Nav() {
   };
 
   return (
-    <nav className="relative z-10 flex items-center justify-between px-4 sm:px-28 lg:px-72 py-4 sm:py-6 lg:py-8">
+    <nav className="relative z-50 flex items-center justify-between px-4 sm:px-28 lg:px-72 py-4 sm:py-6 lg:py-8">
       <a href="#" className="shrink-0">
         <span className="sr-only">Postpidia</span>
               <img src="/logo.png" alt="Postpidia" className="h-16 sm:h-20 w-auto" />
