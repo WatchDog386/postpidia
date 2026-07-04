@@ -345,7 +345,7 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
       {/* Testimonials */}
       <section className="bg-[#111111] py-12 sm:py-24 w-full max-w-5xl mx-auto px-4 sm:px-8 text-center relative z-10">
         <h2 className="text-xl sm:text-3xl font-light text-white mb-2 sm:mb-4 tracking-tight">
-          What Businesses Are Saying
+          Testimonials
         </h2>
         <p className="text-[10px] sm:text-sm font-medium text-gray-500 mb-8 sm:mb-16 max-w-lg mx-auto leading-relaxed">
           We continually strive to elevate brand presence and drive real conversion through expert video production.
