@@ -92,7 +92,7 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
             <p className="font-medium text-gray-200 leading-relaxed">
               Postpidia specializes in high-conversion video editing for TikTok Shop, Amazon, Instagram, and YouTube. We bridge the gap between raw content and revenue by transforming your footage into platform-optimized assets designed to sell.
             </p>
-            <p className="mt-3 text-gray-400 leading-relaxed">
+            <p className="mt-3 font-medium text-gray-200 leading-relaxed">
               Our unique performance-based model aligns our success with yours: for a low monthly subscription, you receive elite-tier editing, while we retain a 3% commission on sales generated. From viral TikTok hooks to polished Amazon storefront demonstrations, we deliver the psychological triggers and visual precision necessary to dominate the social commerce landscape and maximize your ROI.
             </p>
           </div>
