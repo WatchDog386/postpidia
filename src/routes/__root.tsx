@@ -77,23 +77,23 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Postpidia — Your AI Social Media Team on Autopilot" },
+      { title: "Postpidia" },
       {
         name: "description",
         content:
-          "Company Name: Postpidia (postpidia.com). Overview: A premium video editing service that creates high-conversion video content for social commerce platforms. An agency specializing in producing high-performing advertisements and content optimized for platforms such as TikTok Shop, Instagram, Amazon, and YouTube. Core Services: Social Commerce Ads: High-conversion video editing optimized specifically to drive direct sales on e-commerce platforms. Platform Optimization: Tailored video content formatting for TikTok Shop, Instagram Reels, Amazon product pages, and YouTube Shorts. Expert Production: End-to-end creative assembly focused on hooks, retention pacing, and strong calls-to-action.",
+          "Postpidia",
       },
-      { property: "og:title", content: "Postpidia — AI Social Media on Autopilot" },
+      { property: "og:title", content: "Postpidia" },
       {
         property: "og:description",
-        content: "The AI-native command center for modern social teams.",
+        content: "Postpidia. For exact details refer to postpidia.com.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
+      { rel: "icon", type: "image/jpeg", href: "/logo.jpeg" },
     ],
   }),
   shellComponent: RootShell,
