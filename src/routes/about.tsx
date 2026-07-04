@@ -73,8 +73,8 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
         </Link>
       )}
 
-      <section className="bg-[#111111] hero-pattern hero-diagonal relative w-full pt-16 sm:pt-20 pb-16 sm:pb-32 max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center z-10">
-        <div className="flex flex-col items-center md:items-start text-center md:text-left">
+    <section className="bg-[#111111] hero-pattern hero-diagonal relative w-full pt-16 sm:pt-20 pb-16 sm:pb-32 max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 gap-4 sm:gap-12 items-center z-10">
+      <div>
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full px-3 sm:px-4 py-1 mb-4 sm:mb-6 shadow-sm">
             <span className="text-red-500 text-[10px] sm:text-xs font-bold">✨</span>
             <span className="text-[10px] sm:text-xs font-semibold text-gray-400">
