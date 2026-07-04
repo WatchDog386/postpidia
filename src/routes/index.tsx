@@ -1562,8 +1562,7 @@ function Footer() {
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-10 mb-12">
         <div className="col-span-2 lg:col-span-5 flex flex-col space-y-6">
           <a href="#" className="flex items-center gap-3">
-            <img src="/logo.png" alt="Postpidia" className="h-10 w-auto" />
-            <span className="text-xl font-medium tracking-tight text-white leading-none">Postpidia</span>
+            <img src="/logo.png" alt="Postpidia" className="h-20 sm:h-24 w-auto" />
           </a>
           <p className="text-gray-400 text-xs leading-relaxed max-w-sm font-medium">
             Postpidia delivers high-conversion video editing tailored for social commerce platforms. Boost your brand with expert content production.
