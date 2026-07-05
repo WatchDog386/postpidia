@@ -1560,10 +1560,9 @@ function Footer() {
     <footer className="bg-[#161616] border-t border-[#222] pt-16 pb-8">
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-10 mb-12">
         <div className="col-span-2 lg:col-span-5 flex flex-col space-y-6">
-          <a href="#" className="flex items-center gap-3">
-            <img src="/logo.png" alt="Postpidia" className="h-10 w-auto" />
-            <span className="text-xl font-medium tracking-tight text-white leading-none">Postpidia</span>
-          </a>
+<a href="#" className="flex items-center">
+  <img src="/logo.png" alt="Postpidia" className="h-16 sm:h-20 w-auto" />
+</a>
           <p className="text-gray-400 text-xs leading-relaxed max-w-sm font-medium">
             Postpidia delivers high-conversion video editing tailored for social commerce platforms. Boost your brand with expert content production.
           </p>
@@ -1579,12 +1578,14 @@ function Footer() {
         <div className="col-span-1 lg:col-span-3">
           <h4 className="text-[11px] font-medium text-white uppercase tracking-wider mb-4 border-l-2 border-[#f0514e] pl-3">Quick Links</h4>
           <ul className="space-y-2 text-xs font-semibold text-gray-400">
-            {quickLinks.map((link) => (
-              <li key={link} className="hover:text-[#f0514e] cursor-pointer transition-colors flex items-center gap-1.5 group">
-                <span className="w-1 h-1 bg-gray-600 rounded-full group-hover:bg-[#f0514e]" />
-                {link}
-              </li>
-            ))}
+  {quickLinks.map((link) => (
+  <li key={link}>
+    <a href="#" className="hover:text-[#f0514e] transition-colors flex items-center gap-1.5 group">
+      <span className="w-1 h-1 bg-gray-600 rounded-full group-hover:bg-[#f0514e]" />
+      {link}
+    </a>
+  </li>
+))}
           </ul>
         </div>
 
