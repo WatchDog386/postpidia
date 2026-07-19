@@ -82,7 +82,7 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-normal text-white leading-[1.1] mb-4 sm:mb-6 tracking-tight">
+          <h1 className="text-xl sm:text-3xl lg:text-5xl font-light text-white leading-[1.1] mb-6 sm:mb-12 tracking-tight">
             About Us
           </h1>
 
