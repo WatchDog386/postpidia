@@ -73,7 +73,7 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
         </Link>
       )}
 
-    <section className="bg-[#111111] hero-pattern hero-diagonal relative w-full pt-16 sm:pt-20 pb-16 sm:pb-32 max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 gap-4 sm:gap-12 items-center z-10">
+    <section className="bg-[#111111] relative w-full pt-16 sm:pt-20 pb-16 sm:pb-32 max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 gap-4 sm:gap-12 items-center">
       <div>
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full px-3 sm:px-4 py-1 mb-4 sm:mb-6 shadow-sm">
             <span className="text-red-500 text-[10px] sm:text-xs font-bold">✨</span>
@@ -86,11 +86,11 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
             About Us
           </h1>
 
-          <div className="text-gray-400 text-[13px] sm:text-sm lg:text-base leading-relaxed mb-6 sm:mb-10 max-w-lg mx-auto md:mx-0">
-            <p className="font-medium text-gray-200 leading-relaxed">
+          <div className="text-gray-400 text-[8px] sm:text-sm leading-relaxed mb-6 sm:mb-10 max-w-lg mx-auto md:mx-0">
+            <p className="leading-relaxed text-white">
               Postpidia specializes in high-conversion video editing for TikTok Shop, Amazon, Instagram, and YouTube. We bridge the gap between raw content and revenue by transforming your footage into platform-optimized assets designed to sell.
             </p>
-            <p className="mt-3 font-medium text-gray-200 leading-relaxed">
+            <p className="mt-3 leading-relaxed text-white">
               Our unique performance-based model aligns our success with yours: for a low monthly subscription, you receive elite-tier editing, while we retain a 3% commission on sales generated. From viral TikTok hooks to polished Amazon storefront demonstrations, we deliver the psychological triggers and visual precision necessary to dominate the social commerce landscape and maximize your ROI.
             </p>
           </div>
