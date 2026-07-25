@@ -14,6 +14,7 @@ import { Route as StoryRouteImport } from './routes/story'
 import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as SoftwareRouteImport } from './routes/software'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -43,6 +44,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PaymentRoute = PaymentRouteImport.update({
   id: '/payment',
   path: '/payment',
@@ -63,6 +69,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/payment': typeof PaymentRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/software': typeof SoftwareRoute
   '/stories': typeof StoriesRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/payment': typeof PaymentRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/software': typeof SoftwareRoute
   '/stories': typeof StoriesRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/payment': typeof PaymentRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/software': typeof SoftwareRoute
   '/stories': typeof StoriesRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/payment'
+    | '/pricing'
     | '/privacy'
     | '/software'
     | '/stories'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/payment'
+    | '/pricing'
     | '/privacy'
     | '/software'
     | '/stories'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/payment'
+    | '/pricing'
     | '/privacy'
     | '/software'
     | '/stories'
@@ -127,6 +139,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   PaymentRoute: typeof PaymentRoute
+  PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   SoftwareRoute: typeof SoftwareRoute
   StoriesRoute: typeof StoriesRoute
@@ -171,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/payment': {
       id: '/payment'
       path: '/payment'
@@ -199,6 +219,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   PaymentRoute: PaymentRoute,
+  PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   SoftwareRoute: SoftwareRoute,
   StoriesRoute: StoriesRoute,
