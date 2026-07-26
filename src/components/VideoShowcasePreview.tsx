@@ -1,7 +1,5 @@
 import { useState } from "react";
 import {
-  CheckCircle2,
-  Users,
   MoreVertical,
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -44,49 +42,6 @@ const previewChips = [
     text: "Conversion-Focused Editing",
     className:
       "rounded-full border border-[#111827]/30 bg-white px-3 py-1 text-[#111827]",
-  },
-];
-
-const metrics = [
-  {
-    value: "7,543+",
-    label: "Videos Delivered",
-    icon: <CheckCircle2 size={24} strokeWidth={2} />,
-    cardBg: "bg-[#edf0f4]",
-    iconBg: "bg-[#3b6cf7]",
-    iconColor: "text-white",
-    valueColor: "text-[#141824]",
-    labelColor: "text-[#6b7280]",
-  },
-  {
-    value: "Fast",
-    label: "Turnaround",
-    url: "https://www.tiktok.com/@shevify",
-    cardBg: "bg-[#f7a531]",
-    iconBg: "bg-[#ff8c00]",
-    iconColor: "text-white",
-    valueColor: "text-[#1f2937]",
-    labelColor: "text-[#374151]",
-  },
-  {
-    value: "Low",
-    label: "Revision Rates",
-    url: "https://www.linkedin.com/login/?session_redirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2F110777019%2Fadmin",
-    cardBg: "bg-[#25c7af]",
-    iconBg: "bg-[#16a892]",
-    iconColor: "text-white",
-    valueColor: "text-[#0f172a]",
-    labelColor: "text-[#155e56]",
-  },
-  {
-    value: "High",
-    label: "Client Retention",
-    icon: <Users size={24} strokeWidth={2} />,
-    cardBg: "bg-gradient-to-br from-[#8e4bff] to-[#e24cb6]",
-    iconBg: "bg-[#7f3dff]",
-    iconColor: "text-white",
-    valueColor: "text-[#111827]",
-    labelColor: "text-[#312e81]",
   },
 ];
 
@@ -143,24 +98,6 @@ const bottomVariants = {
       ease: "easeOut" as const,
     },
   },
-};
-
-const metricCardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 20,
-    scale: 0.95,
-  },
-  visible: (index: number) => ({
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut" as const,
-      delay: 0.2 + index * 0.1,
-    },
-  }),
 };
 
 const VideoShowcasePreview = () => {
@@ -373,51 +310,6 @@ const VideoShowcasePreview = () => {
         </div>
       </section>
 
-      {/* BOTTOM SECTION - METRICS */}
-      <section className="relative bg-[#111111] overflow-hidden py-6 md:py-12 lg:py-16">
-        <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{
-            backgroundImage: "repeating-linear-gradient(-45deg, transparent, transparent 120px, rgba(255,255,255,0.5) 120px, rgba(255,255,255,0.5) 121px)",
-          }}
-        />
-        <div className="relative z-10 mx-auto max-w-[1440px] px-3 sm:px-6">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="grid grid-cols-4 gap-1.5 sm:gap-3 md:gap-4 w-full"
-          >
-            {metrics.map((metric, i) => (
-              <motion.div
-                key={i}
-                variants={metricCardVariants}
-                custom={i}
-                whileHover={{ y: -10, scale: 1.03, rotate: 0.5 }}
-                className={`group relative flex flex-col justify-between items-center text-center min-h-[60px] sm:min-h-[120px] md:min-h-[150px] overflow-hidden rounded-[12px] md:rounded-[20px] p-1 sm:p-3 md:p-6 border border-white/80 shadow-[0_10px_22px_rgba(15,23,42,0.14)] transition-all duration-300 hover:shadow-[0_16px_30px_rgba(15,23,42,0.18)] ${metric.cardBg}`}
-                style={{ boxShadow: undefined }}
-              >
-                <div className="relative z-10">
-                  <div className={`mb-1 sm:mb-2 md:mb-4 inline-flex rounded-[8px] md:rounded-[12px] p-0.5 shadow-md transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 ${metric.iconBg} ${metric.iconColor}`}>
-                    <div className="flex h-3 w-3 items-center justify-center sm:h-4 sm:w-4 md:h-5 md:w-5">
-                      {metric.icon}
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className={`text-[10px] sm:text-lg md:text-3xl font-light tracking-tight ${metric.valueColor}`}>
-                      {metric.value}
-                    </h3>
-                    <p className={`mt-0.5 text-[7px] sm:text-[10px] md:text-xs font-medium uppercase tracking-[0.22em] line-clamp-2 ${metric.labelColor}`}>
-                      {metric.label}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
       {/* ABOUT SHEVIFY GOODS */}
       <section className="relative bg-[#111111] overflow-hidden py-6 md:py-12 lg:py-16">
         <div
@@ -437,10 +329,10 @@ const VideoShowcasePreview = () => {
             <div className="flex flex-col gap-4">
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
                 <div>
-                  <h3 className="text-lg md:text-2xl font-bold text-white">
+                  <h3 className="text-xl sm:text-3xl lg:text-5xl font-light text-white leading-[1.1] tracking-tight">
                     About Postpidia Goods
                   </h3>
-                  <p className="text-sm text-gray-400 mt-1">
+                  <p className="mt-2 text-[8px] sm:text-sm leading-relaxed text-white/90">
                     Premium US caps & shirts — made for creators.
                   </p>
                 </div>
@@ -459,8 +351,6 @@ const Carousel = ({ items }: { items: typeof shevifyGoods }) => {
 
   return (
     <div className="relative overflow-hidden py-3 md:py-4">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-black via-black/85 to-transparent md:w-24" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-black via-black/85 to-transparent md:w-24" />
 
       <div className="trusted-marquee-track marquee-track flex w-max items-stretch gap-0 will-change-transform">
         {marqueeGroups.map((groupIndex) => (
