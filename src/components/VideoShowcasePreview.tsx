@@ -13,24 +13,20 @@ type PreviewVideo = {
 };
 
 const previewVideos: PreviewVideo[] = [
-  { id: "preview-1", title: "Postpidia", videoId: "YeVm-dg7kx8" },
-  { id: "preview-2", title: "Postpidia", videoId: "QDwe2RF3n0k" },
-  { id: "preview-3", title: "Postpidia", videoId: "LelSMhWCrlA" },
-  { id: "preview-4", title: "Postpidia", videoId: "EoykME_auro" },
-  { id: "preview-5", title: "Postpidia", videoId: "crc2A2a2n3E" },
-  { id: "preview-6", title: "Postpidia", videoId: "AXFGVQl8Mz8" },
-  { id: "preview-7", title: "Postpidia", videoId: "jW6ePOJBpd8" },
-  { id: "preview-8", title: "Postpidia", videoId: "ho99v8xee94" },
-  { id: "preview-9", title: "Postpidia", videoId: "94Ds2UEEJSM" },
-  { id: "preview-10", title: "Postpidia", videoId: "3unpwlgHQ-8" },
-  { id: "preview-11", title: "Postpidia", videoId: "D4uKEh0m8ZQ" },
-  { id: "preview-12", title: "Postpidia", videoId: "6OSGcU-LTGk" },
+  { id: "preview-1", title: "Postpidia", videoId: "P3sQhWer6fg" },
+  { id: "preview-2", title: "Postpidia", videoId: "1EXZoROfTn8" },
+  { id: "preview-3", title: "Postpidia", videoId: "Zia6E6Pst_o" },
+  { id: "preview-4", title: "Postpidia", videoId: "x1C3_jST8vA" },
+  { id: "preview-5", title: "Postpidia", videoId: "z7Z0HIb3W0o" },
+  { id: "preview-6", title: "Postpidia", videoId: "XNr1NsN1Nig" },
+  { id: "preview-7", title: "Postpidia", videoId: "BYMqQ7rYNe4" },
+  { id: "preview-8", title: "Postpidia", videoId: "GscOOnWP9uk" },
 ];
 
 const previewChips = [
   {
     id: "chip-videos",
-    text: "12 Videos",
+    text: "8 Videos",
     className: "rounded-full bg-[#111827] px-3 py-1 text-white",
   },
   {
@@ -182,7 +178,7 @@ const VideoShowcasePreview = () => {
     <div className="flex flex-col">
       {/* TOP SECTION */}
       <section
-        className="relative bg-[#111111] overflow-hidden py-2 md:py-4 lg:py-8 font-sans"
+        className="relative bg-[#111111] overflow-hidden py-2 md:py-4 lg:py-8"
         id="portfolio-preview"
       >
         <div
@@ -206,18 +202,16 @@ const VideoShowcasePreview = () => {
                 <span className="text-white/30 text-xs font-semibold uppercase tracking-[2px]">Featured</span>
                 <span className="h-px w-8 bg-[#DF8885]/50" />
                 <span className="inline-flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1">
-                  <span className="text-[#DF8885] text-xs font-bold">Shevify</span>
-                  <span className="text-white/40 text-xs">&times;</span>
                   <span className="text-white text-xs font-bold">Postpidia</span>
                 </span>
               </div>
 
-              <h2 className="text-xl md:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-                Shevify Edits by Postpidia
+              <h2 className="text-xl sm:text-3xl lg:text-5xl font-light text-white leading-[1.1] tracking-tight">
+                Postpidia Edits
               </h2>
 
-              <p className="mt-2 text-sm text-white/90">
-                Real campaigns edited and optimized by the Postpidia team for Shevify — 
+              <p className="mt-2 text-[8px] sm:text-sm leading-relaxed text-white/90">
+                Real campaigns edited and optimized by Postpidia — 
                 scroll-stopping shorts that drive conversions.
               </p>
 
@@ -260,7 +254,7 @@ const VideoShowcasePreview = () => {
                   stiffness: 260,
                   damping: 22,
                 }}
-                className="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 group flex flex-col gap-2 will-change-transform"
+                className="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-3 group flex flex-col gap-2 will-change-transform"
               >
                 <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 transition-transform duration-300 group-hover:scale-[1.015]">
                   {!failedVideos.has(video.videoId) ? (
@@ -301,7 +295,7 @@ const VideoShowcasePreview = () => {
                 </div>
 
                 <div className="flex items-start justify-between px-1">
-                  <h3 className="text-[15px] font-medium leading-tight text-white line-clamp-2">
+                  <h3 className="text-[11px] sm:text-sm font-medium leading-tight text-white line-clamp-2">
                     {video.title}
                   </h3>
 
@@ -357,10 +351,10 @@ const VideoShowcasePreview = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className={`text-[10px] sm:text-lg md:text-3xl font-black tracking-tighter ${metric.valueColor}`}>
+                    <h3 className={`text-[10px] sm:text-lg md:text-3xl font-light tracking-tight ${metric.valueColor}`}>
                       {metric.value}
                     </h3>
-                    <p className={`mt-0.5 text-[7px] sm:text-[10px] md:text-xs font-bold uppercase tracking-[0.22em] line-clamp-2 ${metric.labelColor}`}>
+                    <p className={`mt-0.5 text-[7px] sm:text-[10px] md:text-xs font-medium uppercase tracking-[0.22em] line-clamp-2 ${metric.labelColor}`}>
                       {metric.label}
                     </p>
                   </div>
