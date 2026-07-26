@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   CheckCircle2,
   Users,
@@ -90,6 +90,14 @@ const metrics = [
   },
 ];
 
+const shevifyGoods = [
+  { id: "sweat", image: "/sweat.png" },
+  { id: "cap", image: "/cap.png" },
+  { id: "cap1", image: "/cap1.png" },
+  { id: "shirt", image: "/shirt.png" },
+  { id: "shirt1", image: "/shirt1.png" },
+];
+
 
 
 const containerVariants = {
@@ -156,28 +164,7 @@ const metricCardVariants = {
 };
 
 const VideoShowcasePreview = () => {
-  const [showAllMobileVideos, setShowAllMobileVideos] = useState(false);
   const [failedVideos, setFailedVideos] = useState<Set<string>>(new Set());
-
-  const [windowWidth, setWindowWidth] = useState(
-    typeof window !== "undefined" ? window.innerWidth : 768
-  );
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const isDesktop = windowWidth >= 768;
-
-  const mobileVisibleVideos = showAllMobileVideos
-    ? previewVideos
-    : previewVideos.slice(0, 4);
-
-  const visibleVideos = isDesktop ? previewVideos : mobileVisibleVideos;
 
   return (
     <div className="flex flex-col">
@@ -259,7 +246,7 @@ const VideoShowcasePreview = () => {
                   stiffness: 260,
                   damping: 22,
                 }}
-                className="col-span-12 sm:col-span-6 group flex flex-col gap-2 will-change-transform"
+                className="col-span-6 group flex flex-col gap-2 will-change-transform"
               >
                 <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 transition-transform duration-300 group-hover:scale-[1.015]">
                   {!failedVideos.has(video.videoId) ? (
@@ -320,7 +307,7 @@ const VideoShowcasePreview = () => {
             viewport={{ once: true }}
             className="grid grid-cols-12 gap-x-2 gap-y-6 sm:gap-x-4 sm:gap-y-8"
           >
-            {visibleVideos.map((video, index) => (
+            {previewVideos.map((video, index) => (
               <motion.div
                 key={video.id}
                 variants={cardVariants}
@@ -331,7 +318,7 @@ const VideoShowcasePreview = () => {
                   stiffness: 260,
                   damping: 22,
                 }}
-                className="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-3 group flex flex-col gap-2 will-change-transform"
+                className="col-span-3 group flex flex-col gap-2 will-change-transform"
               >
                 <div className="relative aspect-[9/16] w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 transition-transform duration-300 group-hover:scale-[1.015]">
                   {!failedVideos.has(video.videoId) ? (
@@ -383,17 +370,6 @@ const VideoShowcasePreview = () => {
               </motion.div>
             ))}
           </motion.div>
-
-          {/* MOBILE BUTTON */}
-          <div className="mt-6 flex justify-center md:hidden">
-            <button
-              type="button"
-              onClick={() => setShowAllMobileVideos((current) => !current)}
-              className="inline-flex items-center justify-center rounded-full border border-green-600/20 bg-[#16a34a] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-[#15803d]"
-            >
-              {showAllMobileVideos ? "View Less" : "View All"}
-            </button>
-          </div>
         </div>
       </section>
 
@@ -410,7 +386,7 @@ const VideoShowcasePreview = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="grid grid-cols-4 sm:grid-cols-2 lg:grid-cols-4 gap-1.5 sm:gap-3 md:gap-4 w-full"
+            className="grid grid-cols-4 gap-1.5 sm:gap-3 md:gap-4 w-full"
           >
             {metrics.map((metric, i) => (
               <motion.div
@@ -441,6 +417,79 @@ const VideoShowcasePreview = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* ABOUT SHEVIFY GOODS */}
+      <section className="relative bg-[#111111] overflow-hidden py-6 md:py-12 lg:py-16">
+        <div
+          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          style={{
+            backgroundImage: "repeating-linear-gradient(-45deg, transparent, transparent 120px, rgba(255,255,255,0.5) 120px, rgba(255,255,255,0.5) 121px)",
+          }}
+        />
+        <div className="relative z-10 mx-auto max-w-[1440px] px-3 sm:px-6">
+          <motion.div
+            variants={bottomVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="w-full"
+          >
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                <div>
+                  <h3 className="text-lg md:text-2xl font-bold text-white">
+                    About Postpidia Goods
+                  </h3>
+                  <p className="text-sm text-gray-400 mt-1">
+                    Premium US caps & shirts — made for creators.
+                  </p>
+                </div>
+              </div>
+              <Carousel items={shevifyGoods} />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+const Carousel = ({ items }: { items: typeof shevifyGoods }) => {
+  const marqueeGroups = [0, 1];
+
+  return (
+    <div className="relative overflow-hidden py-3 md:py-4">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-black via-black/85 to-transparent md:w-24" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-black via-black/85 to-transparent md:w-24" />
+
+      <div className="trusted-marquee-track marquee-track flex w-max items-stretch gap-0 will-change-transform">
+        {marqueeGroups.map((groupIndex) => (
+          <div key={groupIndex} className="flex shrink-0 items-stretch gap-6 pr-6 md:gap-8 md:pr-8">
+            {items.map((item, index) => (
+              <div
+                key={`${groupIndex}-${item.id}-${index}`}
+                className={`flex-shrink-0 ${
+                  item.id === "shirt" || item.id === "shirt1"
+                    ? "w-56 sm:w-72"
+                    : "w-48 sm:w-56"
+                }`}
+              >
+                <div className="w-full flex items-center justify-center">
+                  <img
+                    src={item.image}
+                    alt={item.id}
+                    className={`w-full object-contain ${
+                      item.id === "shirt" || item.id === "shirt1"
+                        ? "h-52 sm:h-60"
+                        : "h-44 sm:h-52"
+                    }`}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

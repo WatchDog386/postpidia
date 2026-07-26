@@ -91,8 +91,8 @@ function Landing() {
         <TrustedCreators />
         <HowItWorksSection />
         <BottomSection />
-        <PricingSection />
         <VideoShowcasePreview />
+        <PricingSection />
         <AboutPage isHomePage={true} />
         <ClientTestimonialsSection />
         <TestimonialsSection />
@@ -1275,7 +1275,12 @@ function CTASection() {
 }
 
 function Footer() {
-  const quickLinks = ["Services", "Pricing", "How It Works", "Contact"];
+  const quickLinks = [
+    { label: "Services", href: "#services" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "How It Works", href: "#how-it-works" },
+    { label: "Contact", href: "#contact" },
+  ];
   const legalLinks = ["Privacy Policy", "Terms of Service", "Legal Notice"];
 
   return (
@@ -1301,10 +1306,10 @@ function Footer() {
           <h4 className="text-[11px] font-medium text-white uppercase tracking-wider mb-4 border-l-2 border-[#f0514e] pl-3">Quick Links</h4>
           <ul className="space-y-2 text-xs font-semibold text-gray-400">
   {quickLinks.map((link) => (
-  <li key={link}>
-    <a href="#" className="hover:text-[#f0514e] transition-colors flex items-center gap-1.5 group">
+  <li key={link.label}>
+    <a href={link.href} onClick={(e) => { e.preventDefault(); document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" }); }} className="hover:text-[#f0514e] transition-colors flex items-center gap-1.5 group">
       <span className="w-1 h-1 bg-gray-600 rounded-full group-hover:bg-[#f0514e]" />
-      {link}
+      {link.label}
     </a>
   </li>
 ))}
