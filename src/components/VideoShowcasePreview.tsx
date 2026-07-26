@@ -23,10 +23,15 @@ const previewVideos: PreviewVideo[] = [
   { id: "preview-8", title: "Postpidia", videoId: "GscOOnWP9uk" },
 ];
 
+const logoVideos: PreviewVideo[] = [
+  { id: "logo-1", title: "Postpidia", videoId: "LtUjg7NM52A" },
+  { id: "logo-2", title: "Postpidia", videoId: "_4Ksf75uCx4" },
+];
+
 const previewChips = [
   {
     id: "chip-videos",
-    text: "8 Videos",
+    text: "10 Videos",
     className: "rounded-full bg-[#111827] px-3 py-1 text-white",
   },
   {
@@ -233,6 +238,78 @@ const VideoShowcasePreview = () => {
                 ))}
               </div>
             </div>
+          </motion.div>
+
+          {/* LOGO VIDEOS - Landscape */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-12 gap-x-2 gap-y-6 sm:gap-x-4 sm:gap-y-8 mb-6 md:mb-8 lg:mb-10"
+          >
+            {logoVideos.map((video, index) => (
+              <motion.div
+                key={video.id}
+                variants={cardVariants}
+                custom={index}
+                whileHover={{ y: -8, scale: 1.025 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 22,
+                }}
+                className="col-span-12 sm:col-span-6 group flex flex-col gap-2 will-change-transform"
+              >
+                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-800 transition-transform duration-300 group-hover:scale-[1.015]">
+                  {!failedVideos.has(video.videoId) ? (
+                    <iframe
+                      src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&mute=1&loop=1&playlist=${video.videoId}&controls=0&modestbranding=1&playsinline=1&rel=0`}
+                      title={video.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; autoplay"
+                      allowFullScreen
+                      onLoad={() => {
+                        setFailedVideos((prev) => {
+                          if (!prev.has(video.videoId)) return prev;
+                          const next = new Set(prev);
+                          next.delete(video.videoId);
+                          return next;
+                        });
+                      }}
+                      onError={() => {
+                        setFailedVideos((prev) => {
+                          if (prev.has(video.videoId)) return prev;
+                          const next = new Set(prev);
+                          next.add(video.videoId);
+                          return next;
+                        });
+                      }}
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/80">
+                      <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 font-semibold text-black">
+                        Unavailable
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
+
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                </div>
+
+                <div className="flex items-start justify-between px-1">
+                  <h3 className="text-[11px] sm:text-sm font-medium leading-tight text-white line-clamp-2">
+                    {video.title}
+                  </h3>
+
+                  <button className="text-white opacity-0 group-hover:opacity-100 transition-opacity p-1 -mr-1 -mt-1 hover:bg-white/10 rounded-full">
+                    <MoreVertical size={18} strokeWidth={2} />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
 
           {/* VIDEO GRID */}
