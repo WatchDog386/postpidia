@@ -38,6 +38,7 @@ import {
 import whyImg from "@/public/why.png";
 import { Input } from "@/components/ui/input";
 import { AboutPage } from "./about";
+import VideoShowcasePreview from "@/components/VideoShowcasePreview";
 import {
   Select,
   SelectContent,
@@ -91,6 +92,7 @@ function Landing() {
         <HowItWorksSection />
         <BottomSection />
         <PricingSection />
+        <VideoShowcasePreview />
         <AboutPage isHomePage={true} />
         <ClientTestimonialsSection />
         <TestimonialsSection />
@@ -315,15 +317,6 @@ function HeroSection() {
             </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="absolute bottom-16 right-12 text-right text-[13px] text-gray-400 leading-snug"
-          >
-            Give us a Call <span className="font-bold text-white">1-888-498-9240</span> and<br/>
-            We can set you up, or <a href="#" className="text-[#99B761] underline decoration-[#99B761]/50 underline-offset-2">check our<br/>pricing plans</a>
-          </motion.div>
         </motion.div>
 
       </div>
@@ -864,7 +857,7 @@ function PricingSection() {
                 <span className="text-white text-sm">&#9670;</span>
               </div>
               <span className="text-white text-[13px] font-bold leading-tight">
-                Basic Plan<br />$79/mo
+                Basic Plan<br />$99/mo
               </span>
             </div>
           </div>
