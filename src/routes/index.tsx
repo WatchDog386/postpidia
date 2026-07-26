@@ -826,46 +826,40 @@ function PricingSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col lg:flex-row items-start lg:items-center gap-12 lg:gap-20"
+          className="grid grid-cols-2 gap-4 sm:gap-12 lg:gap-20 items-center"
         >
-          <div className="flex-1">
-            <span className="text-[#DF8885] text-xs font-extrabold uppercase tracking-[3px] block mb-4">
-              Simple Pricing
-            </span>
+          <div>
             <h2 className="text-xl sm:text-3xl lg:text-5xl font-light text-white leading-[1.1] mb-5 whitespace-nowrap tracking-tight">
               View Our Pricing Plans
             </h2>
-            <p className="text-gray-400 text-[15px] leading-relaxed mb-8 max-w-sm font-medium">
+            <p className="leading-relaxed text-white text-[8px] sm:text-sm mb-4 sm:mb-8">
               Professional video editing for TikTok Shop, Instagram Reels, and YouTube Shorts. 
               We handle production so you can focus on growing your sales.
             </p>
 
-            <div className="bg-[#1a1a1a] border border-[#f0514e]/20 rounded-xl p-4 mb-8 max-w-sm">
-              <p className="text-white text-sm leading-relaxed">
-                <span className="text-[#f0514e] font-bold text-lg">3%</span> commission{" "}
+            <div className="hidden sm:block bg-[#1a1a1a] border border-[#f0514e]/20 rounded-lg sm:rounded-xl p-2 sm:p-4 mb-4 sm:mb-8">
+              <p className="text-white text-[9px] sm:text-sm leading-relaxed">
+                <span className="text-[#f0514e] font-bold text-sm sm:text-lg">3%</span> commission{" "}
                 <span className="font-semibold">only on videos that generate sales</span>.
                 <span className="text-gray-400 block sm:inline sm:ml-1"> No sale? No commission.</span>
               </p>
             </div>
 
             <Link to="/pricing">
-              <div className="inline-flex items-center gap-3 bg-[#00d084] hover:bg-[#00d084]/90 text-white font-bold text-[15px] px-8 py-4 rounded-full shadow-lg shadow-[#00d084]/30 transition-all duration-300 hover:translate-y-[-3px]">
-                See Plans & Pricing <span className="text-lg leading-none">&rarr;</span>
+              <div className="inline-flex items-center gap-2 sm:gap-3 bg-[#00d084] hover:bg-[#00d084]/90 text-white font-bold text-[10px] sm:text-[15px] px-3 sm:px-8 py-2 sm:py-4 rounded-full shadow-lg shadow-[#00d084]/30 transition-all duration-300 hover:translate-y-[-3px]">
+                See Plans & Pricing <span className="text-sm sm:text-lg leading-none">&rarr;</span>
               </div>
             </Link>
 
-            <p className="text-gray-600 text-[12px] mt-4">
-              Starting from $79/mo &middot; Cancel anytime
-            </p>
           </div>
 
-          <div className="hidden lg:block flex-1 relative min-h-[500px] w-full">
+          <div className="relative min-h-[180px] sm:min-h-[250px] lg:min-h-[500px] w-full">
             <div
-              className="absolute w-[380px] h-[380px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[40%_60%_70%_30%_/_40%_50%_60%_50%] -rotate-[15deg]"
+              className="absolute w-[160px] h-[160px] sm:w-[220px] sm:h-[220px] lg:w-[380px] lg:h-[380px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[40%_60%_70%_30%_/_40%_50%_60%_50%] -rotate-[15deg]"
               style={{ background: "url(/pricing.png) center/cover, #00d084" }}
             />
 
-            <div className="absolute bottom-[30%] left-[-5%] bg-gradient-to-r from-[#DF8885] to-[#f0514e] px-5 py-3 rounded-[14px] shadow-xl shadow-[#DF8885]/20 flex items-center gap-3">
+            <div className="hidden sm:flex absolute bottom-[30%] left-[-5%] bg-gradient-to-r from-[#DF8885] to-[#f0514e] px-5 py-3 rounded-[14px] shadow-xl shadow-[#DF8885]/20 flex items-center gap-3">
               <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
                 <span className="text-white text-sm">&#9670;</span>
               </div>
