@@ -47,10 +47,9 @@ const previewChips = [
 
 const shevifyGoods = [
   { id: "sweat", image: "/sweat.png" },
-  { id: "cap", image: "/cap.png" },
-  { id: "cap1", image: "/cap1.png" },
-  { id: "shirt", image: "/shirt.png" },
-  { id: "shirt1", image: "/shirt1.png" },
+  { id: "sweat1", image: "/sweat1.png" },
+  { id: "flask", image: "/flask.png" },
+  { id: "flask1", image: "/flask1.png" },
 ];
 
 
@@ -330,7 +329,7 @@ const VideoShowcasePreview = () => {
               <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
                 <div>
                   <h3 className="text-xl sm:text-3xl lg:text-5xl font-light text-white leading-[1.1] tracking-tight">
-                    About Postpidia Goods
+                    Postpidia Goodies
                   </h3>
                   <p className="mt-2 text-[8px] sm:text-sm leading-relaxed text-white/90">
                     Premium US caps & shirts — made for creators.
