@@ -103,7 +103,7 @@ function PaymentPage() {
       });
 
       if (res.status && res.data.authorization_url) {
-        window.open(res.data.authorization_url, "_blank");
+        window.location.href = res.data.authorization_url;
       } else {
         toast.error(res.message || "Failed to initialize payment.");
         setStep("details");
