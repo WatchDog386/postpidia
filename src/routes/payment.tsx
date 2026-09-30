@@ -99,7 +99,7 @@ function PaymentPage() {
 
     try {
       const res = await initializePayment({
-        data: { email, amount: totalAmount, plan, billing },
+        data: { email, amount: totalAmount, plan, billing, returnUrl: window.location.origin + "/payment" },
       });
 
       if (res.status && res.data.authorization_url) {
@@ -108,7 +108,8 @@ function PaymentPage() {
         toast.error(res.message || "Failed to initialize payment.");
         setStep("details");
       }
-    } catch {
+    } catch (err) {
+      console.error("Payment error:", err);
       toast.error("Payment could not be processed. Please try again.");
       setStep("details");
     }

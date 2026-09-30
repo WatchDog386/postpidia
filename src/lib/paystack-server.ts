@@ -15,9 +15,9 @@ function getSecretKey(): string {
 }
 
 export const initializePayment = createServerFn({ method: "POST" })
-  .validator((d: { email: string; amount: number; plan: string; billing: string }) => d)
+  .validator((d: { email: string; amount: number; plan: string; billing: string; returnUrl: string }) => d)
   .handler(async ({ data }) => {
-    const { email, amount, plan, billing } = data;
+    const { email, amount, plan, billing, returnUrl } = data;
 
     const res = await fetch(`${API}/transaction/initialize`, {
       method: "POST",
@@ -30,6 +30,7 @@ export const initializePayment = createServerFn({ method: "POST" })
         amount: amount * 100,
         currency: "USD",
         metadata: { plan, billing },
+        return_url: returnUrl,
       }),
     });
 
