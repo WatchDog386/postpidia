@@ -34,7 +34,7 @@ export const Route = createFileRoute("/about")({
   component: AboutPage,
 });
 
-export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
+function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
   const navigate = useNavigate();
   const [testimonialIndex, setTestimonialIndex] = useState(0);
 

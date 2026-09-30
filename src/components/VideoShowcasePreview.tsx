@@ -190,7 +190,10 @@ const VideoShowcasePreview = () => {
                       src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&mute=1&loop=1&playlist=${video.videoId}&controls=0&modestbranding=1&playsinline=1&rel=0`}
                       title={video.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; autoplay"
+<<<<<<< HEAD
                       allowFullScreen
+=======
+>>>>>>> d520e49 (Update Paystack keys, fix iframe allowFullScreen warning, fix about.tsx code-splitting)
                       onLoad={() => {
                         setFailedVideos((prev) => {
                           if (!prev.has(video.videoId)) return prev;
@@ -262,7 +265,6 @@ const VideoShowcasePreview = () => {
                       src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&mute=1&loop=1&playlist=${video.videoId}&controls=0&modestbranding=1&playsinline=1&rel=0`}
                       title={video.title}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen; autoplay"
-                      allowFullScreen
                       onLoad={() => {
                         setFailedVideos((prev) => {
                           if (!prev.has(video.videoId)) return prev;
