@@ -37,7 +37,7 @@ import {
 } from "@/components/ui/dialog";
 import whyImg from "@/public/why.png";
 import { Input } from "@/components/ui/input";
-import { AboutPage } from "./about";
+import { AboutPage } from "@/components/AboutPage";
 import VideoShowcasePreview from "@/components/VideoShowcasePreview";
 import {
   Select,
