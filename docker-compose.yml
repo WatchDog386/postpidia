@@ -1,0 +1,38 @@
+# One-server setup: PostgreSQL + the Postpidia app (frontend, API and file storage).
+#   cp .env.example .env   # then edit the values
+#   docker compose up -d --build
+#   docker compose exec app node scripts/make-admin.mjs you@example.com
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: postpidia
+      POSTGRES_USER: postpidia
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postpidia -d postpidia"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://postpidia:${POSTGRES_PASSWORD}@db:5432/postpidia
+      UPLOAD_DIR: /data/uploads
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    volumes:
+      - uploads:/data/uploads
+
+volumes:
+  pgdata:
+  uploads:

@@ -1,29 +1,17 @@
 import { createServerFn } from "@tanstack/react-start";
-import { createClient } from "@supabase/supabase-js";
+import { z } from "zod";
 import { planTotal } from "./plans";
+import { db } from "@/server/db.server";
+import { currentUser } from "@/server/auth.server";
 
 const API = "https://api.paystack.co";
 
 function getSecretKey(): string {
   const key = process.env.PAYSTACK_SECRET_KEY;
   if (!key) {
-    throw new Error(
-      "PAYSTACK_SECRET_KEY is not set. " +
-        "For Vercel: add it in Project Settings > Environment Variables. " +
-        "For local dev: add it to your .env file.",
-    );
+    throw new Error("PAYSTACK_SECRET_KEY is not set. Add it to the server's environment (.env).");
   }
   return key;
-}
-
-function serverSupabase() {
-  const url =
-    process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || import.meta.env.VITE_SUPABASE_URL;
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !serviceKey) return null;
-  return createClient(url, serviceKey, {
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
 }
 
 type PaystackVerify = {
@@ -42,34 +30,29 @@ type PaystackVerify = {
 
 export const initializePayment = createServerFn({ method: "POST" })
   .validator(
-    (d: {
-      email: string;
-      plan: string;
-      billing: string;
-      returnUrl: string;
-      userId?: string | null;
-    }) => d,
+    z.object({
+      email: z.string().trim().email(),
+      plan: z.string(),
+      billing: z.enum(["monthly", "yearly"]),
+      returnUrl: z.string().url(),
+    }),
   )
   .handler(async ({ data }) => {
-    const { email, plan, billing, returnUrl, userId } = data;
+    const { email, plan, billing, returnUrl } = data;
+    const user = await currentUser();
 
     // Price is looked up on the server so it can't be changed via the URL.
     const amount = planTotal(plan, billing);
-    if (amount == null) {
-      return { status: false, message: `Unknown plan "${plan}".`, data: null };
-    }
+    if (amount == null) return { status: false, message: `Unknown plan "${plan}".`, data: null };
 
     const res = await fetch(`${API}/transaction/initialize`, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${getSecretKey()}`,
-        "Content-Type": "application/json",
-      },
+      headers: { Authorization: `Bearer ${getSecretKey()}`, "Content-Type": "application/json" },
       body: JSON.stringify({
         email,
         amount: amount * 100,
         currency: "USD",
-        metadata: { plan, billing, user_id: userId ?? null },
+        metadata: { plan, billing, user_id: user?.id ?? null },
         callback_url: returnUrl,
       }),
     });
@@ -81,12 +64,9 @@ export const initializePayment = createServerFn({ method: "POST" })
     }>;
   });
 
-/**
- * Verify a Paystack transaction and record the subscription server-side.
- * Requires SUPABASE_SERVICE_ROLE_KEY; without it the payment is still verified but not stored.
- */
+/** Verify a Paystack transaction and record the subscription in PostgreSQL. */
 export const confirmPayment = createServerFn({ method: "POST" })
-  .validator((d: { reference: string }) => d)
+  .validator(z.object({ reference: z.string().min(1).max(200) }))
   .handler(async ({ data }) => {
     const res = await fetch(`${API}/transaction/verify/${encodeURIComponent(data.reference)}`, {
       headers: { Authorization: `Bearer ${getSecretKey()}` },
@@ -104,36 +84,15 @@ export const confirmPayment = createServerFn({ method: "POST" })
       return { ok: false as const, message: "Paid amount does not match the selected plan." };
     }
 
-    const result = {
-      ok: true as const,
-      email: body.data.customer.email,
-      plan,
-      billing,
-      amount: body.data.amount / 100,
-      saved: false,
-    };
+    const amount = body.data.amount / 100;
+    await db()`
+      insert into subscriptions (user_id, email, plan, billing, amount, reference, status, paid_at)
+      values (
+        (select id from users where id = ${user_id || null}::uuid),
+        ${body.data.customer.email}, ${plan}, ${billing}, ${amount}, ${body.data.reference}, 'active', ${body.data.paid_at}
+      )
+      on conflict (reference) do nothing
+    `;
 
-    const admin = serverSupabase();
-    if (!admin) {
-      console.error(
-        "SUPABASE_SERVICE_ROLE_KEY is not set — subscription was verified but not saved.",
-      );
-      return result;
-    }
-
-    const { error } = await admin.from("subscriptions").upsert(
-      {
-        email: body.data.customer.email,
-        user_id: user_id || null,
-        plan,
-        billing,
-        amount: body.data.amount / 100,
-        reference: body.data.reference,
-        status: "active",
-        paid_at: body.data.paid_at,
-      },
-      { onConflict: "reference" },
-    );
-    if (error) console.error("Saving subscription failed:", error);
-    return { ...result, saved: !error };
+    return { ok: true as const, email: body.data.customer.email, plan, billing, amount };
   });

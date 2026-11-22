@@ -1,0 +1,8 @@
+node_modules
+.output
+.vercel
+.nitro
+.tanstack
+.git
+.env
+uploads

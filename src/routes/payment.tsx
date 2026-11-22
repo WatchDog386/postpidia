@@ -10,7 +10,7 @@ export const Route = createFileRoute("/payment")({
   component: PaymentPage,
   validateSearch: (search: Record<string, unknown>) => ({
     plan: typeof search.plan === "string" && search.plan in PLAN_PRICES ? search.plan : "Basic",
-    billing: search.billing === "yearly" ? "yearly" : "monthly",
+    billing: search.billing === "yearly" ? ("yearly" as const) : ("monthly" as const),
     trxref: typeof search.trxref === "string" ? search.trxref : "",
     reference: typeof search.reference === "string" ? search.reference : "",
   }),
@@ -64,7 +64,6 @@ function PaymentPage() {
           email,
           plan,
           billing,
-          userId: user?.id ?? null,
           returnUrl: window.location.origin + "/payment",
         },
       });

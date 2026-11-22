@@ -13,15 +13,19 @@ import {
   ShieldCheck,
   Star,
   Trash2,
+  Play,
+  X,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
+import type { Project, ProjectFile, ProjectMessage, ProjectStatus, User } from "@/lib/types";
 import {
-  supabase,
-  type Project,
-  type ProjectFile,
-  type ProjectMessage,
-  type ProjectStatus,
-} from "@/lib/supabase";
+  deleteProjectFile,
+  editorUpdateProject,
+  getProject,
+  postMessage,
+  setProjectStatus,
+} from "@/lib/api/projects";
+import { errorMessage } from "@/lib/errors";
 import {
   formatBytes,
   formatDate,
@@ -30,7 +34,7 @@ import {
   STATUS_META,
   VIDEO_TYPES,
 } from "@/lib/project-meta";
-import { signedUrl, uploadProjectFiles } from "@/lib/uploads";
+import { fileUrl, uploadProjectFiles } from "@/lib/uploads";
 import { AppShell, Card, PageLoader, Spinner } from "@/components/app/AppShell";
 import { RequireAuth } from "@/components/app/RequireAuth";
 import { FilePicker, type PickedFile } from "@/components/app/FilePicker";
@@ -59,18 +63,22 @@ function ProjectPage() {
   const [files, setFiles] = useState<ProjectFile[]>([]);
   const [messages, setMessages] = useState<ProjectMessage[]>([]);
   const [hasReview, setHasReview] = useState(false);
+  const [customer, setCustomer] = useState<Pick<
+    User,
+    "full_name" | "email" | "company" | "phone"
+  > | null>(null);
 
   const load = useCallback(async () => {
-    const [p, f, m, r] = await Promise.all([
-      supabase.from("projects").select("*").eq("id", projectId).maybeSingle(),
-      supabase.from("project_files").select("*").eq("project_id", projectId).order("created_at"),
-      supabase.from("project_messages").select("*").eq("project_id", projectId).order("created_at"),
-      supabase.from("reviews").select("id").eq("project_id", projectId).limit(1),
-    ]);
-    setProject((p.data as Project | null) ?? null);
-    setFiles((f.data as ProjectFile[]) ?? []);
-    setMessages((m.data as ProjectMessage[]) ?? []);
-    setHasReview((r.data?.length ?? 0) > 0);
+    try {
+      const res = await getProject({ data: { id: projectId } });
+      setProject(res?.project ?? null);
+      setFiles(res?.files ?? []);
+      setMessages(res?.messages ?? []);
+      setHasReview(res?.hasReview ?? false);
+      setCustomer(res?.customer ?? null);
+    } catch {
+      setProject(null);
+    }
   }, [projectId]);
 
   useEffect(() => {
@@ -98,10 +106,11 @@ function ProjectPage() {
   const open = !["completed", "cancelled"].includes(project.status);
 
   const setStatus = async (status: ProjectStatus, note?: string) => {
-    const { error } = await supabase.from("projects").update({ status }).eq("id", project.id);
-    if (error) return toast.error(error.message);
-    if (note)
-      await supabase.from("project_messages").insert({ project_id: project.id, body: note });
+    try {
+      await setProjectStatus({ data: { id: project.id, status, note } });
+    } catch (err) {
+      return toast.error(errorMessage(err));
+    }
     toast.success(`Project marked as ${STATUS_META[status].label.toLowerCase()}.`);
     void load();
   };
@@ -201,6 +210,20 @@ function ProjectPage() {
 
         <div className="space-y-4">
           {isAdmin && <EditorPanel project={project} onSaved={load} />}
+          {isAdmin && customer && (
+            <Card className="p-4 md:p-6">
+              <h2 className="mb-3 text-[15px] font-semibold text-white">Customer</h2>
+              <p className="text-sm text-gray-200">{customer.full_name || customer.email}</p>
+              {customer.company && <p className="text-xs text-gray-500">{customer.company}</p>}
+              <a
+                href={`mailto:${customer.email}`}
+                className="mt-2 block text-xs text-[#f0514e] hover:underline"
+              >
+                {customer.email}
+              </a>
+              {customer.phone && <p className="mt-1 text-xs text-gray-400">{customer.phone}</p>}
+            </Card>
+          )}
 
           <Card className="p-4 md:p-6">
             <h2 className="mb-4 text-[15px] font-semibold text-white">Brief</h2>
@@ -277,13 +300,12 @@ function FileList({
   onDeleted?: () => void;
 }) {
   const [busy, setBusy] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
 
   const download = async (f: ProjectFile) => {
     setBusy(f.id);
     try {
-      window.open(await signedUrl(f.bucket, f.path, f.file_name), "_blank", "noopener");
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Could not create download link.");
+      window.location.assign(fileUrl(f.id));
     } finally {
       setBusy(null);
     }
@@ -292,10 +314,12 @@ function FileList({
   const remove = async (f: ProjectFile) => {
     if (!confirm(`Delete ${f.file_name}?`)) return;
     setBusy(f.id);
-    await supabase.storage.from(f.bucket).remove([f.path]);
-    const { error } = await supabase.from("project_files").delete().eq("id", f.id);
+    try {
+      await deleteProjectFile({ data: { fileId: f.id } });
+    } catch (err) {
+      toast.error(errorMessage(err));
+    }
     setBusy(null);
-    if (error) toast.error(error.message);
     onDeleted?.();
   };
 
@@ -304,39 +328,61 @@ function FileList({
       {files.map((f) => (
         <li
           key={f.id}
-          className={`flex items-center gap-3 rounded-xl border p-3 ${accent ? "border-[#00d084]/20 bg-[#00d084]/[0.06]" : "border-white/[0.07] bg-[#141414]"}`}
+          className={`rounded-xl border ${accent ? "border-[#00d084]/20 bg-[#00d084]/[0.06]" : "border-white/[0.07] bg-[#141414]"}`}
         >
-          <FileVideo
-            className={`h-5 w-5 shrink-0 ${accent ? "text-[#00d084]" : "text-gray-500"}`}
-          />
-          <div className="min-w-0 flex-1">
-            <p className="truncate text-sm text-gray-200">{f.file_name}</p>
-            <p className="text-[11px] text-gray-500">
-              {formatBytes(f.size_bytes)} · {formatDate(f.created_at)}
-            </p>
-          </div>
-          {canDelete && (
-            <button
-              onClick={() => void remove(f)}
-              disabled={busy === f.id}
-              className="rounded-full p-2 text-gray-500 hover:bg-white/5 hover:text-red-400"
-              aria-label={`Delete ${f.file_name}`}
-            >
-              <Trash2 className="h-4 w-4" />
-            </button>
-          )}
-          <button
-            onClick={() => void download(f)}
-            disabled={busy === f.id}
-            className={`flex h-9 items-center gap-1.5 rounded-full px-3 text-xs font-semibold ${accent ? "bg-[#00d084] text-black" : "bg-white/10 text-white"} hover:opacity-90`}
-          >
-            {busy === f.id ? (
-              <Spinner className="h-3.5 w-3.5" />
-            ) : (
-              <Download className="h-3.5 w-3.5" />
+          <div className="flex items-center gap-3 p-3">
+            <FileVideo
+              className={`h-5 w-5 shrink-0 ${accent ? "text-[#00d084]" : "text-gray-500"}`}
+            />
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm text-gray-200">{f.file_name}</p>
+              <p className="text-[11px] text-gray-500">
+                {formatBytes(f.size_bytes)} · {formatDate(f.created_at)}
+              </p>
+            </div>
+            {f.mime_type?.startsWith("video/") && (
+              <button
+                onClick={() => setPreview(preview === f.id ? null : f.id)}
+                className="rounded-full p-2 text-gray-400 hover:bg-white/5 hover:text-white"
+                aria-label={
+                  preview === f.id ? `Close preview of ${f.file_name}` : `Preview ${f.file_name}`
+                }
+              >
+                {preview === f.id ? <X className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+              </button>
             )}
-            <span className="hidden sm:inline">Download</span>
-          </button>
+            {canDelete && (
+              <button
+                onClick={() => void remove(f)}
+                disabled={busy === f.id}
+                className="rounded-full p-2 text-gray-500 hover:bg-white/5 hover:text-red-400"
+                aria-label={`Delete ${f.file_name}`}
+              >
+                <Trash2 className="h-4 w-4" />
+              </button>
+            )}
+            <button
+              onClick={() => void download(f)}
+              disabled={busy === f.id}
+              className={`flex h-9 items-center gap-1.5 rounded-full px-3 text-xs font-semibold ${accent ? "bg-[#00d084] text-black" : "bg-white/10 text-white"} hover:opacity-90`}
+            >
+              {busy === f.id ? (
+                <Spinner className="h-3.5 w-3.5" />
+              ) : (
+                <Download className="h-3.5 w-3.5" />
+              )}
+              <span className="hidden sm:inline">Download</span>
+            </button>
+          </div>
+          {preview === f.id && (
+            <video
+              src={fileUrl(f.id, true)}
+              controls
+              playsInline
+              autoPlay
+              className="max-h-[70vh] w-full rounded-b-xl bg-black"
+            />
+          )}
         </li>
       ))}
     </ul>
@@ -362,8 +408,6 @@ function AddFiles({
     setBusy(true);
     const failed = await uploadProjectFiles({
       projectId: project.id,
-      customerId: project.customer_id,
-      uploaderId: user.id,
       kind,
       files: files.filter((f) => !f.done),
       onUpdate: (id, patch) =>
@@ -488,11 +532,13 @@ function Messages({
     e.preventDefault();
     if (!body.trim()) return;
     setBusy(true);
-    const { error } = await supabase
-      .from("project_messages")
-      .insert({ project_id: project.id, body: body.trim() });
+    try {
+      await postMessage({ data: { projectId: project.id, body: body.trim() } });
+    } catch (err) {
+      setBusy(false);
+      return toast.error(errorMessage(err));
+    }
     setBusy(false);
-    if (error) return toast.error(error.message);
     setBody("");
     onSent();
   };
@@ -574,12 +620,15 @@ function EditorPanel({ project, onSaved }: { project: Project; onSaved: () => vo
 
   const save = async () => {
     setBusy(true);
-    const { error } = await supabase
-      .from("projects")
-      .update({ status, editor_notes: notes.trim() || null })
-      .eq("id", project.id);
+    try {
+      await editorUpdateProject({
+        data: { id: project.id, status, editor_notes: notes.trim() || null },
+      });
+    } catch (err) {
+      setBusy(false);
+      return toast.error(errorMessage(err));
+    }
     setBusy(false);
-    if (error) return toast.error(error.message);
     toast.success("Project updated.");
     onSaved();
   };

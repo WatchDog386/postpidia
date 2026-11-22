@@ -11,16 +11,16 @@ import {
   Star,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth";
-import { supabase, type Subscription } from "@/lib/supabase";
+import type { Subscription } from "@/lib/types";
+import { changePassword as changePasswordFn, updateProfile } from "@/lib/api/auth";
+import { listMySubscriptions } from "@/lib/api/projects";
+import { errorMessage } from "@/lib/errors";
 import { formatDate } from "@/lib/project-meta";
 import { AppShell, Avatar, Card, Spinner } from "@/components/app/AppShell";
 import { RequireAuth } from "@/components/app/RequireAuth";
 import { inputClass, labelClass, primaryBtn } from "@/components/app/bits";
 
 export const Route = createFileRoute("/account")({
-  validateSearch: (s: Record<string, unknown>): { reset?: string } => ({
-    reset: typeof s.reset === "string" ? s.reset : undefined,
-  }),
   head: () => ({ meta: [{ title: "Account — Postpidia" }] }),
   component: () => (
     <RequireAuth>
@@ -30,13 +30,12 @@ export const Route = createFileRoute("/account")({
 });
 
 function AccountPage() {
-  const { user, profile, isAdmin, refreshProfile, signOut } = useAuth();
-  const { reset } = Route.useSearch();
+  const { user, profile, isAdmin, setUser, signOut } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({ full_name: "", company: "", phone: "" });
   const [busy, setBusy] = useState(false);
   const [subs, setSubs] = useState<Subscription[]>([]);
-  const [pw, setPw] = useState("");
+  const [pw, setPw] = useState({ current: "", next: "" });
 
   useEffect(() => {
     if (profile)
@@ -48,37 +47,43 @@ function AccountPage() {
   }, [profile]);
 
   useEffect(() => {
-    supabase
-      .from("subscriptions")
-      .select("*")
-      .order("paid_at", { ascending: false })
-      .then(({ data }) => setSubs((data as Subscription[]) ?? []));
+    listMySubscriptions()
+      .then(setSubs)
+      .catch(() => setSubs([]));
   }, [user]);
 
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
     setBusy(true);
-    const { error } = await supabase
-      .from("profiles")
-      .update({
-        full_name: form.full_name.trim(),
-        company: form.company.trim(),
-        phone: form.phone.trim(),
-      })
-      .eq("id", user.id);
-    setBusy(false);
-    if (error) return toast.error(error.message);
-    toast.success("Profile saved.");
-    void refreshProfile();
+    try {
+      setUser(
+        await updateProfile({
+          data: {
+            full_name: form.full_name.trim(),
+            company: form.company.trim(),
+            phone: form.phone.trim(),
+          },
+        }),
+      );
+      toast.success("Profile saved.");
+    } catch (err) {
+      toast.error(errorMessage(err));
+    } finally {
+      setBusy(false);
+    }
   };
 
   const changePassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { error } = await supabase.auth.updateUser({ password: pw });
-    if (error) return toast.error(error.message);
-    setPw("");
-    toast.success("Password updated.");
+    try {
+      const res = await changePasswordFn({ data: { current: pw.current, password: pw.next } });
+      if (!res.ok) return void toast.error(res.error);
+      setPw({ current: "", next: "" });
+      toast.success("Password updated.");
+    } catch (err) {
+      toast.error(errorMessage(err));
+    }
   };
 
   const active = subs.find((s) => s.status === "active");
@@ -188,12 +193,20 @@ function AccountPage() {
           </Card>
         )}
 
-        <Card className={`p-5 ${reset ? "border-[#f0514e]/40" : ""}`}>
+        <Card className="p-5">
           <h2 className="mb-4 flex items-center gap-2 text-[15px] font-semibold text-white">
-            <Shield className="h-4 w-4 text-gray-500" />{" "}
-            {reset ? "Set a new password" : "Change password"}
+            <Shield className="h-4 w-4 text-gray-500" /> Change password
           </h2>
           <form onSubmit={changePassword} className="flex flex-col gap-3 sm:flex-row">
+            <input
+              type="password"
+              required
+              autoComplete="current-password"
+              className={inputClass}
+              placeholder="Current password"
+              value={pw.current}
+              onChange={(e) => setPw({ ...pw, current: e.target.value })}
+            />
             <input
               type="password"
               minLength={8}
@@ -201,8 +214,8 @@ function AccountPage() {
               autoComplete="new-password"
               className={inputClass}
               placeholder="New password (8+ characters)"
-              value={pw}
-              onChange={(e) => setPw(e.target.value)}
+              value={pw.next}
+              onChange={(e) => setPw({ ...pw, next: e.target.value })}
             />
             <button type="submit" className={`${primaryBtn} shrink-0`}>
               Update

@@ -3,7 +3,8 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Link2, Send } from "lucide-react";
 import { useAuth } from "@/lib/auth";
-import { supabase } from "@/lib/supabase";
+import { createProject } from "@/lib/api/projects";
+import { errorMessage } from "@/lib/errors";
 import { ASPECT_RATIOS, PLATFORMS, VIDEO_TYPES } from "@/lib/project-meta";
 import { uploadProjectFiles } from "@/lib/uploads";
 import { AppShell, Card, Spinner } from "@/components/app/AppShell";
@@ -88,33 +89,29 @@ function UploadPage() {
       return;
     }
     setBusy(true);
-    const { data: project, error } = await supabase
-      .from("projects")
-      .insert({
-        customer_id: user.id,
-        title: form.title.trim(),
-        platform: form.platform,
-        video_type: form.video_type,
-        aspect_ratio: form.aspect_ratio,
-        target_length: form.target_length || null,
-        deadline: form.deadline || null,
-        style_notes: form.style_notes.trim() || null,
-        music_preference: form.music_preference.trim() || null,
-        footage_link: form.footage_link.trim() || null,
-      })
-      .select("id")
-      .single();
-
-    if (error || !project) {
+    let project: { id: string };
+    try {
+      project = await createProject({
+        data: {
+          title: form.title.trim(),
+          platform: form.platform,
+          video_type: form.video_type,
+          aspect_ratio: form.aspect_ratio,
+          target_length: form.target_length || null,
+          deadline: form.deadline || null,
+          style_notes: form.style_notes.trim() || null,
+          music_preference: form.music_preference.trim() || null,
+          footage_link: form.footage_link.trim() || null,
+        },
+      });
+    } catch (err) {
       setBusy(false);
-      toast.error(error?.message ?? "Could not create the project.");
+      toast.error(errorMessage(err, "Could not create the project."));
       return;
     }
 
     const failed = await uploadProjectFiles({
       projectId: project.id,
-      customerId: user.id,
-      uploaderId: user.id,
       kind: "raw",
       files: files.filter((f) => !f.done),
       onUpdate: patchFile,

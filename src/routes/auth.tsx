@@ -3,14 +3,18 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Clapperboard, Eye, EyeOff, Film, Sparkles, Upload } from "lucide-react";
 import { useAuth } from "@/lib/auth";
-import { isSupabaseConfigured, supabase } from "@/lib/supabase";
+import { requestPasswordReset, resetPassword, signIn, signUp } from "@/lib/api/auth";
+import { errorMessage } from "@/lib/errors";
 import { inputClass, labelClass, primaryBtn } from "@/components/app/bits";
 import { Spinner } from "@/components/app/AppShell";
 
 type Mode = "signin" | "signup" | "reset";
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (s: Record<string, unknown>): { mode?: Mode; redirect?: string } => ({
+  validateSearch: (
+    s: Record<string, unknown>,
+  ): { mode?: Mode; redirect?: string; token?: string } => ({
+    token: typeof s.token === "string" ? s.token : undefined,
     mode: s.mode === "signup" || s.mode === "reset" ? s.mode : undefined,
     redirect: typeof s.redirect === "string" && s.redirect.startsWith("/") ? s.redirect : undefined,
   }),
@@ -19,9 +23,10 @@ export const Route = createFileRoute("/auth")({
 });
 
 function AuthPage() {
-  const { mode = "signin", redirect } = Route.useSearch();
+  const { mode = "signin", redirect, token } = Route.useSearch();
+  const settingNew = mode === "reset" && Boolean(token);
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
+  const { user, loading, setUser } = useAuth();
   const [form, setForm] = useState({ name: "", company: "", email: "", password: "" });
   const [showPw, setShowPw] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -36,39 +41,35 @@ function AuthPage() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isSupabaseConfigured) {
-      toast.error("Accounts aren't configured yet (missing Supabase env vars).");
-      return;
-    }
     setBusy(true);
     try {
       if (mode === "signup") {
-        const { data, error } = await supabase.auth.signUp({
-          email: form.email.trim(),
-          password: form.password,
-          options: {
-            data: { full_name: form.name.trim(), company: form.company.trim() },
-            emailRedirectTo: `${window.location.origin}/dashboard`,
+        const res = await signUp({
+          data: {
+            email: form.email,
+            password: form.password,
+            full_name: form.name,
+            company: form.company,
           },
         });
-        if (error) throw error;
-        if (!data.session) setCheckEmail(true);
-        else toast.success("Welcome to Postpidia!");
+        if (!res.ok) return void toast.error(res.error);
+        toast.success("Welcome to Postpidia!");
+        setUser(res.user);
       } else if (mode === "signin") {
-        const { error } = await supabase.auth.signInWithPassword({
-          email: form.email.trim(),
-          password: form.password,
-        });
-        if (error) throw error;
+        const res = await signIn({ data: { email: form.email, password: form.password } });
+        if (!res.ok) return void toast.error(res.error);
+        setUser(res.user);
+      } else if (settingNew && token) {
+        const res = await resetPassword({ data: { token, password: form.password } });
+        if (!res.ok) return void toast.error(res.error);
+        toast.success("Password updated — you're signed in.");
+        setUser(res.user);
       } else {
-        const { error } = await supabase.auth.resetPasswordForEmail(form.email.trim(), {
-          redirectTo: `${window.location.origin}/account?reset=1`,
-        });
-        if (error) throw error;
-        toast.success("Check your inbox for a reset link.");
+        await requestPasswordReset({ data: { email: form.email } });
+        setCheckEmail(true);
       }
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Something went wrong.");
+      toast.error(errorMessage(err));
     } finally {
       setBusy(false);
     }
@@ -77,9 +78,11 @@ function AuthPage() {
   const heading =
     mode === "signup"
       ? "Create your account"
-      : mode === "reset"
-        ? "Reset your password"
-        : "Welcome back";
+      : settingNew
+        ? "Choose a new password"
+        : mode === "reset"
+          ? "Reset your password"
+          : "Welcome back";
 
   return (
     <div className="min-h-screen bg-[#111111] md:grid md:grid-cols-2">
@@ -125,10 +128,10 @@ function AuthPage() {
         <div className="w-full max-w-sm">
           {checkEmail ? (
             <div className="text-center">
-              <h1 className="text-2xl font-semibold text-white">Confirm your email</h1>
+              <h1 className="text-2xl font-semibold text-white">Check your inbox</h1>
               <p className="mt-3 text-sm text-gray-400">
-                We sent a confirmation link to <span className="text-white">{form.email}</span>.
-                Open it to activate your account, then sign in.
+                If an account exists for <span className="text-white">{form.email}</span>,
+                we&apos;ve sent a link to reset your password. It expires in 1 hour.
               </p>
               <button
                 className={`${primaryBtn} mt-8 w-full`}
@@ -146,9 +149,11 @@ function AuthPage() {
               <p className="mt-2 text-sm text-gray-400">
                 {mode === "signup"
                   ? "Start sending footage to our editors in minutes."
-                  : mode === "reset"
-                    ? "We'll email you a link to set a new password."
-                    : "Sign in to upload footage and follow your edits."}
+                  : settingNew
+                    ? "Enter a new password for your account."
+                    : mode === "reset"
+                      ? "We'll email you a link to set a new password."
+                      : "Sign in to upload footage and follow your edits."}
               </p>
 
               {mode !== "reset" && (
@@ -198,23 +203,25 @@ function AuthPage() {
                     </div>
                   </div>
                 )}
-                <div>
-                  <label className={labelClass} htmlFor="email">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    inputMode="email"
-                    className={inputClass}
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder="you@brand.com"
-                  />
-                </div>
-                {mode !== "reset" && (
+                {!settingNew && (
+                  <div>
+                    <label className={labelClass} htmlFor="email">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      required
+                      autoComplete="email"
+                      inputMode="email"
+                      className={inputClass}
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                      placeholder="you@brand.com"
+                    />
+                  </div>
+                )}
+                {(mode !== "reset" || settingNew) && (
                   <div>
                     <div className="flex items-center justify-between">
                       <label className={labelClass} htmlFor="password">
@@ -236,11 +243,11 @@ function AuthPage() {
                         type={showPw ? "text" : "password"}
                         required
                         minLength={8}
-                        autoComplete={mode === "signup" ? "new-password" : "current-password"}
+                        autoComplete={mode === "signin" ? "current-password" : "new-password"}
                         className={`${inputClass} pr-12`}
                         value={form.password}
                         onChange={(e) => setForm({ ...form, password: e.target.value })}
-                        placeholder={mode === "signup" ? "At least 8 characters" : "••••••••"}
+                        placeholder={mode === "signin" ? "••••••••" : "At least 8 characters"}
                       />
                       <button
                         type="button"
@@ -261,9 +268,11 @@ function AuthPage() {
                   {busy && <Spinner className="h-4 w-4 border-t-white" />}
                   {mode === "signup"
                     ? "Create account"
-                    : mode === "reset"
-                      ? "Send reset link"
-                      : "Sign in"}
+                    : settingNew
+                      ? "Save new password"
+                      : mode === "reset"
+                        ? "Send reset link"
+                        : "Sign in"}
                 </button>
               </form>
 

@@ -24,7 +24,9 @@ import { Route as StoriesRouteImport } from './routes/stories'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as UploadRouteImport } from './routes/upload'
+import { Route as ApiUploadRouteImport } from './routes/api/upload'
 import { Route as ProjectsProjectIdRouteImport } from './routes/projects.$projectId'
+import { Route as ApiFilesFileIdRouteImport } from './routes/api/files.$fileId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -101,9 +103,19 @@ const UploadRoute = UploadRouteImport.update({
   path: '/upload',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiUploadRoute = ApiUploadRouteImport.update({
+  id: '/api/upload',
+  path: '/api/upload',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsProjectIdRoute = ProjectsProjectIdRouteImport.update({
   id: '/projects/$projectId',
   path: '/projects/$projectId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFilesFileIdRoute = ApiFilesFileIdRouteImport.update({
+  id: '/api/files/$fileId',
+  path: '/api/files/$fileId',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -123,7 +135,9 @@ export interface FileRoutesByFullPath {
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/upload': typeof UploadRoute
+  '/api/upload': typeof ApiUploadRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
+  '/api/files/$fileId': typeof ApiFilesFileIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -141,7 +155,9 @@ export interface FileRoutesByTo {
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/upload': typeof UploadRoute
+  '/api/upload': typeof ApiUploadRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
+  '/api/files/$fileId': typeof ApiFilesFileIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -160,7 +176,9 @@ export interface FileRoutesById {
   '/story': typeof StoryRoute
   '/terms': typeof TermsRoute
   '/upload': typeof UploadRoute
+  '/api/upload': typeof ApiUploadRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
+  '/api/files/$fileId': typeof ApiFilesFileIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -180,7 +198,9 @@ export interface FileRouteTypes {
     | '/story'
     | '/terms'
     | '/upload'
+    | '/api/upload'
     | '/projects/$projectId'
+    | '/api/files/$fileId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -198,7 +218,9 @@ export interface FileRouteTypes {
     | '/story'
     | '/terms'
     | '/upload'
+    | '/api/upload'
     | '/projects/$projectId'
+    | '/api/files/$fileId'
   id:
     | '__root__'
     | '/'
@@ -216,7 +238,9 @@ export interface FileRouteTypes {
     | '/story'
     | '/terms'
     | '/upload'
+    | '/api/upload'
     | '/projects/$projectId'
+    | '/api/files/$fileId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -235,7 +259,9 @@ export interface RootRouteChildren {
   StoryRoute: typeof StoryRoute
   TermsRoute: typeof TermsRoute
   UploadRoute: typeof UploadRoute
+  ApiUploadRoute: typeof ApiUploadRoute
   ProjectsProjectIdRoute: typeof ProjectsProjectIdRoute
+  ApiFilesFileIdRoute: typeof ApiFilesFileIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -345,11 +371,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UploadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/upload': {
+      id: '/api/upload'
+      path: '/api/upload'
+      fullPath: '/api/upload'
+      preLoaderRoute: typeof ApiUploadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects/$projectId': {
       id: '/projects/$projectId'
       path: '/projects/$projectId'
       fullPath: '/projects/$projectId'
       preLoaderRoute: typeof ProjectsProjectIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/files/$fileId': {
+      id: '/api/files/$fileId'
+      path: '/api/files/$fileId'
+      fullPath: '/api/files/$fileId'
+      preLoaderRoute: typeof ApiFilesFileIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -371,7 +411,9 @@ const rootRouteChildren: RootRouteChildren = {
   StoryRoute: StoryRoute,
   TermsRoute: TermsRoute,
   UploadRoute: UploadRoute,
+  ApiUploadRoute: ApiUploadRoute,
   ProjectsProjectIdRoute: ProjectsProjectIdRoute,
+  ApiFilesFileIdRoute: ApiFilesFileIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

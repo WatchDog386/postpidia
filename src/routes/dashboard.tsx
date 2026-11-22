@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ChevronRight, Clapperboard, Clock, Film, Plus, Sparkles } from "lucide-react";
 import { useAuth } from "@/lib/auth";
-import { supabase, type Project } from "@/lib/supabase";
+import type { Project, ProjectListItem } from "@/lib/types";
+import { listMyProjects } from "@/lib/api/projects";
+import { errorMessage } from "@/lib/errors";
+import { toast } from "sonner";
 import { formatDate, labelFor, PLATFORMS } from "@/lib/project-meta";
 import { AppShell, Card, PageLoader } from "@/components/app/AppShell";
 import { RequireAuth } from "@/components/app/RequireAuth";
@@ -17,7 +20,7 @@ export const Route = createFileRoute("/dashboard")({
   ),
 });
 
-type Row = Project & { project_files: { count: number }[] };
+type Row = ProjectListItem;
 
 const FILTERS = [
   {
@@ -42,12 +45,12 @@ function Dashboard() {
 
   useEffect(() => {
     if (!user) return;
-    supabase
-      .from("projects")
-      .select("*, project_files(count)")
-      .eq("customer_id", user.id)
-      .order("created_at", { ascending: false })
-      .then(({ data }) => setProjects((data as Row[]) ?? []));
+    listMyProjects()
+      .then(setProjects)
+      .catch((err) => {
+        toast.error(errorMessage(err));
+        setProjects([]);
+      });
   }, [user]);
 
   const firstName = (profile?.full_name || "").split(" ")[0];
@@ -149,7 +152,7 @@ function Dashboard() {
                       <h3 className="truncate text-[15px] font-semibold text-white">{p.title}</h3>
                     </div>
                     <p className="mt-0.5 truncate text-xs text-gray-500">
-                      {labelFor(PLATFORMS, p.platform)} · {p.project_files[0]?.count ?? 0} files ·{" "}
+                      {labelFor(PLATFORMS, p.platform)} · {p.file_count} files ·{" "}
                       {formatDate(p.created_at)}
                     </p>
                     <div className="mt-2">

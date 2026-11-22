@@ -1,7 +1,6 @@
 import { useEffect, type ReactNode } from "react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useAuth } from "@/lib/auth";
-import { isSupabaseConfigured } from "@/lib/supabase";
 import { PageLoader } from "./AppShell";
 
 /** Redirects to /auth when signed out. With `admin`, also requires the admin role. */
@@ -11,20 +10,11 @@ export function RequireAuth({ children, admin }: { children: ReactNode; admin?: 
   const href = useRouterState({ select: (s) => s.location.href });
 
   useEffect(() => {
-    if (!loading && !user && isSupabaseConfigured) {
+    if (!loading && !user) {
       void navigate({ to: "/auth", search: { mode: "signin", redirect: href } });
     }
   }, [loading, user, href, navigate]);
 
-  if (!isSupabaseConfigured) {
-    return (
-      <div className="mx-auto max-w-md rounded-2xl border border-amber-500/30 bg-amber-500/10 p-6 text-sm text-amber-200">
-        Accounts aren't configured yet. Add <code>VITE_SUPABASE_URL</code> and{" "}
-        <code>VITE_SUPABASE_ANON_KEY</code> to your environment and run the SQL migration in{" "}
-        <code>supabase/migrations</code>.
-      </div>
-    );
-  }
   if (loading || !user || (admin && !profile)) return <PageLoader />;
   if (admin && !isAdmin) {
     return (

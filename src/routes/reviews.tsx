@@ -3,7 +3,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Clock, MessageSquareQuote, PenLine } from "lucide-react";
 import { useAuth } from "@/lib/auth";
-import { isSupabaseConfigured, supabase, type Review } from "@/lib/supabase";
+import type { Review } from "@/lib/types";
+import { createReview, listPublicReviews } from "@/lib/api/reviews";
+import { errorMessage } from "@/lib/errors";
 import { formatDate } from "@/lib/project-meta";
 import { AppShell, Avatar, Card, PageLoader, Spinner } from "@/components/app/AppShell";
 import { inputClass, labelClass, primaryBtn, Stars } from "@/components/app/bits";
@@ -28,31 +30,23 @@ function ReviewsPage() {
   const { project } = Route.useSearch();
   const { user } = useAuth();
   const [reviews, setReviews] = useState<Review[] | null>(null);
-  const [mine, setMine] = useState<Review[]>([]);
+  const [mine, setMine] = useState(0);
   const [showForm, setShowForm] = useState(Boolean(project));
 
   const load = useCallback(async () => {
-    if (!isSupabaseConfigured) return setReviews([]);
-    const { data } = await supabase
-      .from("reviews")
-      .select("*")
-      .eq("approved", true)
-      .order("created_at", { ascending: false })
-      .limit(100);
-    setReviews((data as Review[]) ?? []);
-    if (user) {
-      const own = await supabase
-        .from("reviews")
-        .select("*")
-        .eq("user_id", user.id)
-        .eq("approved", false);
-      setMine((own.data as Review[]) ?? []);
+    try {
+      const res = await listPublicReviews({ data: { limit: 100 } });
+      setReviews(res.reviews);
+      setMine(res.myPending);
+    } catch (err) {
+      toast.error(errorMessage(err));
+      setReviews([]);
     }
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     void load();
-  }, [load]);
+  }, [load, user]);
 
   const avg =
     reviews && reviews.length ? reviews.reduce((n, r) => n + r.rating, 0) / reviews.length : 0;
@@ -136,11 +130,11 @@ function ReviewsPage() {
               </Card>
             ))}
 
-          {mine.length > 0 && (
+          {mine > 0 && (
             <Card className="p-4">
               <p className="flex items-center gap-2 text-xs text-amber-300">
-                <Clock className="h-3.5 w-3.5" /> {mine.length} of your reviews{" "}
-                {mine.length > 1 ? "are" : "is"} awaiting moderation.
+                <Clock className="h-3.5 w-3.5" /> {mine} of your reviews {mine > 1 ? "are" : "is"}{" "}
+                awaiting moderation.
               </p>
             </Card>
           )}
@@ -220,17 +214,22 @@ function ReviewForm({
     if (!user) return;
     if (form.body.trim().length < 10) return toast.error("Please write at least a sentence.");
     setBusy(true);
-    const { error } = await supabase.from("reviews").insert({
-      user_id: user.id,
-      project_id: projectId ?? null,
-      rating,
-      display_name: form.display_name.trim(),
-      company: form.company.trim() || null,
-      title: form.title.trim() || null,
-      body: form.body.trim(),
-    });
+    try {
+      await createReview({
+        data: {
+          project_id: projectId ?? null,
+          rating,
+          display_name: form.display_name.trim(),
+          company: form.company.trim() || null,
+          title: form.title.trim() || null,
+          body: form.body.trim(),
+        },
+      });
+    } catch (err) {
+      setBusy(false);
+      return toast.error(errorMessage(err));
+    }
     setBusy(false);
-    if (error) return toast.error(error.message);
     toast.success("Thanks! Your review will appear once it's approved.");
     onDone();
   };

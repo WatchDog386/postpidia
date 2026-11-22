@@ -1,4 +1,4 @@
-import type { ProjectStatus } from "./supabase";
+import type { ProjectStatus } from "./types";
 
 export const PLATFORMS = [
   { value: "tiktok", label: "TikTok / TikTok Shop" },

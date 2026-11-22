@@ -1,6 +1,6 @@
 import { Star } from "lucide-react";
 import { STATUS_META, STATUS_STEPS } from "@/lib/project-meta";
-import type { ProjectStatus } from "@/lib/supabase";
+import type { ProjectStatus } from "@/lib/types";
 
 export function StatusBadge({ status }: { status: ProjectStatus }) {
   const meta = STATUS_META[status];

@@ -12,5 +12,7 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-  nitro: { preset: "vercel" },
+  // Self-hosted Node server by default (`npm run build` -> .output/server/index.mjs).
+  // Set NITRO_PRESET=vercel (or another Nitro preset) to target a different host.
+  nitro: { preset: process.env.NITRO_PRESET || "node-server" },
 });

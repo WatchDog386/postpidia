@@ -2,13 +2,17 @@ import { useCallback, useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Check, ChevronRight, Inbox, Mail, Star, Trash2 } from "lucide-react";
+import type { ContactMessage, ProjectListItem, ProjectStatus, Review } from "@/lib/types";
+import { adminListProjects } from "@/lib/api/projects";
 import {
-  supabase,
-  type Profile,
-  type Project,
-  type ProjectStatus,
-  type Review,
-} from "@/lib/supabase";
+  adminCounts,
+  adminListContacts,
+  adminListReviews,
+  deleteReview,
+  setContactHandled,
+  setReviewApproved,
+} from "@/lib/api/reviews";
+import { errorMessage } from "@/lib/errors";
 import { formatDate, labelFor, PLATFORMS, STATUS_META } from "@/lib/project-meta";
 import { AppShell, Card, PageLoader } from "@/components/app/AppShell";
 import { RequireAuth } from "@/components/app/RequireAuth";
@@ -22,17 +26,6 @@ export const Route = createFileRoute("/admin")({
     </RequireAuth>
   ),
 });
-
-type ContactMessage = {
-  id: string;
-  name: string;
-  email: string;
-  phone: string | null;
-  subject: string | null;
-  message: string;
-  handled: boolean;
-  created_at: string;
-};
 
 const TABS = [
   { key: "projects", label: "Projects" },
@@ -80,38 +73,25 @@ function AdminPage() {
 
 function BadgeLoader({ onCounts }: { onCounts: (c: { reviews: number; inbox: number }) => void }) {
   useEffect(() => {
-    void Promise.all([
-      supabase.from("reviews").select("id", { count: "exact", head: true }).eq("approved", false),
-      supabase
-        .from("contact_messages")
-        .select("id", { count: "exact", head: true })
-        .eq("handled", false),
-    ]).then(([r, c]) => onCounts({ reviews: r.count ?? 0, inbox: c.count ?? 0 }));
+    adminCounts()
+      .then(onCounts)
+      .catch(() => {});
   }, [onCounts]);
   return null;
 }
 
 function ProjectsQueue() {
-  const [projects, setProjects] = useState<Project[] | null>(null);
-  const [people, setPeople] = useState<Record<string, Profile>>({});
+  const [projects, setProjects] = useState<ProjectListItem[] | null>(null);
   const [status, setStatus] = useState<ProjectStatus | "open">("open");
 
   useEffect(() => {
-    let q = supabase
-      .from("projects")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(200);
-    q = status === "open" ? q.not("status", "in", "(completed,cancelled)") : q.eq("status", status);
-    void q.then(async ({ data }) => {
-      const list = (data as Project[]) ?? [];
-      setProjects(list);
-      const ids = [...new Set(list.map((p) => p.customer_id))];
-      if (ids.length) {
-        const { data: profs } = await supabase.from("profiles").select("*").in("id", ids);
-        setPeople(Object.fromEntries(((profs as Profile[]) ?? []).map((p) => [p.id, p])));
-      }
-    });
+    setProjects(null);
+    adminListProjects({ data: { status } })
+      .then(setProjects)
+      .catch((err) => {
+        toast.error(errorMessage(err));
+        setProjects([]);
+      });
   }, [status]);
 
   return (
@@ -134,7 +114,11 @@ function ProjectsQueue() {
       ) : (
         <ul className="space-y-2">
           {projects.map((p) => {
-            const who = people[p.customer_id];
+            const who = {
+              full_name: p.customer_name,
+              email: p.customer_email,
+              company: p.customer_company,
+            };
             const overdue =
               p.deadline &&
               new Date(p.deadline) < new Date() &&
@@ -177,27 +161,27 @@ function ProjectsQueue() {
 function ReviewQueue({ onCount }: { onCount: (n: number) => void }) {
   const [reviews, setReviews] = useState<Review[] | null>(null);
   const load = useCallback(async () => {
-    const { data } = await supabase
-      .from("reviews")
-      .select("*")
-      .order("approved")
-      .order("created_at", { ascending: false })
-      .limit(200);
-    const list = (data as Review[]) ?? [];
+    const list = await adminListReviews().catch(() => [] as Review[]);
     setReviews(list);
     onCount(list.filter((r) => !r.approved).length);
   }, [onCount]);
   useEffect(() => void load(), [load]);
 
   const approve = async (r: Review, approved: boolean) => {
-    const { error } = await supabase.from("reviews").update({ approved }).eq("id", r.id);
-    if (error) return toast.error(error.message);
+    try {
+      await setReviewApproved({ data: { id: r.id, approved } });
+    } catch (err) {
+      return toast.error(errorMessage(err));
+    }
     void load();
   };
   const remove = async (r: Review) => {
     if (!confirm("Delete this review?")) return;
-    const { error } = await supabase.from("reviews").delete().eq("id", r.id);
-    if (error) return toast.error(error.message);
+    try {
+      await deleteReview({ data: { id: r.id } });
+    } catch (err) {
+      return toast.error(errorMessage(err));
+    }
     void load();
   };
 
@@ -253,20 +237,16 @@ function ReviewQueue({ onCount }: { onCount: (n: number) => void }) {
 function ContactInbox({ onCount }: { onCount: (n: number) => void }) {
   const [msgs, setMsgs] = useState<ContactMessage[] | null>(null);
   const load = useCallback(async () => {
-    const { data } = await supabase
-      .from("contact_messages")
-      .select("*")
-      .order("handled")
-      .order("created_at", { ascending: false })
-      .limit(200);
-    const list = (data as ContactMessage[]) ?? [];
+    const list = await adminListContacts().catch(() => [] as ContactMessage[]);
     setMsgs(list);
     onCount(list.filter((m) => !m.handled).length);
   }, [onCount]);
   useEffect(() => void load(), [load]);
 
   const toggle = async (m: ContactMessage) => {
-    await supabase.from("contact_messages").update({ handled: !m.handled }).eq("id", m.id);
+    await setContactHandled({ data: { id: m.id, handled: !m.handled } }).catch((err) =>
+      toast.error(errorMessage(err)),
+    );
     void load();
   };
 

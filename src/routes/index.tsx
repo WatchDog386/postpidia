@@ -51,7 +51,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useAuth } from "@/lib/auth";
-import { isSupabaseConfigured, supabase, type Review } from "@/lib/supabase";
+import type { Review } from "@/lib/types";
+import { listPublicReviews, submitContact } from "@/lib/api/reviews";
 import { STORIES } from "@/lib/stories";
 import { Stars } from "@/components/app/bits";
 
@@ -1266,14 +1267,9 @@ function CustomerReviewsStrip() {
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
-    if (!isSupabaseConfigured) return;
-    supabase
-      .from("reviews")
-      .select("*")
-      .eq("approved", true)
-      .order("created_at", { ascending: false })
-      .limit(6)
-      .then(({ data }) => setReviews((data as Review[]) ?? []));
+    listPublicReviews({ data: { limit: 6 } })
+      .then((res) => setReviews(res.reviews))
+      .catch(() => {});
   }, []);
 
   if (reviews.length === 0) return null;
@@ -1389,20 +1385,20 @@ function ContactSection() {
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!isSupabaseConfigured) {
-      window.location.href = `mailto:support@postpidia.com?subject=${encodeURIComponent(form.subject || "Website enquiry")}&body=${encodeURIComponent(form.message)}`;
-      return;
-    }
     setSending(true);
-    const { error } = await supabase.from("contact_messages").insert({
-      name: form.name.trim(),
-      email: form.email.trim(),
-      phone: form.phone.trim() || null,
-      subject: form.subject.trim() || null,
-      message: form.message.trim(),
-    });
+    const ok = await submitContact({
+      data: {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim() || null,
+        subject: form.subject.trim() || null,
+        message: form.message.trim(),
+      },
+    })
+      .then(() => true)
+      .catch(() => false);
     setSending(false);
-    if (error) {
+    if (!ok) {
       toast.error("Couldn't send your message. Please email support@postpidia.com.");
       return;
     }
