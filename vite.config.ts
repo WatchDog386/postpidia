@@ -12,5 +12,6 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-  nitro: { preset: "vercel" },
+  // Build a standalone Node.js server (node .output/server/index.mjs) for self-hosting.
+  nitro: { preset: "node-server" },
 });

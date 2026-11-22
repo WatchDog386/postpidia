@@ -3,7 +3,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { Check, ChevronLeft, Loader } from "lucide-react";
 import { initializePayment, verifyPayment } from "@/lib/paystack-server";
-import { supabase } from "@/lib/supabase";
+import { findPlan, planTotal } from "@/lib/plans";
 
 export const Route = createFileRoute("/payment")({
   component: PaymentPage,
@@ -16,73 +16,34 @@ export const Route = createFileRoute("/payment")({
   }),
 });
 
-const featuresByPlan: Record<string, string[]> = {
-  Starter: [
-    "AI Auto-Takeoff & Measurements",
-    "Excel (BOQ) Export Integration",
-    "PDF & DWG Format Support",
-    "Secure Cloud Storage Included",
-    "Up to 5 Projects per Month",
-  ],
-  Professional: [
-    "AI Auto-Takeoff & Measurements",
-    "Excel (BOQ) Export Integration",
-    "Branded PDF Quotes Generation",
-    "Unlimited File Revisions",
-    "Local Material Prices Database",
-    "PDF & DWG Format Support",
-    "Secure Cloud Storage Included",
-    "Up to 20 Projects per Month",
-    "Priority Email Support",
-  ],
-  Enterprise: [
-    "AI Auto-Takeoff & Measurements",
-    "Excel (BOQ) Export Integration",
-    "Branded PDF Quotes Generation",
-    "Unlimited File Revisions",
-    "Local Material Prices Database",
-    "Secure Cloud Storage Included",
-    "PDF & DWG Format Support",
-    "Unlimited Projects per Month",
-    "24/7 Priority Support",
-    "Dedicated Account Manager",
-    "Custom Integrations Available",
-    "Team Collaboration Tools",
-  ],
-};
-
 function PaymentPage() {
-  const { plan, price, billing, trxref, reference } = Route.useSearch();
+  const { plan: planName, billing: billingParam, trxref, reference } = Route.useSearch();
   const [email, setEmail] = useState("");
   const [step, setStep] = useState<"details" | "paying" | "verifying" | "success">("details");
   const navigate = useNavigate();
 
-  const features = featuresByPlan[plan] ?? [];
-  const totalAmount = billing === "yearly" ? price * 12 : price;
+  // Prices come from the shared plan list, not from the page address.
+  const planInfo = findPlan(planName) ?? findPlan("Basic")!;
+  const plan = planInfo.name;
+  const billing = billingParam === "yearly" ? "yearly" : "monthly";
+  const features = planInfo.features;
+  const [totalAmount, setTotalAmount] = useState(planTotal(planInfo, billing));
+  const [paid, setPaid] = useState<{ plan: string; billing: string } | null>(null);
   const ref = trxref || reference;
 
   useEffect(() => {
     if (ref) {
       setStep("verifying");
       verifyPayment({ data: { reference: ref } })
-        .then(async (res) => {
-          if (res.status) {
-            const { error } = await supabase.from("subscriptions").insert({
-              email: res.data.customer.email,
-              plan,
-              billing,
-              amount: totalAmount,
-              reference: ref,
-              status: "active",
-              paid_at: res.data.paid_at,
-            });
-
-            if (error) console.error("Supabase insert error:", error);
-
-            setEmail(res.data.customer.email);
+        .then((res) => {
+          if (res.ok) {
+            // The server has checked the payment with Paystack and saved the subscription.
+            setEmail(res.email);
+            setTotalAmount(res.amount);
+            setPaid({ plan: res.plan, billing: res.billing });
             setStep("success");
           } else {
-            toast.error("Payment verification failed.");
+            toast.error(res.message || "Payment was not completed.");
             setStep("details");
           }
         })
@@ -99,7 +60,7 @@ function PaymentPage() {
 
     try {
       const res = await initializePayment({
-        data: { email, amount: totalAmount, plan, billing, returnUrl: window.location.origin + "/payment" },
+        data: { email, plan, billing, returnUrl: window.location.origin + "/payment" },
       });
 
       if (res.status && res.data.authorization_url) {
@@ -128,6 +89,8 @@ function PaymentPage() {
   }
 
   if (step === "success") {
+    const shownPlan = paid?.plan ?? plan;
+    const shownBilling = paid?.billing ?? billing;
     return (
       <div className="min-h-screen bg-[#111111] flex items-center justify-center px-4">
         <div className="bg-[#1a1a1a] rounded-2xl p-10 max-w-md w-full text-center border border-[#333]">
@@ -136,10 +99,10 @@ function PaymentPage() {
           </div>
           <h1 className="text-2xl font-bold text-white mb-2">Payment Successful!</h1>
           <p className="text-gray-400 text-sm mb-2">
-            Your <span className="text-white font-semibold">{plan}</span> plan is now active.
+            Your <span className="text-white font-semibold">{shownPlan}</span> plan is now active.
           </p>
           <p className="text-gray-500 text-xs mb-8">
-            Billed {billing === "yearly" ? "annually" : "monthly"} — ${totalAmount}/{billing === "yearly" ? "yr" : "mo"}
+            Billed {shownBilling === "yearly" ? "annually" : "monthly"} — ${totalAmount}/{shownBilling === "yearly" ? "yr" : "mo"}
           </p>
           {email && (
             <p className="text-gray-500 text-xs mb-6">

@@ -19,64 +19,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { plans } from "@/lib/plans";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
 });
 
-const plans = [
-  {
-    name: "Basic",
-    desc: "Perfect for small brands getting started with video content",
-    monthly: 99,
-    yearly: 79,
-    popular: false,
-    features: [
-      "Up to 4 Edited Videos",
-      "Royalty-Free Background Music",
-      "Advanced Color Grading",
-      "Noise Reduction & Audio Leveling",
-      "Custom Thumbnail (1 per video)",
-      "3% Sales Commission Agreement",
-    ],
-  },
-  {
-    name: "Essential",
-    desc: "Best value for growing brands ready to scale their content output",
-    monthly: 149,
-    yearly: 119,
-    popular: true,
-    features: [
-      "Up to 5 Edited Videos",
-      "Dynamic Motion Graphics",
-      "Advanced Color Correction",
-      "A/B Testing Thumbnail Variations",
-      "Dedicated Project Manager",
-      "Multi-Platform Exports (TikTok/YT/IG)",
-      "3% Sales Commission Agreement",
-    ],
-  },
-  {
-    name: "Professional",
-    desc: "Full-service for brands serious about dominating social commerce",
-    monthly: 189,
-    yearly: 149,
-    popular: false,
-    features: [
-      "Up to 8 Edited Videos",
-      "High-End 2D/3D Animations",
-      "Custom Brand Identity Kit",
-      "Premium Stock Footage Access",
-      "Performance Analytics Consulting",
-      "Dedicated Project Manager",
-      "Postpidia Asset Library Access",
-      "24-Hour Priority Support",
-      "Professional Voiceover Integration",
-      "SEO & Keyword Strategy for Video",
-      "3% Sales Commission Agreement",
-    ],
-  },
-];
 
 function PricingPage() {
   const [yearly, setYearly] = useState(false);
@@ -217,8 +165,10 @@ function PricingPage() {
                         to: "/payment",
                         search: {
                           plan: plan.name,
-                          price: String(price),
+                          price,
                           billing: yearly ? "yearly" : "monthly",
+                          trxref: "",
+                          reference: "",
                         },
                       });
                     }}
