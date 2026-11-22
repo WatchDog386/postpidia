@@ -19,7 +19,9 @@ function SoftwarePage() {
       <div className="min-h-screen bg-[#111111] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl text-white font-semibold mb-4">Software not found</h1>
-          <Link to="/" className="text-[#f0514e] hover:underline">Go back home</Link>
+          <Link to="/" className="text-[#f0514e] hover:underline">
+            Go back home
+          </Link>
         </div>
       </div>
     );
@@ -42,14 +44,18 @@ function SoftwarePage() {
             </div>
             <div>
               <h1 className="text-3xl lg:text-4xl font-bold text-white mb-2">{name}</h1>
-              <span className="text-[#f05847] text-[12px] font-medium uppercase tracking-wider">{role}</span>
+              <span className="text-[#f05847] text-[12px] font-medium uppercase tracking-wider">
+                {role}
+              </span>
             </div>
           </div>
 
           <div className="h-[2px] w-full bg-[#222] mb-8" />
 
           <div className="text-gray-300 text-[15px] leading-relaxed space-y-6">
-            <h2 className="text-white text-xl font-semibold mb-4">How We Use {name} for Sales Tracking</h2>
+            <h2 className="text-white text-xl font-semibold mb-4">
+              How We Use {name} for Sales Tracking
+            </h2>
             <p>{description}</p>
 
             <div className="bg-[#1a1a1a] p-6 mt-8 border border-[#222]">

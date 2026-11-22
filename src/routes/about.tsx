@@ -63,7 +63,9 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
   const t = testimonials[testimonialIndex];
 
   return (
-    <div className={`${isHomePage ? '' : 'min-h-screen'} antialiased font-sans overflow-hidden relative`}>
+    <div
+      className={`${isHomePage ? "" : "min-h-screen"} antialiased font-sans overflow-hidden relative`}
+    >
       {!isHomePage && (
         <Link
           to="/"
@@ -73,13 +75,11 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
         </Link>
       )}
 
-    <section className="bg-[#111111] relative w-full pt-16 sm:pt-20 pb-16 sm:pb-32 max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 gap-4 sm:gap-12 items-center">
-      <div>
+      <section className="bg-[#111111] relative w-full pt-16 sm:pt-20 pb-16 sm:pb-32 max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 gap-4 sm:gap-12 items-center">
+        <div>
           <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-full px-3 sm:px-4 py-1 mb-4 sm:mb-6 shadow-sm">
             <span className="text-red-500 text-[10px] sm:text-xs font-bold">✨</span>
-            <span className="text-[10px] sm:text-xs font-semibold text-gray-400">
-              About Us
-            </span>
+            <span className="text-[10px] sm:text-xs font-semibold text-gray-400">About Us</span>
           </div>
 
           <h1 className="text-xl sm:text-3xl lg:text-5xl font-light text-white leading-[1.1] mb-6 sm:mb-12 tracking-tight">
@@ -88,10 +88,16 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
 
           <div className="text-gray-400 text-[8px] sm:text-sm leading-relaxed mb-6 sm:mb-10 max-w-lg mx-auto md:mx-0">
             <p className="leading-relaxed text-white">
-              Postpidia specializes in high-conversion video editing for TikTok Shop, Amazon, Instagram, and YouTube. We bridge the gap between raw content and revenue by transforming your footage into platform-optimized assets designed to sell.
+              Postpidia specializes in high-conversion video editing for TikTok Shop, Amazon,
+              Instagram, and YouTube. We bridge the gap between raw content and revenue by
+              transforming your footage into platform-optimized assets designed to sell.
             </p>
             <p className="mt-3 leading-relaxed text-white">
-              Our unique performance-based model aligns our success with yours: for a low monthly subscription, you receive elite-tier editing, while we retain a 3% commission on sales generated. From viral TikTok hooks to polished Amazon storefront demonstrations, we deliver the psychological triggers and visual precision necessary to dominate the social commerce landscape and maximize your ROI.
+              Our unique performance-based model aligns our success with yours: for a low monthly
+              subscription, you receive elite-tier editing, while we retain a 3% commission on sales
+              generated. From viral TikTok hooks to polished Amazon storefront demonstrations, we
+              deliver the psychological triggers and visual precision necessary to dominate the
+              social commerce landscape and maximize your ROI.
             </p>
           </div>
 
@@ -135,8 +141,12 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
               </svg>
             </div>
             <div>
-              <p className="text-[8px] sm:text-[10px] text-gray-500 font-medium leading-none">Earn point</p>
-              <p className="text-[11px] sm:text-sm font-bold text-white leading-none mt-1">$21.00</p>
+              <p className="text-[8px] sm:text-[10px] text-gray-500 font-medium leading-none">
+                Earn point
+              </p>
+              <p className="text-[11px] sm:text-sm font-bold text-white leading-none mt-1">
+                $21.00
+              </p>
             </div>
           </div>
 
@@ -188,7 +198,13 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
 
           {/* Apple Logo minimal float */}
           <div className="absolute bottom-12 sm:bottom-24 left-1/4 w-5 sm:w-8 h-5 sm:h-8 bg-[#1a1a1a] rounded-full flex items-center justify-center shadow-md">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="text-white">
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="text-white"
+            >
               <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.61 1.54-1.43 2.96-2.53 4.08zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
             </svg>
           </div>
@@ -234,9 +250,12 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-white text-[11px] sm:text-lg mb-1">Tailored for Social</h3>
+                <h3 className="font-semibold text-white text-[11px] sm:text-lg mb-1">
+                  Tailored for Social
+                </h3>
                 <p className="text-gray-400 text-[8px] sm:text-sm leading-relaxed max-w-sm">
-                  We don't just edit videos; we craft them specifically for the platform they will live on.
+                  We don't just edit videos; we craft them specifically for the platform they will
+                  live on.
                 </p>
               </div>
             </div>
@@ -291,7 +310,9 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
           <div className="relative flex flex-row gap-2 sm:gap-6 z-10 justify-center items-center">
             {/* Corporate Full Card */}
             <div className="w-full sm:w-[280px] bg-gradient-to-b from-red-500/20 to-red-500/5 rounded-[16px] sm:rounded-[32px] p-2 sm:p-8 pb-3 sm:pb-10 text-center shadow-2xl border border-white/10 transform sm:-translate-y-8 z-20">
-              <h3 className="text-white font-semibold mb-2 sm:mb-6 text-[7px] sm:text-[15px]">TikTok & Shorts</h3>
+              <h3 className="text-white font-semibold mb-2 sm:mb-6 text-[7px] sm:text-[15px]">
+                TikTok & Shorts
+              </h3>
               <div className="w-6 sm:w-14 h-6 sm:h-14 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-6 shadow-md text-red-500">
                 <svg
                   width="10"
@@ -314,7 +335,9 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
 
             {/* Abroad Half Card (layered behind nicely on desktop) */}
             <div className="w-full sm:w-[260px] bg-[#1a1a1a] rounded-[16px] sm:rounded-[32px] p-2 sm:p-8 pb-3 sm:pb-10 text-center shadow-sm border border-white/5 z-10 sm:-ml-12 pt-3 sm:pt-10 sm:mt-16">
-              <h3 className="text-white font-semibold mb-2 sm:mb-6 text-[7px] sm:text-[15px]">YouTube & Meta</h3>
+              <h3 className="text-white font-semibold mb-2 sm:mb-6 text-[7px] sm:text-[15px]">
+                YouTube & Meta
+              </h3>
               <div className="w-5 sm:w-12 h-5 sm:h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-6 shadow-md text-white">
                 <svg
                   width="8"
@@ -346,7 +369,8 @@ export function AboutPage({ isHomePage }: { isHomePage?: boolean }) {
           Testimonials
         </h2>
         <p className="text-[10px] sm:text-sm font-medium text-gray-500 mb-8 sm:mb-16 max-w-lg mx-auto leading-relaxed">
-          We continually strive to elevate brand presence and drive real conversion through expert video production.
+          We continually strive to elevate brand presence and drive real conversion through expert
+          video production.
         </p>
 
         <div className="bg-[#1a1a1a] rounded-3xl shadow-sm border border-white/5 flex flex-row items-center overflow-visible relative max-w-3xl mx-auto mt-8 sm:mt-16 p-1.5 sm:p-3">

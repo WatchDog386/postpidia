@@ -1,7 +1,5 @@
 import { useState } from "react";
-import {
-  MoreVertical,
-} from "lucide-react";
+import { MoreVertical } from "lucide-react";
 import { motion } from "framer-motion";
 
 type PreviewVideo = {
@@ -40,8 +38,7 @@ const previewChips = [
   {
     id: "chip-editing",
     text: "Conversion-Focused Editing",
-    className:
-      "rounded-full border border-[#111827]/30 bg-white px-3 py-1 text-[#111827]",
+    className: "rounded-full border border-[#111827]/30 bg-white px-3 py-1 text-[#111827]",
   },
 ];
 
@@ -51,8 +48,6 @@ const shevifyGoods = [
   { id: "flask", image: "/flask.png" },
   { id: "flask1", image: "/flask1.png" },
 ];
-
-
 
 const containerVariants = {
   hidden: {},
@@ -112,7 +107,8 @@ const VideoShowcasePreview = () => {
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{
-            backgroundImage: "repeating-linear-gradient(-45deg, transparent, transparent 120px, rgba(255,255,255,0.5) 120px, rgba(255,255,255,0.5) 121px)",
+            backgroundImage:
+              "repeating-linear-gradient(-45deg, transparent, transparent 120px, rgba(255,255,255,0.5) 120px, rgba(255,255,255,0.5) 121px)",
           }}
         />
 
@@ -127,7 +123,9 @@ const VideoShowcasePreview = () => {
           >
             <div className="max-w-[760px]">
               <div className="flex items-center gap-3 mb-3">
-                <span className="text-white/30 text-xs font-semibold uppercase tracking-[2px]">Featured</span>
+                <span className="text-white/30 text-xs font-semibold uppercase tracking-[2px]">
+                  Featured
+                </span>
                 <span className="h-px w-8 bg-[#DF8885]/50" />
                 <span className="inline-flex items-center gap-1.5 bg-white/10 rounded-full px-3 py-1">
                   <span className="text-white text-xs font-bold">Postpidia</span>
@@ -139,8 +137,8 @@ const VideoShowcasePreview = () => {
               </h2>
 
               <p className="mt-2 text-[8px] sm:text-sm leading-relaxed text-white/90">
-                Real campaigns edited and optimized by Postpidia — 
-                scroll-stopping shorts that drive conversions.
+                Real campaigns edited and optimized by Postpidia — scroll-stopping shorts that drive
+                conversions.
               </p>
 
               <div className="mt-4 flex flex-wrap gap-2 text-[10px] font-semibold uppercase tracking-wider">
@@ -280,11 +278,11 @@ const VideoShowcasePreview = () => {
                       className="absolute inset-0 h-full w-full object-cover"
                     />
                   ) : (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/80">
-                        <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 font-semibold text-black">
-                          Unavailable
-                        </span>
-                      </div>
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/80">
+                      <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 font-semibold text-black">
+                        Unavailable
+                      </span>
+                    </div>
                   )}
 
                   <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
@@ -312,7 +310,8 @@ const VideoShowcasePreview = () => {
         <div
           className="absolute inset-0 opacity-[0.04] pointer-events-none"
           style={{
-            backgroundImage: "repeating-linear-gradient(-45deg, transparent, transparent 120px, rgba(255,255,255,0.5) 120px, rgba(255,255,255,0.5) 121px)",
+            backgroundImage:
+              "repeating-linear-gradient(-45deg, transparent, transparent 120px, rgba(255,255,255,0.5) 120px, rgba(255,255,255,0.5) 121px)",
           }}
         />
         <div className="relative z-10 mx-auto max-w-[1440px] px-3 sm:px-6">
@@ -348,7 +347,6 @@ const Carousel = ({ items }: { items: typeof shevifyGoods }) => {
 
   return (
     <div className="relative overflow-hidden py-3 md:py-4">
-
       <div className="trusted-marquee-track marquee-track flex w-max items-stretch gap-0 will-change-transform">
         {marqueeGroups.map((groupIndex) => (
           <div key={groupIndex} className="flex shrink-0 items-stretch gap-6 pr-6 md:gap-8 md:pr-8">
@@ -356,9 +354,7 @@ const Carousel = ({ items }: { items: typeof shevifyGoods }) => {
               <div
                 key={`${groupIndex}-${item.id}-${index}`}
                 className={`flex-shrink-0 ${
-                  item.id === "shirt" || item.id === "shirt1"
-                    ? "w-56 sm:w-72"
-                    : "w-48 sm:w-56"
+                  item.id === "shirt" || item.id === "shirt1" ? "w-56 sm:w-72" : "w-48 sm:w-56"
                 }`}
               >
                 <div className="w-full flex items-center justify-center">
@@ -366,9 +362,7 @@ const Carousel = ({ items }: { items: typeof shevifyGoods }) => {
                     src={item.image}
                     alt={item.id}
                     className={`w-full object-contain ${
-                      item.id === "shirt" || item.id === "shirt1"
-                        ? "h-52 sm:h-60"
-                        : "h-44 sm:h-52"
+                      item.id === "shirt" || item.id === "shirt1" ? "h-52 sm:h-60" : "h-44 sm:h-52"
                     }`}
                   />
                 </div>

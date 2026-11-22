@@ -21,7 +21,9 @@ function StoryPage() {
       <div className="min-h-screen bg-[#111111] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl text-white font-semibold mb-4">Story not found</h1>
-          <Link to="/" className="text-[#f0514e] hover:underline">Go back home</Link>
+          <Link to="/" className="text-[#f0514e] hover:underline">
+            Go back home
+          </Link>
         </div>
       </div>
     );
@@ -40,11 +42,17 @@ function StoryPage() {
         </Link>
 
         <div className="mb-8">
-          <span className="text-[#00d084] text-[10px] font-medium tracking-widest uppercase">{category}</span>
-          <h1 className="text-3xl lg:text-4xl font-bold text-white mt-3 mb-4 leading-tight">{title}</h1>
+          <span className="text-[#00d084] text-[10px] font-medium tracking-widest uppercase">
+            {category}
+          </span>
+          <h1 className="text-3xl lg:text-4xl font-bold text-white mt-3 mb-4 leading-tight">
+            {title}
+          </h1>
           <p className="text-gray-400 text-lg mb-6">{subtitle}</p>
           <div className="flex items-center gap-3">
-            <span className="bg-white/10 text-white text-[9px] font-medium px-2.5 py-1 rounded-sm tracking-widest">{tag}</span>
+            <span className="bg-white/10 text-white text-[9px] font-medium px-2.5 py-1 rounded-sm tracking-widest">
+              {tag}
+            </span>
           </div>
         </div>
 

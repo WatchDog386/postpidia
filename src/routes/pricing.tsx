@@ -19,70 +19,37 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { PLAN_FEATURES, PLAN_PRICES } from "@/lib/plans";
 
 export const Route = createFileRoute("/pricing")({
   component: PricingPage,
 });
 
-const plans = [
-  {
-    name: "Basic",
-    desc: "Perfect for small brands getting started with video content",
-    monthly: 99,
-    yearly: 79,
-    popular: false,
-    features: [
-      "Up to 4 Edited Videos",
-      "Royalty-Free Background Music",
-      "Advanced Color Grading",
-      "Noise Reduction & Audio Leveling",
-      "Custom Thumbnail (1 per video)",
-      "3% Sales Commission Agreement",
-    ],
-  },
-  {
-    name: "Essential",
-    desc: "Best value for growing brands ready to scale their content output",
-    monthly: 149,
-    yearly: 119,
-    popular: true,
-    features: [
-      "Up to 5 Edited Videos",
-      "Dynamic Motion Graphics",
-      "Advanced Color Correction",
-      "A/B Testing Thumbnail Variations",
-      "Dedicated Project Manager",
-      "Multi-Platform Exports (TikTok/YT/IG)",
-      "3% Sales Commission Agreement",
-    ],
-  },
-  {
-    name: "Professional",
-    desc: "Full-service for brands serious about dominating social commerce",
-    monthly: 189,
-    yearly: 149,
-    popular: false,
-    features: [
-      "Up to 8 Edited Videos",
-      "High-End 2D/3D Animations",
-      "Custom Brand Identity Kit",
-      "Premium Stock Footage Access",
-      "Performance Analytics Consulting",
-      "Dedicated Project Manager",
-      "Postpidia Asset Library Access",
-      "24-Hour Priority Support",
-      "Professional Voiceover Integration",
-      "SEO & Keyword Strategy for Video",
-      "3% Sales Commission Agreement",
-    ],
-  },
-];
+const plans = Object.entries(PLAN_PRICES).map(([name, price]) => ({
+  name,
+  desc: {
+    Basic: "Perfect for small brands getting started with video content",
+    Essential: "Best value for growing brands ready to scale their content output",
+    Professional: "Full-service for brands serious about dominating social commerce",
+  }[name]!,
+  monthly: price.monthly,
+  yearly: price.yearly,
+  popular: name === "Essential",
+  features: PLAN_FEATURES[name],
+}));
 
 function PricingPage() {
   const [yearly, setYearly] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "", company: "", budget: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    budget: "",
+    message: "",
+  });
   const [sending, setSending] = useState(false);
   const router = useRouter();
 
@@ -91,7 +58,7 @@ function PricingPage() {
     setSending(true);
     const subject = encodeURIComponent(`Enterprise Inquiry from ${formData.name}`);
     const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCompany: ${formData.company}\nBudget: ${formData.budget || "Not specified"}\n\nMessage:\n${formData.message}`
+      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nCompany: ${formData.company}\nBudget: ${formData.budget || "Not specified"}\n\nMessage:\n${formData.message}`,
     );
     window.location.href = `mailto:support@postpidia.com?subject=${subject}&body=${body}`;
     setTimeout(() => {
@@ -104,7 +71,10 @@ function PricingPage() {
   return (
     <div className="min-h-screen bg-[#111111]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Link to="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-white text-sm mb-8 transition-colors">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 text-gray-400 hover:text-white text-sm mb-8 transition-colors"
+        >
           <ChevronLeft className="w-4 h-4" /> Back to Home
         </Link>
 
@@ -182,13 +152,19 @@ function PricingPage() {
 
                   <div className="mb-4">
                     <div className="flex items-baseline gap-1.5">
-                      <span className="text-[44px] text-[#f97316] font-light leading-none">${price}</span>
+                      <span className="text-[44px] text-[#f97316] font-light leading-none">
+                        ${price}
+                      </span>
                       <span className="text-base text-gray-300">/mo</span>
                     </div>
                     {yearly && (
                       <div className="flex items-center gap-2 mt-1">
-                        <span className="text-[12px] text-gray-400 line-through">${plan.monthly}/mo</span>
-                        <span className="bg-[#f0514e] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md leading-none">Save 20%</span>
+                        <span className="text-[12px] text-gray-400 line-through">
+                          ${plan.monthly}/mo
+                        </span>
+                        <span className="bg-[#f0514e] text-white text-[10px] font-bold px-1.5 py-0.5 rounded-md leading-none">
+                          Save 20%
+                        </span>
                       </div>
                     )}
                     <p className="text-[12px] text-gray-400 mt-0.5">
@@ -197,14 +173,18 @@ function PricingPage() {
                   </div>
 
                   <ul className="space-y-2 mb-5 flex-1">
-                    {plan.features.slice(0, activeIndex === i ? plan.features.length : 4).map((feature, j) => (
-                      <li key={j} className="flex items-center gap-2">
-                        <div className="w-1 h-1 rounded-full bg-[#f0514e] shrink-0" />
-                        <span className="text-[13px] text-gray-200">{feature}</span>
-                      </li>
-                    ))}
+                    {plan.features
+                      .slice(0, activeIndex === i ? plan.features.length : 4)
+                      .map((feature, j) => (
+                        <li key={j} className="flex items-center gap-2">
+                          <div className="w-1 h-1 rounded-full bg-[#f0514e] shrink-0" />
+                          <span className="text-[13px] text-gray-200">{feature}</span>
+                        </li>
+                      ))}
                     {activeIndex !== i && plan.features.length > 4 && (
-                      <li className="text-[12px] text-gray-400 pl-3">+{plan.features.length - 4} more features</li>
+                      <li className="text-[12px] text-gray-400 pl-3">
+                        +{plan.features.length - 4} more features
+                      </li>
                     )}
                   </ul>
 
@@ -217,8 +197,9 @@ function PricingPage() {
                         to: "/payment",
                         search: {
                           plan: plan.name,
-                          price: String(price),
                           billing: yearly ? "yearly" : "monthly",
+                          trxref: "",
+                          reference: "",
                         },
                       });
                     }}
@@ -248,7 +229,8 @@ function PricingPage() {
               </span>
             </div>
             <p className="text-[15px] text-gray-300 mb-4">
-              Need a tailored solution for your business? Get a custom plan with dedicated support, personalized onboarding, and enterprise-grade features.
+              Need a tailored solution for your business? Get a custom plan with dedicated support,
+              personalized onboarding, and enterprise-grade features.
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mb-4">
               {[

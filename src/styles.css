@@ -6,8 +6,9 @@
 @source "../src";
 
 @theme inline {
-  --font-sans: "Outfit", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans:
+    "Outfit", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
   --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
 
   --color-brand-red: #dc2626;
@@ -36,8 +37,7 @@
   body {
     background:
       radial-gradient(1000px 420px at 8% 96%, rgba(255, 0, 123, 0.07), transparent 60%),
-      radial-gradient(900px 380px at 92% 12%, rgba(90, 69, 253, 0.06), transparent 62%),
-      #0f0f0f;
+      radial-gradient(900px 380px at 92% 12%, rgba(90, 69, 253, 0.06), transparent 62%), #0f0f0f;
     color: #e5e5e5;
     font-family: var(--font-sans);
     font-size: 1rem;
@@ -95,7 +95,7 @@
 }
 
 .hero-pattern::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -108,7 +108,7 @@
 }
 
 .hero-pattern::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -133,7 +133,7 @@
 }
 
 .hero-diagonal-right::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   right: 0;
@@ -145,8 +145,12 @@
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .marquee-track {
@@ -154,7 +158,7 @@
 }
 
 .hero-diagonal::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 25%;
@@ -165,7 +169,12 @@
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: -1;
-  background: radial-gradient(circle, rgba(239, 68, 68, 0.45) 0%, rgba(239, 68, 68, 0.2) 30%, transparent 65%);
+  background: radial-gradient(
+    circle,
+    rgba(239, 68, 68, 0.45) 0%,
+    rgba(239, 68, 68, 0.2) 30%,
+    transparent 65%
+  );
   mix-blend-mode: screen;
   filter: blur(50px);
 }

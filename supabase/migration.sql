@@ -1,3 +1,6 @@
+-- Superseded by supabase/migrations/20261122000000_video_editing_platform.sql,
+-- which also replaces the open RLS policies below. Kept for history only.
+
 CREATE TABLE subscriptions (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   email TEXT NOT NULL,
